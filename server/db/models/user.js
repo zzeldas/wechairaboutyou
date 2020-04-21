@@ -3,7 +3,20 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   email: {
+    type: Sequelize.STRING,
+    unique: true,
+    isEmail: true,
+    allowNull: false
+  },
+  loginId: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
@@ -23,6 +36,18 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('salt')
     }
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  phoneNum: {
+    type: Sequelize.STRING,
+    allowNull: false // validation needed
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   googleId: {
     type: Sequelize.STRING
