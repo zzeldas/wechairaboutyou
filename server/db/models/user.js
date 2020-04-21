@@ -91,8 +91,7 @@ const setSaltAndPassword = user => {
 //validation for phone number
 const isPhoneNum = str => {
   let phoneNumber = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-
-  if (str.value.match(phoneNumber)) {
+  if (str.phoneNum.match(phoneNumber)) {
     return true
   } else {
     alert('phone number invalid')
@@ -100,8 +99,8 @@ const isPhoneNum = str => {
   }
 }
 
-User.beforeCreate(setSaltAndPassword)
 User.beforeCreate(isPhoneNum)
+User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)

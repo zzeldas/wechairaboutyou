@@ -16,7 +16,12 @@ describe('User routes', () => {
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
+        name: 'cody',
+        loginId: 'cody123',
+        address: '123 new york, newyork',
+        phoneNum: '123-456-7891',
+        email: codysEmail,
+        password: 'bones'
       })
     })
 
