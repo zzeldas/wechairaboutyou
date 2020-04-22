@@ -89,9 +89,9 @@ const setSaltAndPassword = user => {
 }
 
 //validation for phone number
-const isPhoneNum = str => {
+const isPhoneNum = user => {
   let phoneNumber = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-  if (str.phoneNum.match(phoneNumber)) {
+  if (user.phoneNum.match(phoneNumber)) {
     return true
   } else {
     alert('phone number invalid')
