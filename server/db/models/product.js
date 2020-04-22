@@ -25,7 +25,7 @@ const Product = db.define('products', {
     defaultValue: 'http://placehold.it/400x600'
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -57,5 +57,11 @@ const Product = db.define('products', {
     defaultValue: true
   }
 })
+
+const isPriceInt = product => {
+  product.price = product.price * 100
+}
+
+Product.beforeCreate(isPriceInt)
 
 module.exports = Product
