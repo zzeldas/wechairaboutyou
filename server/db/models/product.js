@@ -25,7 +25,10 @@ const Product = db.define('products', {
     defaultValue: 'http://placehold.it/400x600'
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
+    get() {
+      return this.getDataValue('price') / 1
+    },
     allowNull: false,
     validate: {
       notEmpty: true
@@ -56,6 +59,10 @@ const Product = db.define('products', {
     type: Sequelize.BOOLEAN,
     defaultValue: true
   }
+})
+
+Product.beforeCreate(async (product, options) => {
+  product.price = product.price * 100
 })
 
 module.exports = Product
