@@ -75,7 +75,7 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return {...state, allUser: action.user}
     case REMOVE_USER:
       let currUser = [...state.allUser]
       currUser = state.allUser.filter(user => user.id !== action.userId)
