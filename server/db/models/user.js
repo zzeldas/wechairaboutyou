@@ -4,6 +4,7 @@ const db = require('../db')
 
 const User = db.define('user', {
   name: {
+    // make two separate name fields (first & last)
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -13,10 +14,11 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    isEmail: true,
+    isEmail: true, // check Sequelize docs for placement
     allowNull: false
   },
   loginId: {
+    // rename "username" or remove completely and use email to login
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
@@ -42,6 +44,7 @@ const User = db.define('user', {
     allowNull: false
   },
   phoneNum: {
+    // call "phone" or remove completely
     type: Sequelize.STRING,
     allowNull: false // validation needed
   },
@@ -88,7 +91,7 @@ const setSaltAndPassword = user => {
   }
 }
 
-//validation for phone number
+//validation for phone number // remove
 const isPhoneNum = user => {
   let phoneNumber = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   if (user.phoneNum.match(phoneNumber)) {
@@ -99,7 +102,7 @@ const isPhoneNum = user => {
   }
 }
 
-User.beforeCreate(isPhoneNum)
+User.beforeCreate(isPhoneNum) // remove
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {

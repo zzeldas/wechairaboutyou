@@ -8,9 +8,9 @@ router.get('/', async (req, res, next) => {
       order: [['id', 'ASC']]
     })
 
-    res.status(200).json(products)
+    res.json(products) // .status(200) redundant because it is the default status
   } catch (err) {
-    console.error('Error ', err)
+    console.error('Error ', err) // redundant (refer to line 89 "error handling endware" in /server/index.js)
     next(err)
   }
 })
@@ -20,9 +20,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId)
-    res.status(200).json(product)
+    res.json(product) // .status(200) redundant because it is the default status
   } catch (err) {
-    console.error('Error ', err)
+    console.error('Error ', err) // redundant
     next(err)
   }
 })

@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Product = db.define('products', {
+  // make table name singular in definition
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -14,6 +15,7 @@ const Product = db.define('products', {
     defaultValue: 'Product description will come soon'
   },
   category: {
+    // consider making a separate categories table and through table for one product to many categories relationship
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -57,7 +59,7 @@ const Product = db.define('products', {
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: true // reconsider false
   }
 })
 

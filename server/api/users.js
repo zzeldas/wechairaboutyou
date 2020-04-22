@@ -3,6 +3,8 @@ const User = require('../db/models/user')
 const Order = require('../db/models/order')
 module.exports = router
 
+// Add security here!
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
