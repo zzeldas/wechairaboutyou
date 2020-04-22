@@ -6,19 +6,6 @@ const {User, Product} = require('../server/db/models')
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-
-  const users = await Promise.all([
-    User.create({
-      name: 'testUser',
-      loginId: 'testUser',
-      address: 'One Way St',
-      phoneNum: '555-5555',
-      email: 'cody@email.com',
-      password: '123'
-    })
-    //User.create({email: 'murphy@email.com', password: '123'})
-  ])
-
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 
