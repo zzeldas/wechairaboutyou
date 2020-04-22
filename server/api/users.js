@@ -1,25 +1,9 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
 const Order = require('../db/models/order')
+const {isAdmin, isLoggedIn} = require('../middleware')
 module.exports = router
 
-//middleware isAdmin
-const isAdmin = (req, res, next) => {
-  //check req.user.isAdmin is true
-  if (!req.user || !req.user.isAdmin) {
-    res.status(401).json({error: 'You are not authorized'})
-  }
-  next()
-}
-//middleware isLoggedIn
-const isLoggedIn = (req, res, next) => {
-  //check req.session.userId is there
-  if (!req.session.userId) {
-    res.status(401).json({error: 'You are not logged in'})
-    //redirect to log in page
-  }
-  next()
-}
 //get all users route
 router.get('/', isAdmin, async (req, res, next) => {
   try {
