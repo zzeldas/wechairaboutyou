@@ -10,8 +10,8 @@ const isAdmin = (req, res, next) => {
 const isLoggedIn = (req, res, next) => {
   //check req.session.userId is there
   if (!req.session.userId) {
-    res.status(401).json({error: 'You are not logged in'})
-    //redirect to log in page
+    // res.status(401).json({error: 'You are not logged in'})
+    res.redirect('/login')
   }
   next()
 }
