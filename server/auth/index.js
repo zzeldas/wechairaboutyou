@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const {isAdmin, isLoggedIn} = require('../middleware')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -13,6 +14,19 @@ router.post('/login', async (req, res, next) => {
       res.status(401).send('Wrong username and/or password')
     } else {
       req.login(user, err => (err ? next(err) : res.json(user)))
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+//store logged in user's data in req.session
+router.put('/login', async (req, res, next) => {
+  try {
+    const user = await User.findOne({where: {email: req.body.email}})
+    if (user) {
+      req.session.userId = user.userId
+      res.json(user)
     }
   } catch (err) {
     next(err)

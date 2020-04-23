@@ -20,14 +20,14 @@ const Category = require('./category')
 User.hasMany(Order)
 Order.belongsTo(User)
 
-// Order.hasMany(OrderDetail)
-// OrderDetail.belongsTo(Order)
+// Order.belongsToMany(Product, {through: OrderProduct})
+// Product.belongsToMany(Order, {through: OrderProduct})
 
-// Chair.hasMany(OrderDetail)
-// OrderDetail.belongsTo(Chair)
-
-Order.belongsToMany(Product, {through: OrderProduct})
-Product.belongsToMany(Order, {through: OrderProduct})
+OrderProduct.belongsTo(Order)
+// Product.belongsTo(Order)
+Order.hasMany(OrderProduct)
+// Product.hasMany(OrderProduct)
+OrderProduct.belongsTo(Product)
 
 // Category model relationships
 Product.belongsToMany(Category, {through: 'ProductCategory'})
