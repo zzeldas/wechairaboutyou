@@ -25,6 +25,7 @@ const Product = db.define(
       // get() {
       //   return this.getDataValue('price') / 100
       // },
+
       allowNull: false,
       validate: {
         min: 0,

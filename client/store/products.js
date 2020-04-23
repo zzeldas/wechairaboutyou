@@ -37,7 +37,7 @@ export const fetchAllProducts = () => async dispatch => {
 export default function productsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
-      return [...state, action.allProducts]
+      return action.allProducts
     default:
       return state
   }
