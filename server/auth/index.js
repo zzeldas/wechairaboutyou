@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const {isAdmin, isLoggedIn} = require('../middleware')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
