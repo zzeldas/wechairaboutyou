@@ -1079,31 +1079,31 @@ async function seed() {
 
   const dummyOrderProducts = [
     {
-      // unitPrice: 13599,
+      unitPrice: 13599,
       quantity: 4,
       orderId: 1,
       productId: 1
     },
     {
-      // unitPrice: 12999,
+      unitPrice: 12999,
       quantity: 4,
       orderId: 1,
       productId: 2
     },
     {
-      // unitPrice: 14699,
+      unitPrice: 14699,
       quantity: 4,
       orderId: 3,
       productId: 3
     },
     {
-      // unitPrice: 13599,
+      unitPrice: 13599,
       quantity: 4,
       orderId: 3,
       productId: 4
     },
     {
-      // unitPrice: 12999,
+      unitPrice: 12999,
       quantity: 4,
       orderId: 3,
       productId: 5

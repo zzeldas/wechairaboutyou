@@ -24,26 +24,21 @@ const OrderProduct = db.define('orderproduct', {
   }
 })
 
-const updateOrderProductTotal = async op => {
-  // console.log("QQQQ", op)
-  let product = await Product.findByPk(op.productId)
-  // console.log("BBB", x)
-  op.unitPrice = product.price
-  op.total = op.quantity * op.unitPrice
-  console.log('TOTAL', op.total)
-}
+// const updateOrderProductTotal = async op => {
+//   op.total = op.quantity * op.unitPrice
+// }
 
-OrderProduct.beforeBulkCreate(async (orderproducts, options) => {
-  for (const op of orderproducts) {
-    await updateOrderProductTotal(op)
-  }
-})
+// OrderProduct.beforeBulkCreate(async (orderproducts, options) => {
+//   for (const op of orderproducts) {
+//     await updateOrderProductTotal(op)
+//   }
+// })
 //READ ME TOMORROW
 //TODO RECALCULATE TOTAL WHEN QUANITY IS CHANGED
 //https://sequelize.org/master/manual/hooks.html grabs hooks from here
 
-OrderProduct.beforeCreate(async op => {
-  await updateOrderProductTotal(op)
+OrderProduct.beforeCreate(op => {
+  op.total = op.quantity * op.unitPrice
 })
 
 // FIXME: If the quanity is updated, the total will not update. NEED TO FIX

@@ -6,12 +6,13 @@ router.get('/:id', async (req, res, next) => {
   //FIXME -user route checks if person is logged in
   try {
     //----
-    const cart = await OrderProduct.findAll({
+    let cart = await Order.findAll({
       where: {
-        orderId: req.params.id
+        id: req.params.id
       },
-      include: Product
+      include: OrderProduct
     })
+
     if (cart.length === 0) {
       res.json('Your cart is empty')
     } else {
