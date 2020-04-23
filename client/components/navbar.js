@@ -2,11 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import {logout} from '../store/singleUser'
 
 const Navbar = ({handleClick, isLoggedInUser}) => (
   <div>
-
     <h1>We Chair About You</h1>
     <nav>
       {isLoggedInUser ? (
