@@ -5,7 +5,7 @@ const {isAdmin, isLoggedIn} = require('../middleware')
 module.exports = router
 
 //get all users route
-router.get('/', isAdmin, async (req, res, next) => {
+router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'isAdmin']

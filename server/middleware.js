@@ -1,17 +1,14 @@
 //middleware isAdmin
 const isAdmin = (req, res, next) => {
-  //check req.user.isAdmin is true
-  if (!req.user || !req.user.isAdmin) {
-    res.status(401).json({error: 'You are not authorized'})
+  if (!req.user.isAdmin) {
+    res.status(401).json({error: 'You are not authorized to see this content'})
   }
   next()
 }
 //middleware isLoggedIn
 const isLoggedIn = (req, res, next) => {
-  //check req.session.userId is there
   if (!req.session.userId) {
-    res.status(401).json({error: 'You are not logged in'})
-    //redirect to log in page
+    res.redirect('/login')
   }
   next()
 }
