@@ -53,12 +53,12 @@ const Product = db.define(
 const isPriceInt = product => {
   product.price = product.price * 100
 }
-// const isPriceDec = product => {
-//   product.price = product.price / 100
-// }
+const isPriceDec = product => {
+  product.price = product.price / 100
+}
 //FIXME CHECK WITH MARIA
-// Product.beforeValidate(isPriceInt)
-// Product.afterValidate(isPriceDec)
+Product.beforeValidate(isPriceInt)
+Product.afterValidate(isPriceDec)
 Product.beforeCreate(isPriceInt)
 
 module.exports = Product
