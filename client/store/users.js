@@ -37,7 +37,7 @@ export const fetchAllUsers = () => async dispatch => {
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_USERS:
-      return [...state, action.allUsers]
+      return action.allUsers
     default:
       return state
   }
