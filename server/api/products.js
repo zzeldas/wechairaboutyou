@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
 const Category = require('../db/models/category')
+const {isAdmin, isLoggedIn} = require('../middleware')
 
 module.exports = router
 
@@ -48,8 +49,8 @@ router.get('/:productId', async (req, res, next) => {
 
 // Add a product only if you are an Admin
 
-//router.post("/", isAdmin, async (req, res, next) => {
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
+  //router.post('/', async (req, res, next) => {
   try {
     if (!req.body.content) {
       res.status(500)
@@ -76,9 +77,8 @@ router.post('/', async (req, res, next) => {
 
 // Update a product only if you are an Admin
 
-//router.put('/:ProductId', isAdmin, async (req, res, next) => {
-
-router.put(`/:productId`, async (req, res, next) => {
+router.put('/:productId', isAdmin, async (req, res, next) => {
+  //router.put(`/:productId`, async (req, res, next) => {
   try {
     await Product.findByPk(req.params.productId).then(async product => {
       await product
@@ -128,12 +128,12 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 // Delete a product only if you are an Admin
 
-//router.delete('/:ProductId', isAdmin, async (req, res, next) => {
-router.delete('/:ProductId', async (req, res, next) => {
-  const ProductId = req.params.ProductId
+router.delete('/:productId', isAdmin, async (req, res, next) => {
+  //router.delete('/:productId', async (req, res, next) => {
+  const productId = req.params.productId
   try {
-    await Product.destroy({where: {id: ProductId}})
-    res.json(ProductId)
+    await Product.destroy({where: {id: productId}})
+    res.json(productId)
   } catch (err) {
     next(err)
   }
