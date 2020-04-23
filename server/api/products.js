@@ -1,11 +1,22 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
+const Category = require('../db/models/category')
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      order: [['id', 'ASC']]
+      where: {isActive: true},
+      order: [['name', 'ASC']],
+      include: [
+        {
+          model: Category,
+          attributes: ['name', 'id'],
+          through: {attributes: []}, //  <== use to return only the categories and no the CategoryProduct
+          required: true
+        }
+      ]
     })
 
     res.json(products)
@@ -18,7 +29,17 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId)
+    const product = await Product.findOne({
+      where: {id: req.params.productId},
+      include: [
+        {
+          model: Category,
+          attributes: ['name', 'id'],
+          through: {attributes: []}, //  <== use to return only the categories and no the CategoryProduct
+          required: true
+        }
+      ]
+    })
     res.json(product)
   } catch (err) {
     next(err)
@@ -39,22 +60,15 @@ router.post('/', async (req, res, next) => {
       description: req.body.description,
       imageUrl: req.body.imageUrl,
       price: req.body.price,
-      color: req.body.color,
-      size: req.body.size,
-      category: req.body.category,
       quantity: req.body.quantity,
       isActive: req.body.isActive
     }
-    const createdProduct = await Product.create(newProductInstance)
-
-    const checkExist = await Product.findByPk(createdProduct.id)
-
-    const resMessage = {
-      message: 'Created successfully',
-      Product: checkExist
-    }
-
-    res.json(createdProduct)
+    const createdProduct = await Product.create(newProductInstance).then(
+      product => {
+        product.setCategories(req.body.categories)
+        res.json(product)
+      }
+    )
   } catch (err) {
     next(err)
   }
@@ -64,39 +78,48 @@ router.post('/', async (req, res, next) => {
 
 //router.put('/:ProductId', isAdmin, async (req, res, next) => {
 
-router.put('/:ProductId', async (req, res, next) => {
+router.put(`/:productId`, async (req, res, next) => {
   try {
-    let product = await Product.findByPk(req.params.ProductId)
-    if (product === null) {
-      res.status(404).json('Not Found!')
-    } else {
-      const update = await Product.update(
-        {
+    await Product.findByPk(req.params.productId).then(async product => {
+      await product
+        .update({
           name: req.body.name,
           description: req.body.description,
           imageUrl: req.body.imageUrl,
           price: req.body.price,
-          color: req.body.color,
-          size: req.body.size,
-          category: req.body.category,
           quantity: req.body.quantity,
           isActive: req.body.isActive
-        },
-        {
-          where: {id: req.params.ProductId},
-          returning: true,
-          plain: true
-        }
-      )
+        })
+        .then(updatedProduct => {
+          updatedProduct.setCategories(req.body.categories)
+          res.json(updatedProduct)
+        })
+    })
+  } catch (err) {
+    next(err)
+  }
+})
 
-      const checkExist = await Product.findByPk(req.params.ProductId)
-
-      const resMessage = {
-        message: 'Updated successfully',
-        product: checkExist
-      }
-
-      res.json(resMessage)
+router.get('/categories/:categoryId', async (req, res, next) => {
+  try {
+    const categoryId = req.params.categoryId
+    if (categoryId > 0) {
+      const productsByCategory = await Product.findAll({
+        include: [
+          {
+            model: Category,
+            where: {
+              id: categoryId
+            },
+            attributes: ['name', 'id'],
+            through: {attributes: []}, //  <== use to return only the categories and no the CategoryProduct
+            required: true
+          }
+        ]
+      })
+      return res.json(productsByCategory)
+    } else {
+      return res.json({name: 'There are no products for this category'})
     }
   } catch (err) {
     next(err)
@@ -115,12 +138,3 @@ router.delete('/:ProductId', async (req, res, next) => {
     next(err)
   }
 })
-
-const isAdmin = (req, res, next) => {
-  if (!req.user || !req.user.isAdmin) {
-    const err = new Error('You need to be an Admin to perform this transaction')
-    err.status = 401
-    return next(err)
-  }
-  next()
-}
