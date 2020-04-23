@@ -24,15 +24,15 @@ const OrderProduct = db.define('orderproduct', {
   }
 })
 
-// const updateOrderProductTotal = async op => {
-//   op.total = op.quantity * op.unitPrice
-// }
+const updateOrderProductTotal = async op => {
+  op.total = op.quantity * op.unitPrice
+}
 
-// OrderProduct.beforeBulkCreate(async (orderproducts, options) => {
-//   for (const op of orderproducts) {
-//     await updateOrderProductTotal(op)
-//   }
-// })
+OrderProduct.beforeBulkCreate(async (orderproducts, options) => {
+  for (const op of orderproducts) {
+    await updateOrderProductTotal(op)
+  }
+})
 //READ ME TOMORROW
 //TODO RECALCULATE TOTAL WHEN QUANITY IS CHANGED
 //https://sequelize.org/master/manual/hooks.html grabs hooks from here

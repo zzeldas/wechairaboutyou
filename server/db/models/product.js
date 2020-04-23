@@ -22,9 +22,10 @@ const Product = db.define(
     },
     price: {
       type: Sequelize.INTEGER,
-      get() {
-        return this.getDataValue('price') / 1
-      },
+      // get() {
+      //   return this.getDataValue('price') / 100
+      // },
+
       allowNull: false,
       validate: {
         min: 0,
@@ -56,7 +57,7 @@ const isPriceInt = product => {
 const isPriceDec = product => {
   product.price = product.price / 100
 }
-
+//FIXME CHECK WITH MARIA
 Product.beforeValidate(isPriceInt)
 Product.afterValidate(isPriceDec)
 Product.beforeCreate(isPriceInt)
