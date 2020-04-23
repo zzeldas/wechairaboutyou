@@ -912,7 +912,6 @@ async function seed() {
 
   const users = await Promise.all([User.bulkCreate(dummyUsers)])
 
-
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 

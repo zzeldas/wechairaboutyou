@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const OrderProduct = db.define('orderproduct', {
+const CartProduct = db.define('cartProduct', {
   unitPrice: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -17,11 +17,3 @@ const OrderProduct = db.define('orderproduct', {
     }
   }
 })
-
-OrderProduct.beforeCreate(op => {
-  op.unitPrice = op.unitPrice * 100
-  op.total = op.quantity * op.unitPrice
-  console.log('TOTAL', op.total)
-})
-
-module.exports = OrderProduct
