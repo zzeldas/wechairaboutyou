@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const {User, Product, Order, OrderProduct} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -912,7 +912,6 @@ async function seed() {
 
   const users = await Promise.all([User.bulkCreate(dummyUsers)])
 
-
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 
@@ -1063,9 +1062,60 @@ async function seed() {
       return Product.create(product)
     })
   )
-
   console.log(`seeded ${products.length} products`)
   console.log(`products seeded successfully`)
+
+  const dummyOrders = [
+    {userId: 1},
+    {userId: 2},
+    {userId: 3},
+    {userId: 4},
+    {userId: 5}
+  ]
+  const orders = await Promise.all([Order.bulkCreate(dummyOrders)])
+
+  console.log(`seeded ${orders.length} orders`)
+  console.log(`seeded successfully`)
+
+  const dummyOrderProducts = [
+    {
+      unitPrice: 13599,
+      quantity: 4,
+      orderId: 1,
+      productId: 1
+    },
+    {
+      unitPrice: 12999,
+      quantity: 4,
+      orderId: 1,
+      productId: 2
+    },
+    {
+      unitPrice: 14699,
+      quantity: 4,
+      orderId: 3,
+      productId: 3
+    },
+    {
+      unitPrice: 13599,
+      quantity: 4,
+      orderId: 3,
+      productId: 4
+    },
+    {
+      unitPrice: 12999,
+      quantity: 4,
+      orderId: 3,
+      productId: 5
+    }
+  ]
+
+  const orderProducts = await Promise.all([
+    OrderProduct.bulkCreate(dummyOrderProducts)
+  ])
+
+  console.log(`seeded ${orderProducts.length} orders`)
+  console.log(`seeded successfully`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.
