@@ -20,14 +20,15 @@ describe('User routes', () => {
         lastName: 'pug',
         address: '123 new york, newyork',
         email: codysEmail,
-        password: 'bones'
+        password: 'bones',
+        isAdmin: false
       })
     })
 
     it('GET /api/users', async () => {
       const res = await request(app)
         .get('/api/users')
-        .expect(200)
+        .expect(401)
 
       expect(res.body).to.be.an('array')
       expect(res.body[0].email).to.be.equal(codysEmail)

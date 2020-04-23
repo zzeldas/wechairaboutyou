@@ -1,20 +1,27 @@
 const router = require('express').Router()
-const {Order, OrderProduct, Product} = require('../db/models')
+const {Order, OrderProduct, Product, User} = require('../db/models')
 module.exports = router
 
-router.get('/:id', async (req, res, next) => {
+//logged in user cart
+router.get('/', async (req, res, next) => {
   //FIXME -user route checks if person is logged in
+
+  //Check if there is a pending cart in orders
+  //if pending cart, it goes to cart id
+  //else create pending order
+
   try {
     //----
     let cart = await Order.findAll({
       where: {
-        id: req.params.id
+        status: 'pending'
       },
       include: OrderProduct
     })
 
-    if (cart.length === 0) {
-      res.json('Your cart is empty')
+    if (!cart) {
+      let newCart = Order.create()
+      res.json(newCart)
     } else {
       res.json(cart)
     }
