@@ -2,6 +2,8 @@ const User = require('./user')
 const Product = require('./product')
 const Order = require('./order')
 const OrderProduct = require('./orderproduct')
+const Cart = require('./cart')
+const CartProduct = require('./cartproduct')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -17,21 +19,35 @@ const OrderProduct = require('./orderproduct')
  * instead of: const User = require('../db/models/user')
  */
 
+//OUR ASSOCIATIONS
+// User.hasMany(Order)
+// Order.belongsTo(User)
+
+// Order.belongsToMany(Product, {through: OrderProduct})
+// Product.belongsToMany(Order, {through: OrderProduct})
+
+//ARIELLE ASSOCIATIONS
+
+User.hasOne(Cart)
 User.hasMany(Order)
+
+Cart.hasMany(CartProduct)
+
+CartProduct.belongsTo(Product)
+
+Order.hasMany(OrderProduct)
+
+OrderProduct.belongsTo(Product)
+Cart.belongsTo(User)
+CartProduct.belongsTo(Cart)
 Order.belongsTo(User)
-
-// Order.hasMany(OrderDetail)
-// OrderDetail.belongsTo(Order)
-
-// Chair.hasMany(OrderDetail)
-// OrderDetail.belongsTo(Chair)
-
-Order.belongsToMany(Product, {through: OrderProduct})
-Product.belongsToMany(Order, {through: OrderProduct})
+OrderProduct.belongsTo(Order)
 
 module.exports = {
   User,
   Product,
   Order,
-  OrderProduct
+  OrderProduct,
+  CartProduct,
+  Cart
 }
