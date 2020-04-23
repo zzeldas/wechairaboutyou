@@ -1,8 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Category, Order, OrderProduct} = require('../server/db/models')
-
+const {
+  User,
+  Product,
+  Category,
+  Order,
+  OrderProduct
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -259,20 +264,22 @@ async function seed() {
       price: 154.79,
       quantity: '25',
       isActive: true
-
     }).then(product => product.setCategories([categories[1]]))
   ])
-
 
   console.log(`seeded ${products.length} products`)
   console.log(`products seeded successfully`)
 
   const dummyOrders = [
-    {userId: 1},
+    {userId: 1}, //Order 1
     {userId: 2},
     {userId: 3},
     {userId: 4},
-    {userId: 5}
+    {userId: 5},
+    {
+      userId: 5,
+      status: 'completed'
+    }
   ]
   const orders = await Promise.all([Order.bulkCreate(dummyOrders)])
 
