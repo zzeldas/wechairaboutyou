@@ -23,7 +23,7 @@ const Product = db.define(
     price: {
       type: Sequelize.INTEGER,
       get() {
-        return this.getDataValue('price') / 100
+        return this.getDataValue('price') / 1
       },
       allowNull: false,
       validate: {
