@@ -9,8 +9,23 @@ export class Cart extends React.Component {
   }
 
   render() {
-    let items = JSON.parse(sessionStorage.getItem('cart'))
-    // console.log('ITEMS KEYS', Object.keys(items))
+    let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
+    const {products} = this.props
+    let cartProducts = products.filter(product => product.id in cart)
+    console.log('QQQ', cartProducts)
+
+    let result = 0
+    cartProducts.forEach(product => {
+      result += product.price / 100 * cart[product.id]
+    })
+
+    let fullAmount = result
+
+    console.log('QQQ', result)
+    //product name
+    //product price
+    //quantity
+    //total
 
     // async function showCart (items) {
     //   let result = []
@@ -26,6 +41,15 @@ export class Cart extends React.Component {
     return (
       <div>
         <h1>MY CART</h1>
+        {cartProducts.map(product => (
+          <div key={product.name}>
+            <p>Name: {product.name}</p>
+            <p>Price: {product.price / 100}</p>
+            <p>Quantity: {cart[product.id]}</p>
+            <p>Unit Total: {product.price / 100 * cart[product.id]}</p>
+          </div>
+        ))}
+        <p>FULL AMOUNT: {fullAmount}</p>
         <button type="button">Check Out</button>
       </div>
     )
