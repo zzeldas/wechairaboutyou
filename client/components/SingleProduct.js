@@ -21,7 +21,12 @@ class SingleProduct extends React.Component {
         <p>Description: {product.description}</p>
         <p>Available Count: {product.quantity}</p>
         <button type="button">Add to Cart</button>
-        {user.isAdmin === true && <button type="button">Edit Product</button>}
+        {user.isAdmin === true && (
+          <div>
+            <button type="button">Edit Product</button>
+            <button type="button">Remove Product</button>
+          </div>
+        )}
       </div>
     )
   }
