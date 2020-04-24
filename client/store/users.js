@@ -25,6 +25,7 @@ const getAllUsers = allUsers => ({
 export const fetchAllUsers = () => async dispatch => {
   try {
     const res = await axios.get('/api/users')
+
     dispatch(getAllUsers(res.data))
   } catch (err) {
     console.error(err)

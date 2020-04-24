@@ -1,23 +1,38 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {fetchAllUsers} from '../store/users'
-import {makeStyles} from '@material-ui/core/styles'
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow
-} from '@material-ui/core'
+
+export class AllUsers extends React.Component {
+  componentDidMount() {
+    this.props.getUsersFromStore()
+  }
+
+  render() {
+    return (
+      <div>
+        {this.props.users ? (
+          this.props.users.map(user => (
+            <ul key={user.id}>
+              <li>ID :{user.id}</li>
+              <li>First Name :{user.firstName}</li>
+              <li>Last Name :{user.lastName}</li>
+              <li>Email :{user.email}</li>
+              <li>Address :{user.address}</li>
+              <li>Is user admin :{user.isAdmin.toString()}</li>
+            </ul>
+          ))
+        ) : (
+          <h2>No Users</h2>
+        )}
+      </div>
+    )
+  }
+}
 
 const mapState = state => {
   return {
-    isLoggedInUser: !!state.user.id
+    isLoggedInUser: !!state.user.id,
+    users: state.users
   }
 }
 
