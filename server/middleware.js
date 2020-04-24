@@ -1,5 +1,6 @@
 //middleware isAdmin
 const isAdmin = (req, res, next) => {
+  console.log('req.user ', req.user)
   if (!req.user.isAdmin) {
     res.status(401).json({error: 'You are not authorized to see this content'})
   }

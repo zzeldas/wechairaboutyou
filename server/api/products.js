@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Product, User, Order} = require('../db/models')
 const Category = require('../db/models/category')
+const {isAdmin, isLoggedIn} = require('../middleware')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -46,11 +47,17 @@ router.get('/:productId', async (req, res, next) => {
 
 // Add a product only if you are an Admin
 
-//router.post("/", isAdmin, async (req, res, next) => {
+//router.post('/', isAdmin, async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     if (!req.body.content) {
       res.status(500)
+    }
+
+    if (req.body.categories && typeof req.body.categories === 'string') {
+      updateCategories = req.body.categories.split(',')
+    } else {
+      updateCategories = req.body.categories
     }
 
     const newProductInstance = {
@@ -63,7 +70,7 @@ router.post('/', async (req, res, next) => {
     }
     const createdProduct = await Product.create(newProductInstance).then(
       product => {
-        product.setCategories(req.body.categories)
+        product.setCategories(updateCategories)
         res.json(product)
       }
     )
@@ -74,10 +81,14 @@ router.post('/', async (req, res, next) => {
 
 // Update a product only if you are an Admin
 
-//router.put('/:ProductId', isAdmin, async (req, res, next) => {
-
+//router.put('/:productId', isAdmin, async (req, res, next) => {
 router.put(`/:productId`, async (req, res, next) => {
   try {
+    if (req.body.categories && typeof req.body.categories === 'string') {
+      updateCategories = req.body.categories.split(',')
+    } else {
+      updateCategories = req.body.categories
+    }
     await Product.findByPk(req.params.productId).then(async product => {
       await product
         .update({
@@ -89,7 +100,7 @@ router.put(`/:productId`, async (req, res, next) => {
           isActive: req.body.isActive
         })
         .then(updatedProduct => {
-          updatedProduct.setCategories(req.body.categories)
+          updatedProduct.setCategories(updateCategories)
           res.json(updatedProduct)
         })
     })
@@ -126,12 +137,12 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 // Delete a product only if you are an Admin
 
-//router.delete('/:ProductId', isAdmin, async (req, res, next) => {
-router.delete('/:ProductId', async (req, res, next) => {
-  const ProductId = req.params.ProductId
+//router.delete('/:productId', isAdmin, async (req, res, next) => {
+router.delete('/:productId', async (req, res, next) => {
+  const productId = req.params.productId
   try {
-    await Product.destroy({where: {id: ProductId}})
-    res.json(ProductId)
+    await Product.destroy({where: {id: productId}})
+    res.json(productId)
   } catch (err) {
     next(err)
   }
