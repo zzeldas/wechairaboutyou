@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import Product from '../../server/db/'
 // import {fetchCart} from '../store/products'
 
 export class Cart extends React.Component {
@@ -9,14 +10,17 @@ export class Cart extends React.Component {
   render() {
     let items = JSON.parse(sessionStorage.getItem('cart'))
 
-    let item = sessionStorage.getItem('cart')
+    let array = []
 
-    // async function showCart () {
+    // async function showCart (items) {
     //   let result = []
+    //   // eslint-disable-next-line guard-for-in
     //   for (let productId in items) {
-    //     let quantity = items[productId];
+    //     // let quantityOrder = items[productId];
     //     let product = await Product.findByPK(productId)
+    //     result.push(product)
     //   }
+    //   return result
     // }
 
     return (
