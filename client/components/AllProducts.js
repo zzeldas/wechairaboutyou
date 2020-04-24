@@ -11,6 +11,7 @@ export class AllProducts extends React.Component {
 
   render() {
     const {products, user} = this.props
+
     let userCart
     if (!user.id) {
       userCart = (
@@ -53,6 +54,7 @@ export class AllProducts extends React.Component {
     }
 
     return <div>{userCart}</div>
+
   }
 }
 
