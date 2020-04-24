@@ -7,12 +7,12 @@ const Order = db.define('order', {
     type: Sequelize.ENUM({
       values: ['pending', 'completed']
     }),
-    allowNull: false,
+
     defaultValue: 'pending'
   },
   total: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+
     defaultValue: 0
   }
 })

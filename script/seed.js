@@ -133,6 +133,14 @@ async function seed() {
       password: 'VulrOH',
       address: '034 Hallows Avenue',
       isAdmin: false
+    },
+    {
+      firstName: 'Admin',
+      lastName: 'Admin',
+      email: 'admin@wechair.com',
+      password: 'admin123',
+      address: '034 Hallows Avenue',
+      isAdmin: true
     }
   ]
 
