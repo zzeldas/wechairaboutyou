@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, User} = require('../db/models')
+const {Product, User, Order} = require('../db/models')
 const Category = require('../db/models/category')
 
 router.get('/', async (req, res, next) => {
@@ -147,20 +147,16 @@ router.get('/cart', async (req, res, next) => {
   //else create pending order
   try {
     //----
+    let {orders} = await User.findByPk(req.user.id, {include: [{model: Order}]})
 
-    let cart = await Order.findAll({
-      where: {
-        status: 'pending'
-      },
-      include: OrderProduct
-    })
+    console.log(orders)
 
-    if (!cart) {
-      let newCart = Order.create()
-      res.json(newCart)
-    } else {
-      res.json(cart)
-    }
+    // if (!cart) {
+    //   let newCart = Order.create()
+    //   res.json(newCart)
+    // } else {
+    //   res.json('cart')
+    // }
   } catch (err) {
     next(err)
   }
@@ -170,12 +166,11 @@ router.get('/cart', async (req, res, next) => {
 //url /:userId/cart
 router.post('/cart', async (req, res, next) => {
   try {
-    const addedProduct = await OrderProduct.create()
-    //check for pending order
-    let {orders} = await User.findByPk(req.params.userId, {
-      include: [{model: Order}]
-    })
-
+    // const addedProduct = await OrderProduct.create()
+    // //check for pending order
+    // let {orders} = await User.findByPk(req.params.userId, {
+    //   include: [{model: Order}]
+    // })
     //if there is one pending order
     //look up pending order's id
     //assign addedProduct's orderId to the id of the pending order
