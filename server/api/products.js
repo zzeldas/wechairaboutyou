@@ -86,6 +86,11 @@ router.post('/', async (req, res, next) => {
 //router.put('/:productId', isAdmin, async (req, res, next) => {
 router.put(`/:productId`, async (req, res, next) => {
   try {
+    if (req.body.categories && typeof req.body.categories === 'string') {
+      updateCategories = req.body.categories.split(',')
+    } else {
+      updateCategories = req.body.categories
+    }
     await Product.findByPk(req.params.productId).then(async product => {
       await product
         .update({
@@ -97,7 +102,7 @@ router.put(`/:productId`, async (req, res, next) => {
           isActive: req.body.isActive
         })
         .then(updatedProduct => {
-          updatedProduct.setCategories(req.body.categories)
+          updatedProduct.setCategories(updateCategories)
           res.json(updatedProduct)
         })
     })

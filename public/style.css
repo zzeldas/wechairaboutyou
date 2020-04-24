@@ -107,3 +107,15 @@ form div {
 .flex-inner li {
   width: 100px;
 }
+
+.box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: space-around;
+}
+
+.box img {
+  width: 200px;
+  height: 100px;
+}

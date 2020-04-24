@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
 
 export class AllProducts extends React.Component {
@@ -20,6 +20,17 @@ export class AllProducts extends React.Component {
             <p>Price: {product.price}</p>
             <p>Quantity: {product.quantity}</p>
             <button type="button">Add to Cart</button>
+            <div id="flex-container">
+              {/* <Link to={`/updateProduct/${product.id}/${product.name}/${product.description}/${product.price}/${product.quantity}/${product.isActive}/${encodeURI(product.imageUrl)}`}>Edit Product</Link> */}
+
+              <Link
+                to={`/updateProduct/${product.id}/${product.name}/${
+                  product.description
+                }/${product.price}/${product.quantity}/${product.isActive}`}
+              >
+                Edit Product
+              </Link>
+            </div>
           </div>
         ))}
       </div>

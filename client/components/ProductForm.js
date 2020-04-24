@@ -7,6 +7,10 @@ const ProductForm = props => {
   return (
     <main>
       <h2>Product Form</h2>
+      <div className="box">
+        <img src="/chairaboutyoulogo.png" />
+      </div>
+      <p />
       <div className="container">
         <form onSubmit={handleSubmit}>
           <ul className="flex-outer">
@@ -30,7 +34,6 @@ const ProductForm = props => {
                 type="text"
                 name="description"
                 value={state.description}
-                required
               />
             </li>
 
@@ -42,7 +45,6 @@ const ProductForm = props => {
                 type="text"
                 name="imageUrl"
                 value={state.imageUrl}
-                required
               />
             </li>
             <li>
@@ -53,7 +55,6 @@ const ProductForm = props => {
                 type="text"
                 name="price"
                 value={state.price}
-                required
               />
             </li>
             <li>

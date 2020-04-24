@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import ProductForm from './AddProductForm'
+import ProductForm from './ProductForm'
 import Axios from 'axios'
 
 class newProduct extends Component {

@@ -82,5 +82,3 @@ const mapDispatch = dispatch => {
     getUsersFromStore: () => dispatch(fetchAllUsers())
   }
 }
-
-export default connect(mapState, mapDispatch)(AllUsers)
