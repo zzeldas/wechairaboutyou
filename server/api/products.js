@@ -49,11 +49,17 @@ router.get('/:productId', async (req, res, next) => {
 
 // Add a product only if you are an Admin
 
-router.post('/', isAdmin, async (req, res, next) => {
-  //router.post('/', async (req, res, next) => {
+//router.post('/', isAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     if (!req.body.content) {
       res.status(500)
+    }
+
+    if (req.body.categories && typeof req.body.categories === 'string') {
+      updateCategories = req.body.categories.split(',')
+    } else {
+      updateCategories = req.body.categories
     }
 
     const newProductInstance = {
@@ -66,7 +72,7 @@ router.post('/', isAdmin, async (req, res, next) => {
     }
     const createdProduct = await Product.create(newProductInstance).then(
       product => {
-        product.setCategories(req.body.categories)
+        product.setCategories(updateCategories)
         res.json(product)
       }
     )
@@ -77,8 +83,8 @@ router.post('/', isAdmin, async (req, res, next) => {
 
 // Update a product only if you are an Admin
 
-router.put('/:productId', isAdmin, async (req, res, next) => {
-  //router.put(`/:productId`, async (req, res, next) => {
+//router.put('/:productId', isAdmin, async (req, res, next) => {
+router.put(`/:productId`, async (req, res, next) => {
   try {
     await Product.findByPk(req.params.productId).then(async product => {
       await product
@@ -128,8 +134,8 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 // Delete a product only if you are an Admin
 
-router.delete('/:productId', isAdmin, async (req, res, next) => {
-  //router.delete('/:productId', async (req, res, next) => {
+//router.delete('/:productId', isAdmin, async (req, res, next) => {
+router.delete('/:productId', async (req, res, next) => {
   const productId = req.params.productId
   try {
     await Product.destroy({where: {id: productId}})
