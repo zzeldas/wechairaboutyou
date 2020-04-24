@@ -9,7 +9,9 @@ class SingleProduct extends React.Component {
   }
 
   render() {
-    const {product} = this.props
+    const {product, user} = this.props
+    console.log('this.props: ', this.props)
+    console.log(this.props.user)
 
     return (
       <div>
@@ -19,6 +21,7 @@ class SingleProduct extends React.Component {
         <p>Description: {product.description}</p>
         <p>Available Count: {product.quantity}</p>
         <button type="button">Add to Cart</button>
+        {user.isAdmin === true && <button type="button">Edit Product</button>}
       </div>
     )
   }
@@ -26,7 +29,8 @@ class SingleProduct extends React.Component {
 
 const mapState = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.user
   }
 }
 
