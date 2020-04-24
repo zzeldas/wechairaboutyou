@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_ALL_USERS = 'GET_ALL_USERS'
+const ADD_USER = 'ADD_USER'
 
 /**
  * INITIAL STATE
@@ -19,6 +20,10 @@ const getAllUsers = allUsers => ({
   allUsers
 })
 
+const addUser = newUser => ({
+  type: ADD_USER,
+  newUser
+})
 /**
  * THUNK CREATORS
  */
@@ -32,6 +37,21 @@ export const fetchAllUsers = () => async dispatch => {
   }
 }
 
+export const fetchSignUp = () => async dispatch => {
+  try {
+    const res = await axios.post('/api/users', {
+      firstName,
+      lastName,
+      email,
+      password,
+      address
+    })
+    dispatch(addUser(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -39,6 +59,8 @@ export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_USERS:
       return action.allUsers
+    case ADD_USER:
+      return [...state, action.newUser]
     default:
       return state
   }

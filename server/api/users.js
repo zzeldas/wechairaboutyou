@@ -28,6 +28,21 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 //add single user route
+router.post('/', async (req, res, next) => {
+  try {
+    const {firstName, lastName, email, password, address} = req.body
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+      address
+    })
+    res.json(newUser)
+  } catch (err) {
+    next(err)
+  }
+})
 
 //update single user route for admin and login user (may need two routes )
 
