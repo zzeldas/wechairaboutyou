@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //get single User route
-router.get('/:userId', isLoggedIn, async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
     const userId = req.params.userId
     const foundUser = await User.findByPk(userId, {include: [{model: Order}]})

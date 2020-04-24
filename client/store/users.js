@@ -30,6 +30,7 @@ const addUser = newUser => ({
 export const fetchAllUsers = () => async dispatch => {
   try {
     const res = await axios.get('/api/users')
+
     dispatch(getAllUsers(res.data))
   } catch (err) {
     console.error(err)
@@ -57,7 +58,7 @@ export const fetchSignUp = () => async dispatch => {
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_USERS:
-      return [...state, action.allUsers]
+      return action.allUsers
     case ADD_USER:
       return [...state, action.newUser]
     default:
