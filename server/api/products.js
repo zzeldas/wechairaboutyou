@@ -138,7 +138,7 @@ router.delete('/:ProductId', async (req, res, next) => {
 })
 
 //logged in user cart
-router.get('/cart', async (req, res, next) => {
+router.get('/carts/:cartId', async (req, res, next) => {
   //FIXME -user route checks if person is logged in
 
   //search by user and look into the cart
@@ -147,7 +147,12 @@ router.get('/cart', async (req, res, next) => {
   //else create pending order
   try {
     //----
-    let {orders} = await User.findByPk(req.user.id, {include: [{model: Order}]})
+    console.log('kjhgfgdjhj')
+
+    console.log(req.session)
+    const userId = req.session.passport.user
+    console.log(userId)
+    const {orders} = await User.findByPk(userId, {include: [{model: Order}]})
 
     console.log(orders)
 
@@ -164,23 +169,23 @@ router.get('/cart', async (req, res, next) => {
 
 //user adds item to cart
 //url /:userId/cart
-router.post('/cart', async (req, res, next) => {
-  try {
-    // const addedProduct = await OrderProduct.create()
-    // //check for pending order
-    // let {orders} = await User.findByPk(req.params.userId, {
-    //   include: [{model: Order}]
-    // })
-    //if there is one pending order
-    //look up pending order's id
-    //assign addedProduct's orderId to the id of the pending order
-    //if there is no pending order
-    //let newCart = Order.create()
-    //assign addedProduct's orderId to the if of the newCart
-    //res.json(newCart)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.post('/cart', async (req, res, next) => {
+//   try {
+// const addedProduct = await OrderProduct.create()
+// //check for pending order
+// let {orders} = await User.findByPk(req.params.userId, {
+//   include: [{model: Order}]
+// })
+//if there is one pending order
+//look up pending order's id
+//assign addedProduct's orderId to the id of the pending order
+//if there is no pending order
+//let newCart = Order.create()
+//assign addedProduct's orderId to the if of the newCart
+//res.json(newCart)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 module.exports = router

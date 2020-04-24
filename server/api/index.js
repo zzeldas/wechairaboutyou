@@ -3,7 +3,7 @@ module.exports = router
 
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
-//'for cart routes look inside products
+//for cart routes look inside products
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
