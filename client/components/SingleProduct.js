@@ -23,7 +23,13 @@ class SingleProduct extends React.Component {
         <button type="button">Add to Cart</button>
         {user.isAdmin === true && (
           <div>
-            <button type="button">Edit Product</button>
+            <Link
+              to={`/updateProduct/${product.id}/${product.name}/${
+                product.description
+              }/${product.price}/${product.quantity}/${product.isActive}`}
+            >
+              <button type="button">Edit Product</button>
+            </Link>
             <button type="button">Remove Product</button>
           </div>
         )}
