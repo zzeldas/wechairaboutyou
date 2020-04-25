@@ -8,7 +8,8 @@ import {fetchCart} from '../store/cart'
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
-    this.props.getPendingOrderFromStore()
+    // this.props.getPendingOrderFromStore()
+    this.props.getCart()
   }
 
   render() {
@@ -24,49 +25,86 @@ export class Cart extends React.Component {
 
     let result = 0
     cartProducts.forEach(product => {
-      result += Math.round(product.price * cart[product.id]) / 100
+      result += product.price * cart[product.id]
     })
+    let fullAmount = result
 
-    this.props.getCart()
+    console.log('this props ', this.props)
+    let orderProducts = this.props.cart.orderproducts
 
-    console.log('cart', this.props.cart)
-    console.log('products', this.props.products)
-    console.log('req.session', sessionStorage)
+    let userCartProducts
+
+    if (orderProducts) {
+      let orderProductsId = orderProducts.map(
+        orderProduct => orderProduct.productId
+      )
+
+      userCartProducts = orderProductsId
+        .map(id => {
+          return products.filter(product => id === product.id)
+        })
+        .flat()
+
+      console.log(userCartProducts)
+    }
 
     return (
       <div>
         <h1>MY CART</h1>
-        {!this.props.cart.orderproducts ? (
+        <p>FULL AMOUNT: ${fullAmount}</p>
+        <button type="button">Check Out</button>
+        {!this.props.user.id ? (
+          cartProducts.map(product => (
+            <div key={product.name}>
+              <img src={product.imageUrl} height="200" width="200" />
+              <Link to={`/products/${product.id}`}>{product.name}</Link>
+              <p>Price: ${product.price}</p>
+              <p>Quantity: {cart[product.id]}</p>
+              <p>Unit Total: ${product.price * cart[product.id]}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  removeItem(product.id)
+                  location.reload()
+                }}
+              >
+                Remove Button
+              </button>
+            </div>
+          ))
+        ) : !this.props.cart.orderproducts ? (
           <div>
             <h3>There are currently no chairs in your shopping cart!</h3>
             <Link to="/products">Look for chairs to add to your cart</Link>
           </div>
         ) : (
-          <h3>There are something in cart</h3>
-        )}
-        {/* {cartProducts.map(product => (
-          <div key={product.name}>
-
-            <p>Name: {product.name}</p>
-            <p>Price: ${product.price / 100}</p>
-            <p>Quantity: {cart[product.id]}</p>
-            <p>
-              Unit Total: ${Math.round(product.price * cart[product.id]) / 100}
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                removeItem(product.id)
-                location.reload()
-              }}
-            >
-              Remove Button
-            </button>
+          <div>
+            {userCartProducts ? (
+              userCartProducts.map((product, i) => (
+                <div key={product.name}>
+                  <img src={product.imageUrl} height="200" width="200" />
+                  <Link to={`/products/${product.id}`}>{product.name}</Link>
+                  <p>Price: ${product.price}</p>
+                  <p>Quantity: {orderProducts[i].quantity}</p>
+                  <p>
+                    Unit Total: ${product.price * orderProducts[i].quantity}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      removeItem(product.id)
+                      location.reload()
+                    }}
+                  >
+                    Remove Button
+                  </button>
+                </div>
+              ))
+            ) : (
+              <h3>Nothing in your cart</h3>
+            )}
           </div>
-            ))}
-
-        <p>FULL AMOUNT: ${fullAmount}</p>
-        <button type="button">Check Out</button>*/}
+        )}
       </div>
     )
   }
