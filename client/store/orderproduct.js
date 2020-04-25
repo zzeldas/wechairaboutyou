@@ -56,7 +56,7 @@ export default function ordersReducer(state = initialState, action) {
     case GET_ALL_ORDERS:
       return action.orders
     case GET_PENDING_ORDER:
-      return action.pendingOrder
+      return action.pending
     default:
       return state
   }

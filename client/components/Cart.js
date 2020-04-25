@@ -2,20 +2,23 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
+import {fetchPendingOrder} from '../store/order'
 
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
+    this.props.getPendingOrderFromStore()
   }
 
   render() {
+    const {products, user} = this.props
+    console.log('CART PROPS', this.props)
     function removeItem(productId) {
       let guestCart = JSON.parse(sessionStorage.getItem('cart'))
       delete guestCart[productId]
       sessionStorage.setItem('cart', JSON.stringify(guestCart))
     }
     let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
-    const {products} = this.props
     let cartProducts = products.filter(product => product.id in cart)
 
     let result = 0
@@ -63,7 +66,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProductsFromStore: () => dispatch(fetchAllProducts())
+    getProductsFromStore: () => dispatch(fetchAllProducts()),
+    getPendingOrderFromStore: () => dispatch(fetchPendingOrder)
   }
 }
 
