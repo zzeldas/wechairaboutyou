@@ -56,8 +56,8 @@ export class Cart extends React.Component {
         {!this.props.user.id ? (
           cartProducts.map(product => (
             <div key={product.name}>
-              <p>Name: {product.name}</p>
               <img src={product.imageUrl} height="200" width="200" />
+              <Link to={`/products/${product.id}`}>{product.name}</Link>
               <p>Price: ${product.price}</p>
               <p>Quantity: {cart[product.id]}</p>
               <p>Unit Total: ${product.price * cart[product.id]}</p>
@@ -82,8 +82,8 @@ export class Cart extends React.Component {
             {userCartProducts ? (
               userCartProducts.map((product, i) => (
                 <div key={product.name}>
-                  <p>Name: {product.name}</p>
                   <img src={product.imageUrl} height="200" width="200" />
+                  <Link to={`/products/${product.id}`}>{product.name}</Link>
                   <p>Price: ${product.price}</p>
                   <p>Quantity: {orderProducts[i].quantity}</p>
                   <p>
