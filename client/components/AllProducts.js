@@ -15,6 +15,7 @@ export class AllProducts extends React.Component {
     if (!user.id) {
       userCart = (
         <div>
+
           {products.map(product => (
             <div key={product.id}>
               <img src={product.imageUrl} height="200" width="200" />
@@ -26,7 +27,6 @@ export class AllProducts extends React.Component {
                 Add To Cart
               </button>
 
-           
             </div>
           ))}
         </div>
@@ -48,14 +48,12 @@ export class AllProducts extends React.Component {
               <button type="button">ADD TO USER CART</button>
               <div id="flex-container">
 
-
               </div>
             </div>
           ))}
         </div>
       )
     }
-
     const addToCart = (product, quantityToAdd) => {
       let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
       let oldQuantity = cart[product.id] || 0

@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const Order = require('../db/models/order')
 const {isAdmin, isLoggedIn} = require('../middleware')
 module.exports = router
 
@@ -13,6 +14,7 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
+      await Order.findOrCreate({where: {userId: user.id, status: 'pending'}})
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {

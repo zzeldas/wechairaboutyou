@@ -2,43 +2,36 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
+import {fetchPendingOrder} from '../store/order'
 import {fetchCart} from '../store/cart'
+
 
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
-    this.props.getCart()
+    this.props.getPendingOrderFromStore()
   }
 
   render() {
-    // let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
-    // const {products} = this.props
-    // let cartProducts = products.filter(product => product.id in cart)
-    // console.log('QQQ', cartProducts)
+    const {products, user} = this.props
+    console.log('CART PROPS', this.props)
+    function removeItem(productId) {
+      let guestCart = JSON.parse(sessionStorage.getItem('cart'))
+      delete guestCart[productId]
+      sessionStorage.setItem('cart', JSON.stringify(guestCart))
+    }
+    let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
+    let cartProducts = products.filter(product => product.id in cart)
 
-    // let result = 0
-    // cartProducts.forEach(product => {
-    //   result += product.price / 100 * cart[product.id]
-    // })
+    let result = 0
+    cartProducts.forEach(product => {
+      result += Math.round(product.price * cart[product.id]) / 100
+    })
 
-    // let fullAmount = result
+    this.props.getCart()
+  
 
-    // console.log('QQQ', result)
-    //product name
-    //product price
-    //quantity
-    //total
-
-    // async function showCart (items) {
-    //   let result = []
-    //   // eslint-disable-next-line guard-for-in
-    //   for (let productId in items) {
-    //     // let quantityOrder = items[productId];
-    //     let product = await Product.findByPK(productId)
-    //     result.push(product)
-    //   }
-    //   return result
-    // }
+  
     console.log('cart', this.props.cart)
     console.log('products', this.props.products)
     console.log('req.session', sessionStorage)
@@ -56,14 +49,28 @@ export class Cart extends React.Component {
         )}
         {/* {cartProducts.map(product => (
           <div key={product.name}>
+
             <p>Name: {product.name}</p>
-            <p>Price: {product.price / 100}</p>
+            <p>Price: ${product.price / 100}</p>
             <p>Quantity: {cart[product.id]}</p>
-            <p>Unit Total: {product.price / 100 * cart[product.id]}</p>
+            <p>
+              Unit Total: ${Math.round(product.price * cart[product.id]) / 100}
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                removeItem(product.id)
+                location.reload()
+              }}
+            >
+              Remove Button
+            </button>
           </div>
         ))}
-        <p>FULL AMOUNT: {fullAmount}</p>
-        <button type="button">Check Out</button> */}
+
+        <p>FULL AMOUNT: ${fullAmount}</p>
+        <button type="button">Check Out</button>
+
       </div>
     )
   }
@@ -80,7 +87,11 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getProductsFromStore: () => dispatch(fetchAllProducts()),
+
+    getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
+
     getCart: () => dispatch(fetchCart())
+
   }
 }
 
