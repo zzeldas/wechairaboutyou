@@ -25,7 +25,7 @@ export class Cart extends React.Component {
 
     let result = 0
     cartProducts.forEach(product => {
-      result += Math.round(product.price * cart[product.id]) / 100
+      result += product.price * cart[product.id]
     })
     let fullAmount = result
 
@@ -51,16 +51,15 @@ export class Cart extends React.Component {
     return (
       <div>
         <h1>MY CART</h1>
+        <p>FULL AMOUNT: ${fullAmount}</p>
+        <button type="button">Check Out</button>
         {!this.props.user.id ? (
           cartProducts.map(product => (
             <div key={product.name}>
               <p>Name: {product.name}</p>
-              <p>Price: ${product.price / 100}</p>
+              <p>Price: ${product.price}</p>
               <p>Quantity: {cart[product.id]}</p>
-              <p>
-                Unit Total: $
-                {Math.round(product.price * cart[product.id]) / 100}
-              </p>
+              <p>Unit Total: ${product.price * cart[product.id]}</p>
               <button
                 type="button"
                 onClick={() => {
@@ -70,8 +69,6 @@ export class Cart extends React.Component {
               >
                 Remove Button
               </button>
-              <p>FULL AMOUNT: ${fullAmount}</p>
-              <button type="button">Check Out</button>
             </div>
           ))
         ) : !this.props.cart.orderproducts ? (
@@ -85,12 +82,10 @@ export class Cart extends React.Component {
               userCartProducts.map((product, i) => (
                 <div key={product.name}>
                   <p>Name: {product.name}</p>
-                  <p>Price: ${product.price / 100}</p>
+                  <p>Price: ${product.price}</p>
                   <p>Quantity: {orderProducts[i].quantity}</p>
                   <p>
-                    Unit Total: $
-                    {Math.round(product.price * orderProducts[i].quantity) /
-                      100}
+                    Unit Total: ${product.price * orderProducts[i].quantity}
                   </p>
                   <button
                     type="button"
@@ -101,8 +96,6 @@ export class Cart extends React.Component {
                   >
                     Remove Button
                   </button>
-                  <p>FULL AMOUNT: ${fullAmount}</p>
-                  <button type="button">Check Out</button>
                 </div>
               ))
             ) : (
