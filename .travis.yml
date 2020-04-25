@@ -15,14 +15,16 @@ install:
 before_script:
   - psql -c 'create database "wechairaboutyou-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test             # test the code
+  - npm test # test the code
   - npm run build-client # make the bundle
-
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: we-chair-about-you
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: Q/XUcNH33cac4SqZybRiNH985bTU1X+nIveXRGZpwJy0/pJU/t5ocoWehAWzJ6wXRPukcMbacXWpwvvZ4mNgrXY02TH80RTmQeFR6CPuY0NA6bNm/WfpH0xVJNM08iu/4DMggNcDZv6A0LxIGnzfAmk4g9ro9IxtPysK+gi/hlPXg5i9hAVCRMM3ueR4mPbJScTmGdFSYoXMQ1NhR3I1BwweOhEKQR3zJMOGUPN0QFE7ui6EncgMmbTbH9DXBRzR/Tt9EKPqA7Wg7qwqrAs7dZfP5KImmEArVhPjVMngAgGHmvYJqgC/zFicc5iPsf9EH8uaZbiw0GqDCGSdoJJLHid8RMWzKYccwhWQfTsnythzWJDZ84zpKdUXBk8XkwwI8BF7kTEkXPZJsth7X7E7RxfbU5t2VnFu1aPreVL5KZPuTYCj1vIPScGt68E0R2CFoIraB8+DATxjaiBw7ev7zMNdC0K7HFxQI5Tveqe6geC4yYlGCtaAa4cdHq7zyK3h2wyodGQ5oK3T1BAzqOyvra5ipxgMWUsmSpj3gZedMovmKCQLp2dL5WMxWDzyvojL4PcyVLPJfdTHpPfJYk9i3iqZmtiUZD7iWZlNNpMv2ofg3UVVu40H0wHQZXhBCxHH87QeUJ/F/353YXiX6YK6CPJumoWnQhWJ5auaSl0ha5Y=
