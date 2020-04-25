@@ -696,7 +696,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "title"
       }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: product.imgUrl,
+        src: product.imageUrl,
         height: "300",
         width: "300"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: ", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", product.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Available Count: ", product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
