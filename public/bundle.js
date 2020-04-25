@@ -436,7 +436,11 @@ function (_React$Component) {
       }, "Check Out"), !this.props.user.id ? cartProducts.map(function (product) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: product.name
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Name: ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", cart[product.id]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.price * cart[product.id]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Name: ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: product.imageUrl,
+          height: "200",
+          width: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", cart[product.id]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.price * cart[product.id]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           onClick: function onClick() {
             removeItem(product.id);
@@ -448,7 +452,11 @@ function (_React$Component) {
       }, "Look for chairs to add to your cart")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, userCartProducts ? userCartProducts.map(function (product, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: product.name
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Name: ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.price * orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Name: ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: product.imageUrl,
+          height: "200",
+          width: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.price * orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           onClick: function onClick() {
             removeItem(product.id);
