@@ -21,10 +21,25 @@ router.post('/login', async (req, res, next) => {
 })
 
 //store logged in user's data in req.session
+//merge guest shopping cart to order?
+
 router.put('/login', async (req, res, next) => {
   try {
+    console.log('heyyyyyyyy i am here')
     const user = await User.findOne({where: {email: req.body.email}})
     if (user) {
+      //check sessionStorage for cart
+      //if user has a pending cart
+      //if they do merge sessionStorage with pending cart
+      //if not, create a pending order
+      //and create orderProduct with sessionStorage to assign to order
+      //let newCart = Order.create()
+      //assign addedProduct's orderId to the if of the newCart
+      //res.json(newCart)
+      //   } catch (err) {
+      //     next(err)
+      //   }
+      // })
       req.session.userId = user.userId
       res.json(user)
     }
