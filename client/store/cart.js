@@ -31,13 +31,31 @@ export const fetchCart = () => async dispatch => {
     console.error(err)
   }
 }
+//
+export const fetchCreateProduct = (
+  product,
+  quantityToAdd
+) => async dispatch => {
+  try {
+    const {data} = await axios.post('/api/carts/cart', {product, quantityToAdd})
 
-const initialState = {}
+    dispatch(addToCart(data[0]))
+  } catch (err) {
+    console.error(err)
+  }
+}
+const initialState = {
+  cart: {},
+  orderproducts: []
+}
 // REDUCERS
+
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      return action.cart
+      return {...state, cart: action.cart}
+    case ADD_TO_CART:
+      return {...state, orderproducts: [...state.orderproducts, action.item]}
     default:
       return state
   }
