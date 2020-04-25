@@ -71,7 +71,7 @@ router.post('/', async (req, res, next) => {
     if (!req.body.content) {
       res.status(500)
     }
-
+    let updateCategories
     if (req.body.categories && typeof req.body.categories === 'string') {
       updateCategories = req.body.categories.split(',')
     } else {
@@ -102,6 +102,7 @@ router.post('/', async (req, res, next) => {
 //router.put('/:productId', isAdmin, async (req, res, next) => {
 router.put('/:productId', async (req, res, next) => {
   try {
+    let updateCategories
     if (req.body.categories && typeof req.body.categories === 'string') {
       updateCategories = req.body.categories.split(',')
     } else {

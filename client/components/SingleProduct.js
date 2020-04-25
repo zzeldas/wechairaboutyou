@@ -17,7 +17,7 @@ class SingleProduct extends React.Component {
       <div>
         <h2 id="title">{product.name}</h2>
         <img src={product.imgUrl} height="300" width="300" />
-        <p>Price: {product.price}</p>
+        <p>Price: ${product.price}</p>
         <p>Description: {product.description}</p>
         <p>Available Count: {product.quantity}</p>
         <button type="button">Add to Cart</button>
@@ -37,7 +37,6 @@ class SingleProduct extends React.Component {
               >
                 <button type="button">Edit Product</button>
               </Link> */}
-
 
             <button type="button">Remove Product</button>
           </div>

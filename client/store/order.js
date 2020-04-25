@@ -44,7 +44,6 @@ const getPendingOrder = pending => ({
 export const fetchPendingOrder = () => async dispatch => {
   try {
     const res = await axios.get('/cart')
-
     dispatch(getPendingOrder(res.data))
   } catch (err) {
     console.error(err)
