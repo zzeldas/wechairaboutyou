@@ -30,6 +30,15 @@ class SingleProduct extends React.Component {
             >
               <button type="button">Edit Product</button>
             </Link>
+
+            {/* PENDING TO SIMPLIFY THE ROUTE BY MARIA */}
+            {/* <Link
+                to={'/updateProduct'}
+              >
+                <button type="button">Edit Product</button>
+              </Link> */}
+
+
             <button type="button">Remove Product</button>
           </div>
         )}

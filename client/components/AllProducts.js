@@ -25,17 +25,8 @@ export class AllProducts extends React.Component {
                 {' '}
                 Add To Cart
               </button>
-              <div id="flex-container">
-                {/* <Link to={`/updateProduct/${product.id}/${product.name}/${product.description}/${product.price}/${product.quantity}/${product.isActive}/${encodeURI(product.imageUrl)}`}>Edit Product</Link> */}
 
-                <Link
-                  to={`/updateProduct/${product.id}/${product.name}/${
-                    product.description
-                  }/${product.price}/${product.quantity}/${product.isActive}`}
-                >
-                  Edit Product
-                </Link>
-              </div>
+           
             </div>
           ))}
         </div>
@@ -56,15 +47,8 @@ export class AllProducts extends React.Component {
               <p>Quantity: {product.quantity}</p>
               <button type="button">ADD TO USER CART</button>
               <div id="flex-container">
-                {/* <Link to={`/updateProduct/${product.id}/${product.name}/${product.description}/${product.price}/${product.quantity}/${product.isActive}/${encodeURI(product.imageUrl)}`}>Edit Product</Link> */}
 
-                <Link
-                  to={`/updateProduct/${product.id}/${product.name}/${
-                    product.description
-                  }/${product.price}/${product.quantity}/${product.isActive}`}
-                >
-                  Edit Product
-                </Link>
+
               </div>
             </div>
           ))}

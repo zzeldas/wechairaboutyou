@@ -12,6 +12,18 @@ class updateProduct extends Component {
   //   super(props)
   // }
 
+
+    this.state = {
+      id: this.props.match.params.id,
+      name: this.props.match.params.name,
+      description: this.props.match.params.description,
+      price: this.props.match.params.price,
+      quantity: this.props.match.params.quantity,
+      isActive: this.props.match.params.isActive,
+      categories: this.props.match.params.categories,
+      imageUrl: this.props.match.params.imageUrl
+    }
+
   //   this.state = {
   //     id: this.props.match.params.id,
   //     name: this.props.match.params.name,
@@ -22,6 +34,7 @@ class updateProduct extends Component {
   //     categories: [],
   //     imageUrl: this.props.match.params.imageUrl
   //   }
+
 
   //   this.handleChange = this.handleChange.bind(this)
   //   this.handleSubmit = this.handleSubmit.bind(this)
