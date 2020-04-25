@@ -81,14 +81,23 @@ const ProductForm = props => {
             </li>
             <li>
               <label htmlFor="isActive">isActive:</label>
-              <input
+              {/* <input
                 placeholder="isActive"
                 onChange={handleChange}
-                type="text"
+                type="boolean"
                 name="isActive"
                 value={state.isActive}
                 required
-              />
+						  /> */}
+
+              <select
+                name="isActive"
+                value={state.isActive}
+                onChange={handleChange}
+              >
+                <option>true</option>
+                <option>false</option>
+              </select>
             </li>
             <li>
               <button type="submit">Submit</button>

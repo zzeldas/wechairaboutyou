@@ -27,6 +27,14 @@ class newProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    let isActForm
+
+    if (this.state.isActive === 'true') {
+      isActForm = true
+    } else {
+      isActForm = false
+    }
+
     Axios.post('/api/products', {
       name: this.state.name,
       description: this.state.description,
@@ -34,7 +42,7 @@ class newProduct extends Component {
       price: this.state.price,
       quantity: this.state.quantity,
       categories: this.state.categories,
-      isActive: this.state.isActive
+      isActive: isActForm
     })
 
     this.setState({
