@@ -14,7 +14,8 @@ export class Cart extends React.Component {
 
   render() {
     const {products, user} = this.props
-    console.log('CART PROPS', this.props)
+
+    //GUEST CART
     function removeItem(productId) {
       let guestCart = JSON.parse(sessionStorage.getItem('cart'))
       delete guestCart[productId]
@@ -29,6 +30,7 @@ export class Cart extends React.Component {
     })
     let fullAmount = result
 
+    //USER CART
     console.log('this props ', this.props)
     let orderProducts = this.props.cart.orderproducts
 
@@ -45,7 +47,8 @@ export class Cart extends React.Component {
         })
         .flat()
 
-      console.log(userCartProducts)
+      console.log('USERCARTPRODUCTS', userCartProducts)
+      console.log('ORDERPRODUCTS', orderProducts)
     }
 
     return (

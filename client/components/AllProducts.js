@@ -2,11 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
+import {fetchCreateProduct} from '../store/cart'
 import {number} from 'prop-types'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
+    this.props.createItem()
   }
 
   render() {
@@ -15,7 +17,6 @@ export class AllProducts extends React.Component {
     if (!user.id) {
       userCart = (
         <div>
-
           {products.map(product => (
             <div key={product.id}>
               <img src={product.imageUrl} height="200" width="200" />
@@ -26,7 +27,6 @@ export class AllProducts extends React.Component {
                 {' '}
                 Add To Cart
               </button>
-
             </div>
           ))}
         </div>
@@ -45,15 +45,19 @@ export class AllProducts extends React.Component {
               <Link to={`/products/${product.id}`}>{product.name}</Link>
               <p>Price: {product.price}</p>
               <p>Quantity: {product.quantity}</p>
-              <button type="button">ADD TO USER CART</button>
-              <div id="flex-container">
-
-              </div>
+              <button
+                type="button"
+                onClick={() => this.props.createItem(product, 1)}
+              >
+                ADD TO USER CART
+              </button>
+              <div id="flex-container" />
             </div>
           ))}
         </div>
       )
     }
+    //GUEST CART ADDCART
     const addToCart = (product, quantityToAdd) => {
       let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
       let oldQuantity = cart[product.id] || 0
@@ -61,6 +65,8 @@ export class AllProducts extends React.Component {
       cart[product.id] = newQuantity
       sessionStorage.setItem('cart', JSON.stringify(cart))
     }
+
+    //USER CART ADDCART
 
     return <div>{userCart}</div>
   }
@@ -75,7 +81,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProductsFromStore: () => dispatch(fetchAllProducts())
+    getProductsFromStore: () => dispatch(fetchAllProducts()),
+    createItem: (product, quantityToAdd) =>
+      dispatch(fetchCreateProduct(product, quantityToAdd))
   }
 }
 

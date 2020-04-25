@@ -51,12 +51,13 @@ router.post('/cart', async (req, res, next) => {
       },
       include: [{model: OrderProduct}]
     })
-
+    console.log('ORDER', order)
+    console.log('REQ.BODY', req.body)
     const addedProduct = await OrderProduct.create({
-      unitPrice: req.body.price,
-      quanity: 1,
-      orderId: order.userId,
-      productId: req.body.id
+      unitPrice: req.body.product.price * 100,
+      quantity: req.body.quantityToAdd, //FIXME
+      orderId: order[0].dataValues.id,
+      productId: req.body.product.id
     })
 
     res.json(order)
