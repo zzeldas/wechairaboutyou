@@ -6,26 +6,39 @@ import history from '../history'
 
 const ADD_TO_CART = 'ADD_TO_CART'
 const REMOVE_ITEM = 'REMOVE_ITEM'
+const GET_CART = 'GET_CART'
 
 // ACTION CREATORS
-export const getCart = item => ({
+
+const getCart = cart => ({
+  type: GET_CART,
+  cart
+})
+
+const addToCart = item => ({
   type: ADD_TO_CART,
   item
 })
 
 //THUNKS
 
-export const fetchCart = (item, user) => async dispatch => {
+export const fetchCart = () => async dispatch => {
   try {
-    //FIXME
-    console.log('Hi')
+    const {data} = await axios.get('/api/carts/cart')
+
+    dispatch(getCart(data[0]))
   } catch (err) {
     console.error(err)
   }
 }
 
-const initialState = {
-  items: [],
-  total: 0
-}
+const initialState = {}
 // REDUCERS
+export default function cartReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_CART:
+      return action.cart
+    default:
+      return state
+  }
+}

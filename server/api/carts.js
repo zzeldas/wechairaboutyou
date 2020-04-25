@@ -25,7 +25,7 @@ router.get('/cart', async (req, res, next) => {
 //api/carts/history
 router.get('/history', async (req, res, next) => {
   try {
-    const pastOrders = await Order.findOne({
+    const pastOrders = await Order.findAll({
       where: {
         userId: req.user.id,
         status: 'completed'
@@ -41,20 +41,25 @@ router.get('/history', async (req, res, next) => {
 
 //user adds item to cart
 //api/carts/addToCart
+//not tested
 router.post('/cart', async (req, res, next) => {
   try {
-    const addedProduct = await OrderProduct.create()
-    //check for pending order
-    let {orders} = await User.findByPk(req.params.userId, {
-      include: [{model: Order}]
+    const order = await Order.findOrCreate({
+      where: {
+        userId: req.user.id,
+        status: 'pending'
+      },
+      include: [{model: OrderProduct}]
     })
-    // if there is one pending order
-    // look up pending order's id
-    // assign addedProduct's orderId to the id of the pending order
-    // if there is no pending order
-    let newCart = Order.create()
-    // assign addedProduct's orderId to the if of the newCart
-    res.json(newCart)
+
+    const addedProduct = await OrderProduct.create({
+      unitPrice: req.body.price,
+      quanity: 1,
+      orderId: order.userId,
+      productId: req.body.id
+    })
+
+    res.json(order)
   } catch (err) {
     next(err)
   }

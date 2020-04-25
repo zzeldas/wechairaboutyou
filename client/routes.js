@@ -34,6 +34,7 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/users" component={AllUsers} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/cart" component={Cart} />
 
         <Route exact path="/addproduct" component={newProduct} />
         <Route
@@ -41,8 +42,6 @@ class Routes extends Component {
           path="/updateProduct/:id/:name/:description/:price/:quantity/:isActive"
           component={updateProduct}
         />
-
-        <Route exact path="/cart" component={Cart} />
 
         {isLoggedInUser && (
           <Switch>
@@ -52,7 +51,6 @@ class Routes extends Component {
             {/* <Route exact path="/addproduct" component={AddProductForm} /> */}
 
             <Route exact path="/cart" component={Cart} />
-
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
