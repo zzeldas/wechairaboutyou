@@ -1055,21 +1055,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductForm */ "./client/components/ProductForm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _store_singleProduct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/singleProduct */ "./client/store/singleProduct.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -1079,19 +1079,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-
 var updateProduct =
 /*#__PURE__*/
 function (_Component) {
   _inherits(updateProduct, _Component);
-
-  _createClass(updateProduct, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.getSingleProductFromStore(this.props.match.params.id);
-    }
-  }]);
 
   function updateProduct(props) {
     var _this;
@@ -1109,81 +1100,62 @@ function (_Component) {
       categories: _this.props.match.params.categories,
       imageUrl: _this.props.match.params.imageUrl
     };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.getProduct = _this.getProduct.bind(_assertThisInitialized(_this));
     return _this;
-  } //   this.state = {
-  //     id: this.props.match.params.id,
-  //     name: this.props.match.params.name,
-  //     description: this.props.match.params.description,
-  //     price: this.props.match.params.price,
-  //     quantity: this.props.match.params.quantity,
-  //     isActive: this.props.match.params.isActive,
-  //     categories: [],
-  //     imageUrl: this.props.match.params.imageUrl
-  //   }
-  //   this.handleChange = this.handleChange.bind(this)
-  //   this.handleSubmit = this.handleSubmit.bind(this)
-  //   this.getProduct = this.getProduct.bind(this)
-  // }
-  // getProduct(id) {
-  //   let data = Axios.get(`/api/products/${id}`)
-  //   return data
-  // }
-  // handleChange(evt) {
-  //   evt.preventDefault()
-  //   this.setState({
-  //     [evt.target.name]: evt.target.value
-  //   })
-  // }
-  // handleSubmit(evt) {
-  //   evt.preventDefault()
-  //   Axios.put(`/api/products/${this.props.match.params.id}`, {
-  //     name: this.state.name,
-  //     description: this.state.description,
-  //     price: this.state.price,
-  //     quantity: this.state.quantity,
-  //     categories: this.state.categories,
-  //     isActive: this.state.isActive,
-  //     imageUrl: this.state.imageUrl
-  //   })
-  //   this.setState({
-  //     name: this.state.name,
-  //     description: this.state.description,
-  //     price: this.state.price,
-  //     quantity: this.state.quantity,
-  //     categories: this.state.categories,
-  //     isActive: this.state.isActive,
-  //     imageUrl: this.state.imageUrl
-  //   })
-  // }
-
+  }
 
   _createClass(updateProduct, [{
+    key: "getProduct",
+    value: function getProduct(id) {
+      var data = axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/products/".concat(id));
+      return data;
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(evt) {
+      evt.preventDefault();
+      this.setState(_defineProperty({}, evt.target.name, evt.target.value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(evt) {
+      evt.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.put("/api/products/".concat(this.props.match.params.id), {
+        name: this.state.name,
+        description: this.state.description,
+        price: this.state.price,
+        quantity: this.state.quantity,
+        categories: this.state.categories,
+        isActive: this.state.isActive,
+        imageUrl: this.state.imageUrl
+      });
+      this.setState({
+        name: this.state.name,
+        description: this.state.description,
+        price: this.state.price,
+        quantity: this.state.quantity,
+        categories: this.state.categories,
+        isActive: this.state.isActive,
+        imageUrl: this.state.imageUrl
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      console.log('STATE PRODUCT!!!', this.props);
-      console.log('PRODUCT ID', this.props.product.id);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "HELLO");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProductForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        state: this.state,
+        handleChange: this.handleChange,
+        handleSubmit: this.handleSubmit
+      }));
     }
   }]);
 
   return updateProduct;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-var mapState = function mapState(state) {
-  return {
-    product: state.product
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    getSingleProductFromStore: function getSingleProductFromStore(id) {
-      return dispatch(Object(_store_singleProduct__WEBPACK_IMPORTED_MODULE_3__["fetchProduct"])(id));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapState, mapDispatch)(updateProduct)); // export default updateProduct
+/* harmony default export */ __webpack_exports__["default"] = (updateProduct);
 
 /***/ }),
 
