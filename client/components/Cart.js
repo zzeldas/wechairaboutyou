@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
 import {fetchPendingOrder} from '../store/order'
-import {fetchCart} from '../store/cart'
+import {fetchCart, fetchCreateProduct} from '../store/cart'
 
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
-    // this.props.getPendingOrderFromStore()
+    this.props.getCreateProduct()
     this.props.getCart()
   }
 
@@ -32,7 +32,7 @@ export class Cart extends React.Component {
 
     //USER CART
     console.log('this props ', this.props)
-    let orderProducts = this.props.cart.orderproducts
+    let orderProducts = this.props.cart.cart.orderproducts
 
     let userCartProducts
 
@@ -114,13 +114,15 @@ const mapState = state => {
   return {
     products: state.products,
     user: state.user,
-    cart: state.cart
+    cart: state.cart,
+    orderproducts: state.orderproducts
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getProductsFromStore: () => dispatch(fetchAllProducts()),
+    getCreateProduct: () => dispatch(fetchCreateProduct()),
 
     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
 

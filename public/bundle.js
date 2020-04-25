@@ -401,8 +401,8 @@ function (_React$Component) {
   _createClass(Cart, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getProductsFromStore(); // this.props.getPendingOrderFromStore()
-
+      this.props.getProductsFromStore();
+      this.props.getCreateProduct();
       this.props.getCart();
     }
   }, {
@@ -429,7 +429,7 @@ function (_React$Component) {
       var fullAmount = result; //USER CART
 
       console.log('this props ', this.props);
-      var orderProducts = this.props.cart.orderproducts;
+      var orderProducts = this.props.cart.cart.orderproducts;
       var userCartProducts;
 
       if (orderProducts) {
@@ -490,7 +490,8 @@ var mapState = function mapState(state) {
   return {
     products: state.products,
     user: state.user,
-    cart: state.cart
+    cart: state.cart,
+    orderproducts: state.orderproducts
   };
 };
 
@@ -498,6 +499,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     getProductsFromStore: function getProductsFromStore() {
       return dispatch(Object(_store_products__WEBPACK_IMPORTED_MODULE_3__["fetchAllProducts"])());
+    },
+    getCreateProduct: function getCreateProduct() {
+      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_5__["fetchCreateProduct"])());
     },
     getPendingOrderFromStore: function getPendingOrderFromStore() {
       return dispatch(Object(_store_order__WEBPACK_IMPORTED_MODULE_4__["fetchPendingOrder"])());
@@ -1701,7 +1705,7 @@ var fetchCart = function fetchCart() {
               case 3:
                 _ref2 = _context.sent;
                 data = _ref2.data;
-                dispatch(addToCart(data[0]));
+                dispatch(getCart(data[0]));
                 _context.next = 11;
                 break;
 
@@ -1748,7 +1752,7 @@ var fetchCreateProduct = function fetchCreateProduct(product, quantityToAdd) {
               case 3:
                 _ref4 = _context2.sent;
                 data = _ref4.data;
-                dispatch(getCart(data[0]));
+                dispatch(addToCart(data[0]));
                 _context2.next = 11;
                 break;
 
@@ -1772,7 +1776,8 @@ var fetchCreateProduct = function fetchCreateProduct(product, quantityToAdd) {
   );
 };
 var initialState = {
-  cart: [] // REDUCERS
+  cart: {},
+  orderproducts: [] // REDUCERS
 
 };
 function cartReducer() {
@@ -1787,7 +1792,7 @@ function cartReducer() {
 
     case ADD_TO_CART:
       return _objectSpread({}, state, {
-        cart: [].concat(_toConsumableArray(state.cart), [action.item])
+        orderproducts: [].concat(_toConsumableArray(state.orderproducts), [action.item])
       });
 
     default:
@@ -46111,7 +46116,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
