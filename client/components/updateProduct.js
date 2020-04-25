@@ -13,7 +13,7 @@ class updateProduct extends Component {
       price: this.props.match.params.price,
       quantity: this.props.match.params.quantity,
       isActive: this.props.match.params.isActive,
-      categories: [],
+      categories: this.props.match.params.categories,
       imageUrl: this.props.match.params.imageUrl
     }
 

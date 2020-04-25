@@ -41,6 +41,13 @@ class Routes extends Component {
           path="/updateProduct/:id/:name/:description/:price/:quantity/:isActive"
           component={updateProduct}
         />
+        {/* Pending TO SIMPLIFY THE ROUTE by maria */}
+        {/* <Route
+          exact
+          path="/updateProduct"
+          component={updateProduct}
+        /> */}
+        {/* Pending to fix by maria */}
 
         <Route exact path="/cart" component={Cart} />
 
@@ -52,7 +59,6 @@ class Routes extends Component {
             {/* <Route exact path="/addproduct" component={AddProductForm} /> */}
 
             <Route exact path="/cart" component={Cart} />
-
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
