@@ -388,8 +388,9 @@ function (_React$Component) {
   _createClass(Cart, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getProductsFromStore();
-      this.props.getPendingOrderFromStore();
+      this.props.getProductsFromStore(); // this.props.getPendingOrderFromStore()
+
+      this.props.getCart();
     }
   }, {
     key: "render",
@@ -413,13 +414,50 @@ function (_React$Component) {
       cartProducts.forEach(function (product) {
         result += Math.round(product.price * cart[product.id]) / 100;
       });
-      this.props.getCart();
-      console.log('cart', this.props.cart);
-      console.log('products', this.props.products);
-      console.log('req.session', sessionStorage);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "MY CART"), !this.props.cart.orderproducts ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are currently no chairs in your shopping cart!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      var fullAmount = result;
+      console.log('this props ', this.props);
+      var orderProducts = this.props.cart.orderproducts;
+      var userCartProducts;
+
+      if (orderProducts) {
+        var orderProductsId = orderProducts.map(function (orderProduct) {
+          return orderProduct.productId;
+        });
+        userCartProducts = orderProductsId.map(function (id) {
+          return products.filter(function (product) {
+            return id === product.id;
+          });
+        }).flat();
+        console.log(userCartProducts);
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "MY CART"), !this.props.user.id ? cartProducts.map(function (product) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: product.name
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Name: ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", cart[product.id]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", Math.round(product.price * cart[product.id]) / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: function onClick() {
+            removeItem(product.id);
+            location.reload();
+          }
+        }, "Remove Button"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FULL AMOUNT: $", fullAmount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button"
+        }, "Check Out"));
+      }) : !this.props.cart.orderproducts ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are currently no chairs in your shopping cart!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/products"
-      }, "Look for chairs to add to your cart")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are something in cart"));
+      }, "Look for chairs to add to your cart")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, userCartProducts ? userCartProducts.map(function (product, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: product.name
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Name: ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", Math.round(product.price * orderProducts[i].quantity) / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: function onClick() {
+            removeItem(product.id);
+            location.reload();
+          }
+        }, "Remove Button"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FULL AMOUNT: $", fullAmount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button"
+        }, "Check Out"));
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Nothing in your cart")));
     }
   }]);
 
