@@ -82,7 +82,7 @@ router.post('/', async (req, res, next) => {
 // Update a product only if you are an Admin
 
 //router.put('/:productId', isAdmin, async (req, res, next) => {
-router.put(`/:productId`, async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   try {
     if (req.body.categories && typeof req.body.categories === 'string') {
       updateCategories = req.body.categories.split(',')
