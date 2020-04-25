@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
 import {fetchPendingOrder} from '../store/order'
+import {fetchCart} from '../store/cart'
+
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -26,13 +28,28 @@ export class Cart extends React.Component {
       result += Math.round(product.price * cart[product.id]) / 100
     })
 
-    let fullAmount = result
+    this.props.getCart()
+  
+
+  
+    console.log('cart', this.props.cart)
+    console.log('products', this.props.products)
+    console.log('req.session', sessionStorage)
 
     return (
       <div>
         <h1>MY CART</h1>
-        {cartProducts.map(product => (
-          <div key={JSON.stringify([product.id, cart[product.id]])}>
+        {!this.props.cart.orderproducts ? (
+          <div>
+            <h3>There are currently no chairs in your shopping cart!</h3>
+            <Link to="/products">Look for chairs to add to your cart</Link>
+          </div>
+        ) : (
+          <h3>There are something in cart</h3>
+        )}
+        {/* {cartProducts.map(product => (
+          <div key={product.name}>
+
             <p>Name: {product.name}</p>
             <p>Price: ${product.price / 100}</p>
             <p>Quantity: {cart[product.id]}</p>
@@ -50,8 +67,10 @@ export class Cart extends React.Component {
             </button>
           </div>
         ))}
+
         <p>FULL AMOUNT: ${fullAmount}</p>
         <button type="button">Check Out</button>
+
       </div>
     )
   }
@@ -60,14 +79,19 @@ export class Cart extends React.Component {
 const mapState = state => {
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
+    cart: state.cart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getProductsFromStore: () => dispatch(fetchAllProducts()),
-    getPendingOrderFromStore: () => dispatch(fetchPendingOrder)
+
+    getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
+
+    getCart: () => dispatch(fetchCart())
+
   }
 }
 

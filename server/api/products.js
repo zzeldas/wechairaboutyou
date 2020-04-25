@@ -2,10 +2,19 @@ const router = require('express').Router()
 const {Product, User, Order} = require('../db/models')
 const Category = require('../db/models/category')
 const {isAdmin, isLoggedIn} = require('../middleware')
+const Sequelize = require('sequelize')
 
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'imageUrl',
+        [Sequelize.literal('price / 100.00'), 'price'],
+        'quantity'
+      ],
       where: {isActive: true},
       order: [['name', 'ASC']],
       include: [
@@ -29,6 +38,15 @@ router.get('/', async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findOne({
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'imageUrl',
+        [Sequelize.literal('price / 100.00'), 'price'],
+        'quantity',
+        'isActive'
+      ],
       where: {id: req.params.productId},
       include: [
         {
@@ -82,7 +100,7 @@ router.post('/', async (req, res, next) => {
 // Update a product only if you are an Admin
 
 //router.put('/:productId', isAdmin, async (req, res, next) => {
-router.put(`/:productId`, async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   try {
     if (req.body.categories && typeof req.body.categories === 'string') {
       updateCategories = req.body.categories.split(',')
@@ -114,6 +132,14 @@ router.get('/categories/:categoryId', async (req, res, next) => {
     const categoryId = req.params.categoryId
     if (categoryId > 0) {
       const productsByCategory = await Product.findAll({
+        attributes: [
+          'id',
+          'name',
+          'description',
+          'imageUrl',
+          [Sequelize.literal('price / 100.00'), 'price'],
+          'quantity'
+        ],
         include: [
           {
             model: Category,
@@ -147,56 +173,5 @@ router.delete('/:productId', async (req, res, next) => {
     next(err)
   }
 })
-
-//logged in user cart
-router.get('/carts/:cartId', async (req, res, next) => {
-  //FIXME -user route checks if person is logged in
-
-  //search by user and look into the cart
-  //Check if there is a pending cart in orders
-  //if pending cart, it goes to cart id
-  //else create pending order
-  try {
-    //----
-    console.log('kjhgfgdjhj')
-
-    console.log(req.session)
-    const userId = req.session.passport.user
-    console.log(userId)
-    const {orders} = await User.findByPk(userId, {include: [{model: Order}]})
-
-    console.log(orders)
-
-    // if (!cart) {
-    //   let newCart = Order.create()
-    //   res.json(newCart)
-    // } else {
-    //   res.json('cart')
-    // }
-  } catch (err) {
-    next(err)
-  }
-})
-
-//user adds item to cart
-//url /:userId/cart
-// router.post('/cart', async (req, res, next) => {
-//   try {
-// const addedProduct = await OrderProduct.create()
-// //check for pending order
-// let {orders} = await User.findByPk(req.params.userId, {
-//   include: [{model: Order}]
-// })
-//if there is one pending order
-//look up pending order's id
-//assign addedProduct's orderId to the id of the pending order
-//if there is no pending order
-//let newCart = Order.create()
-//assign addedProduct's orderId to the if of the newCart
-//res.json(newCart)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 
 module.exports = router

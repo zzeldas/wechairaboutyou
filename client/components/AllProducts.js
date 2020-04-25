@@ -15,7 +15,7 @@ export class AllProducts extends React.Component {
     if (!user.id) {
       userCart = (
         <div>
-          {user.isAdmin === true && <button type="button">Add Product</button>}
+
           {products.map(product => (
             <div key={product.id}>
               <img src={product.imageUrl} height="200" width="200" />
@@ -26,17 +26,7 @@ export class AllProducts extends React.Component {
                 {' '}
                 Add To Cart
               </button>
-              <div id="flex-container">
-                {/* <Link to={`/updateProduct/${product.id}/${product.name}/${product.description}/${product.price}/${product.quantity}/${product.isActive}/${encodeURI(product.imageUrl)}`}>Edit Product</Link> */}
 
-                <Link
-                  to={`/updateProduct/${product.id}/${product.name}/${
-                    product.description
-                  }/${product.price}/${product.quantity}/${product.isActive}`}
-                >
-                  Edit Product
-                </Link>
-              </div>
             </div>
           ))}
         </div>
@@ -44,7 +34,11 @@ export class AllProducts extends React.Component {
     } else {
       userCart = (
         <div>
-          {user.isAdmin === true && <button type="button">Add Product</button>}
+          {user.isAdmin === true && (
+            <Link to="/addproduct">
+              <button type="button">Add Product</button>
+            </Link>
+          )}
           {products.map(product => (
             <div key={product.id}>
               <img src={product.imageUrl} height="200" width="200" />
@@ -53,15 +47,7 @@ export class AllProducts extends React.Component {
               <p>Quantity: {product.quantity}</p>
               <button type="button">ADD TO USER CART</button>
               <div id="flex-container">
-                {/* <Link to={`/updateProduct/${product.id}/${product.name}/${product.description}/${product.price}/${product.quantity}/${product.isActive}/${encodeURI(product.imageUrl)}`}>Edit Product</Link> */}
 
-                <Link
-                  to={`/updateProduct/${product.id}/${product.name}/${
-                    product.description
-                  }/${product.price}/${product.quantity}/${product.isActive}`}
-                >
-                  Edit Product
-                </Link>
               </div>
             </div>
           ))}
