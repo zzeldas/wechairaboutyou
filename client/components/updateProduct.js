@@ -8,10 +8,8 @@ class updateProduct extends Component {
   componentDidMount() {
     this.props.getSingleProductFromStore(this.props.match.params.id)
   }
-  // constructor(props) {
-  //   super(props)
-  // }
-
+  constructor(props) {
+    super(props)
 
     this.state = {
       id: this.props.match.params.id,
@@ -23,6 +21,7 @@ class updateProduct extends Component {
       categories: this.props.match.params.categories,
       imageUrl: this.props.match.params.imageUrl
     }
+  }
 
   //   this.state = {
   //     id: this.props.match.params.id,
@@ -34,7 +33,6 @@ class updateProduct extends Component {
   //     categories: [],
   //     imageUrl: this.props.match.params.imageUrl
   //   }
-
 
   //   this.handleChange = this.handleChange.bind(this)
   //   this.handleSubmit = this.handleSubmit.bind(this)

@@ -5,7 +5,6 @@ import {fetchAllProducts} from '../store/products'
 import {fetchPendingOrder} from '../store/order'
 import {fetchCart} from '../store/cart'
 
-
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
@@ -29,9 +28,7 @@ export class Cart extends React.Component {
     })
 
     this.props.getCart()
-  
 
-  
     console.log('cart', this.props.cart)
     console.log('products', this.props.products)
     console.log('req.session', sessionStorage)
@@ -66,11 +63,10 @@ export class Cart extends React.Component {
               Remove Button
             </button>
           </div>
-        ))}
+            ))}
 
         <p>FULL AMOUNT: ${fullAmount}</p>
-        <button type="button">Check Out</button>
-
+        <button type="button">Check Out</button>*/}
       </div>
     )
   }
@@ -91,7 +87,6 @@ const mapDispatch = dispatch => {
     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
 
     getCart: () => dispatch(fetchCart())
-
   }
 }
 
