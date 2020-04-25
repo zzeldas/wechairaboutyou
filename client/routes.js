@@ -10,6 +10,7 @@ import AllUsers from './components/AllUsers'
 
 import newProduct from './components/newProduct'
 import updateProduct from './components/updateProduct'
+import removeProduct from './components/removeProduct'
 
 import Cart from './components/Cart'
 import SingleProduct from './components/SingleProduct'
@@ -41,6 +42,12 @@ class Routes extends Component {
           exact
           path="/updateProduct/:id/:name/:description/:price/:quantity/:isActive"
           component={updateProduct}
+        />
+
+        <Route
+          exact
+          path="/removeProduct/:id/:name/:description"
+          component={removeProduct}
         />
         {/* Pending TO SIMPLIFY THE ROUTE by maria */}
         {/* <Route

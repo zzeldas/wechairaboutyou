@@ -36,13 +36,19 @@ class updateProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    let isActForm
+    if (this.state.isActive === 'true') {
+      isActForm = true
+    } else {
+      isActForm = false
+    }
     Axios.put(`/api/products/${this.props.match.params.id}`, {
       name: this.state.name,
       description: this.state.description,
       price: this.state.price,
       quantity: this.state.quantity,
       categories: this.state.categories,
-      isActive: this.state.isActive,
+      isActive: isActForm,
       imageUrl: this.state.imageUrl
     })
     this.setState({
@@ -51,7 +57,7 @@ class updateProduct extends Component {
       price: this.state.price,
       quantity: this.state.quantity,
       categories: this.state.categories,
-      isActive: this.state.isActive,
+      isActive: isActForm,
       imageUrl: this.state.imageUrl
     })
   }

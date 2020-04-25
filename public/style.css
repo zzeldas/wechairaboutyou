@@ -119,3 +119,8 @@ form div {
   width: 200px;
   height: 100px;
 }
+
+.headercenter {
+  text-align: center;
+  width: 100%;
+}
