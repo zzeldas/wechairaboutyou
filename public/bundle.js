@@ -388,8 +388,9 @@ function (_React$Component) {
   _createClass(Cart, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getProductsFromStore();
-      this.props.getPendingOrderFromStore();
+      this.props.getProductsFromStore(); // this.props.getPendingOrderFromStore()
+
+      this.props.getCart();
     }
   }, {
     key: "render",
@@ -411,15 +412,60 @@ function (_React$Component) {
       });
       var result = 0;
       cartProducts.forEach(function (product) {
-        result += Math.round(product.price * cart[product.id]) / 100;
+        result += product.price * cart[product.id];
       });
-      this.props.getCart();
-      console.log('cart', this.props.cart);
-      console.log('products', this.props.products);
-      console.log('req.session', sessionStorage);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "MY CART"), !this.props.cart.orderproducts ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are currently no chairs in your shopping cart!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/products"
-      }, "Look for chairs to add to your cart")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "There are something in cart"));
+      var fullAmount = result;
+      console.log('this props ', this.props);
+      var orderProducts = this.props.cart.orderproducts;
+      var userCartProducts;
+
+      if (orderProducts) {
+        var orderProductsId = orderProducts.map(function (orderProduct) {
+          return orderProduct.productId;
+        });
+        userCartProducts = orderProductsId.map(function (id) {
+          return products.filter(function (product) {
+            return id === product.id;
+          });
+        }).flat();
+        console.log(userCartProducts);
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "MY CART"), !this.props.user.id ? cartProducts.map(function (product) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: product.name
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: product.imageUrl,
+          height: "200",
+          width: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/products/".concat(product.id)
+        }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", cart[product.id]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.price * cart[product.id]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: function onClick() {
+            removeItem(product.id);
+            location.reload();
+          }
+        }, "Remove Button"));
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, userCartProducts ? userCartProducts.map(function (product, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: product.name
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: product.imageUrl,
+          height: "200",
+          width: "200"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/products/".concat(product.id)
+        }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.price * orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: function onClick() {
+            removeItem(product.id);
+            location.reload();
+          }
+        }, "Remove Button"));
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Nothing in your cart")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FULL AMOUNT: $", fullAmount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button"
+      }, "Check Out"));
     }
   }]);
 
@@ -448,7 +494,123 @@ var mapDispatch = function mapDispatch(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(Cart));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(Cart)); // import React from 'react'
+// import {connect} from 'react-redux'
+// import {Link} from 'react-router-dom'
+// import {fetchAllProducts} from '../store/products'
+// import {fetchPendingOrder} from '../store/order'
+// import {fetchCart} from '../store/cart'
+// export class Cart extends React.Component {
+//   componentDidMount() {
+//     this.props.getProductsFromStore()
+//     // this.props.getPendingOrderFromStore()
+//     this.props.getCart()
+//   }
+//   render() {
+//     const {products, user} = this.props
+//     console.log('CART PROPS', this.props)
+//     function removeItem(productId) {
+//       let guestCart = JSON.parse(sessionStorage.getItem('cart'))
+//       delete guestCart[productId]
+//       sessionStorage.setItem('cart', JSON.stringify(guestCart))
+//     }
+//     let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
+//     let cartProducts = products.filter(product => product.id in cart)
+//     let result = 0
+//     cartProducts.forEach(product => {
+//       result += product.price * cart[product.id]
+//     })
+//     let fullAmount = result
+//     console.log('this props ', this.props)
+//     let orderProducts = this.props.cart.orderproducts
+//     let userCartProducts
+//     if (orderProducts) {
+//       let orderProductsId = orderProducts.map(
+//         orderProduct => orderProduct.productId
+//       )
+//       userCartProducts = orderProductsId
+//         .map(id => {
+//           return products.filter(product => id === product.id)
+//         })
+//         .flat()
+//       console.log(userCartProducts)
+//     }
+//     return (
+//       <div>
+//         <h1>MY CART</h1>
+//         <p>FULL AMOUNT: ${fullAmount}</p>
+//         <button type="button">Check Out</button>
+//         {!this.props.user.id ? (
+//           cartProducts.map(product => (
+//             <div key={product.name}>
+//               <img src={product.imageUrl} height="200" width="200" />
+//               <Link to={`/products/${product.id}`}>{product.name}</Link>
+//               <p>Price: ${product.price}</p>
+//               <p>Quantity: {cart[product.id]}</p>
+//               <p>Unit Total: ${product.price * cart[product.id]}</p>
+//               <button
+//                 type="button"
+//                 onClick={() => {
+//                   removeItem(product.id)
+//                   location.reload()
+//                 }}
+//               >
+//                 Remove Button
+//               </button>
+//             </div>
+//           ))
+//         ) : !this.props.cart.orderproducts ? (
+//           <div>
+//             <h3>There are currently no chairs in your shopping cart!</h3>
+//             <Link to="/products">Look for chairs to add to your cart</Link>
+//           </div>
+//         ) : (
+//           <div>
+//             {userCartProducts ? (
+//               userCartProducts.map((product, i) => (
+//                 <div key={product.name}>
+//                   <img src={product.imageUrl} height="200" width="200" />
+//                   <Link to={`/products/${product.id}`}>{product.name}</Link>
+//                   <p>Price: ${product.price}</p>
+//                   <p>Quantity: {orderProducts[i].quantity}</p>
+//                   <p>
+//                     Unit Total: ${product.price * orderProducts[i].quantity}
+//                   </p>
+//                   <button
+//                     type="button"
+//                     onClick={() => {
+//                       removeItem(product.id)
+//                       location.reload()
+//                     }}
+//                   >
+//                     Remove Button
+//                   </button>
+//                 </div>
+//               ))
+//             ) : (
+//               <h3>Nothing in your cart</h3>
+//             )}
+//           </div>
+//         )}
+//       </div>
+//     )
+//   }
+// }
+// const mapState = state => {
+//   return {
+//     products: state.products,
+//     user: state.user,
+//     cart: state.cart
+//   }
+// }
+// const mapDispatch = dispatch => {
+//   return {
+//     getProductsFromStore: () => dispatch(fetchAllProducts()),
+//     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
+//     getCart: () => dispatch(fetchCart())
+//   }
+// }
+// export default connect(mapState, mapDispatch)(Cart)
 
 /***/ }),
 
