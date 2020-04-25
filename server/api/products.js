@@ -2,10 +2,19 @@ const router = require('express').Router()
 const {Product, User, Order} = require('../db/models')
 const Category = require('../db/models/category')
 const {isAdmin, isLoggedIn} = require('../middleware')
+const Sequelize = require('sequelize')
 
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'imageUrl',
+        [Sequelize.literal('price / 100.00'), 'price'],
+        'quantity'
+      ],
       where: {isActive: true},
       order: [['name', 'ASC']],
       include: [
@@ -29,6 +38,15 @@ router.get('/', async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findOne({
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'imageUrl',
+        [Sequelize.literal('price / 100.00'), 'price'],
+        'quantity',
+        'isActive'
+      ],
       where: {id: req.params.productId},
       include: [
         {
@@ -82,7 +100,7 @@ router.post('/', async (req, res, next) => {
 // Update a product only if you are an Admin
 
 //router.put('/:productId', isAdmin, async (req, res, next) => {
-router.put(`/:productId`, async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   try {
     if (req.body.categories && typeof req.body.categories === 'string') {
       updateCategories = req.body.categories.split(',')
@@ -114,6 +132,14 @@ router.get('/categories/:categoryId', async (req, res, next) => {
     const categoryId = req.params.categoryId
     if (categoryId > 0) {
       const productsByCategory = await Product.findAll({
+        attributes: [
+          'id',
+          'name',
+          'description',
+          'imageUrl',
+          [Sequelize.literal('price / 100.00'), 'price'],
+          'quantity'
+        ],
         include: [
           {
             model: Category,

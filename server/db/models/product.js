@@ -22,14 +22,14 @@ const Product = db.define(
     },
     price: {
       type: Sequelize.INTEGER,
-      // get() {
-      //   return this.getDataValue('price') / 100
-      // },
-
       allowNull: false,
       validate: {
         min: 0,
         notEmpty: true
+      },
+      // Please leave this getter dividing by one - it serves to convert this into a number when retrieving the rows in the api via sequelize, otherwise the routes were returning a string
+      get() {
+        return this.getDataValue('price') / 1
       }
     },
     quantity: {
@@ -51,15 +51,12 @@ const Product = db.define(
   }
 )
 
+// we are saving price as interger to avoid 1-rounding problems 2- the routes were returning string when saving price ad decimal(10,2)
 const isPriceInt = product => {
   product.price = product.price * 100
 }
-const isPriceDec = product => {
-  product.price = product.price / 100
-}
-//FIXME CHECK WITH MARIA
-Product.beforeValidate(isPriceInt)
-Product.afterValidate(isPriceDec)
+
+Product.beforeUpdate(isPriceInt)
 Product.beforeCreate(isPriceInt)
 
 module.exports = Product
