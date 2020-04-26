@@ -10,6 +10,12 @@ export class Cart extends React.Component {
     this.props.getProductsFromStore()
     this.props.getCreateProduct()
     this.props.getCart()
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+  handleDelete(itemId, e) {
+    e.preventDefault()
+    this.props.removeUserItem(itemId)
+    this.props.getCart()
   }
 
   render() {
@@ -91,6 +97,7 @@ export class Cart extends React.Component {
                     type="button"
                     onClick={() => {
                       this.props.removeUserItem(product)
+                      // this.handleDelete(product.id, e)
                     }}
                   >
                     Remove Button

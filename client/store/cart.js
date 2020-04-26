@@ -53,7 +53,7 @@ export const fetchRemovedItem = item => async dispatch => {
   try {
     console.log('i am deleting item thunk', item)
     const itemId = item.id
-    const {data} = await axios.delete(`/api/carts/cart/:${itemId}`)
+    const {data} = await axios.delete(`/api/carts/cart/${itemId}`)
     console.log('thunk delete this item', data)
     dispatch(removeItem(item))
   } catch (err) {
@@ -75,7 +75,7 @@ export default function cartReducer(state = initialState, action) {
     case REMOVE_ITEM:
       return {
         ...state,
-        orderproducts: [...state.filter(item => item !== action.item)]
+        cart: state.orderproducts.filter(item => item.id !== action.item.id)
       }
     default:
       return state

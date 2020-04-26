@@ -95,6 +95,7 @@ router.delete('/cart/:itemId', async (req, res, next) => {
         productId: req.params.itemId
       }
     })
+
     res.json(deletedItem)
   } catch (err) {
     next(err)
