@@ -21,6 +21,20 @@ router.get('/cart', async (req, res, next) => {
     next(error)
   }
 })
+// api/carts/ --- Change order status from "pending"  to "completed"
+
+router.put('/cart/:orderId', async (req, res, next) => {
+  try {
+    let order = await Order.findByPk(req.params.orderId)
+
+    if (order !== null) {
+      const updateOrder = await order.update({status: 'completed'})
+      res.json(updateOrder)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
 
 //api/carts/history
 router.get('/history', async (req, res, next) => {

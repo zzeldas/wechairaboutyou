@@ -51,7 +51,7 @@ const Product = db.define(
   }
 )
 
-// we are saving price as interger to avoid 1-rounding problems 2- the routes were returning string when saving price ad decimal(10,2)
+// we are saving price as interger to avoid 1-rounding problems 2- the routes were returning string when saving price as decimal(10,2)
 const isPriceInt = product => {
   product.price = product.price * 100
 }
