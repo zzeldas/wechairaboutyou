@@ -316,22 +316,24 @@ export class CheckoutPage extends React.Component {
 
               {/* Button Confirm Your Order should be disabled when form is not completed */}
               <div className="btns">
-                <button
-                  type="button"
-                  disabled={
-                    !this.state.zipCode ||
-                    !this.state.CCV ||
-                    !this.state.expirationDate ||
-                    !this.state.creditCard
-                  }
-                  onClick={() =>
-                    this.props.changeOrderStatus(
-                      this.props.location.state.cart.id
-                    )
-                  }
-                >
-                  Confirm Your Order
-                </button>
+                <Link to="/products">
+                  <button
+                    type="button"
+                    disabled={
+                      !this.state.zipCode ||
+                      !this.state.CCV ||
+                      !this.state.expirationDate ||
+                      !this.state.creditCard
+                    }
+                    onClick={() =>
+                      this.props.changeOrderStatus(
+                        this.props.location.state.cart.id
+                      )
+                    }
+                  >
+                    Confirm Your Order
+                  </button>
+                </Link>
               </div>
             </form>
           </div>
