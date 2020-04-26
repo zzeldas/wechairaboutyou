@@ -25,21 +25,31 @@ const addToCart = item => ({
 export const fetchCart = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/carts/cart')
-
     dispatch(getCart(data[0]))
   } catch (err) {
     console.error(err)
   }
 }
 //
-export const fetchCreateProduct = (
-  product,
-  quantityToAdd
-) => async dispatch => {
+export const fetchCreateProduct = product => async dispatch => {
   try {
-    const {data} = await axios.post('/api/carts/cart', {product, quantityToAdd})
+    const resFromGet = await axios.get('/api/carts/cart')
+    const orderInfo = resFromGet.data[0]
+    const orderProductsInfo = resFromGet.data[0].orderproducts
 
-    dispatch(addToCart(data[0]))
+    let orderproductId = orderProductsInfo.map(eachP => eachP.productId)
+
+    if (orderproductId.includes(product.id)) {
+      const resFromPut = await axios.put('/api/carts/cart', {product})
+      dispatch(addToCart(resFromPut.data))
+    } else {
+      const resFromPost = await axios.post('/api/carts/cart', {
+        product,
+        orderInfo,
+        resFromGet
+      })
+      dispatch(addToCart(orderInfo))
+    }
   } catch (err) {
     console.error(err)
   }

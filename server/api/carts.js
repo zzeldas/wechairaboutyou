@@ -44,51 +44,37 @@ router.get('/history', async (req, res, next) => {
 //not tested
 router.post('/cart', async (req, res, next) => {
   try {
-    const order = await Order.findOrCreate({
+    const {product, orderInfo} = req.body
+    const addedProduct = await OrderProduct.create({
+      unitPrice: product.price * 100,
+      quantity: 1,
+      orderId: orderInfo.id,
+      productId: product.id
+    })
+    res.json(orderInfo)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/cart', async (req, res, next) => {
+  try {
+    const findProduct = await OrderProduct.findOne({
+      where: {productId: req.body.product.id}
+    })
+    findProduct.quantity++
+    await findProduct.save()
+    const updatedOrder = await Order.findAll({
       where: {
         userId: req.user.id,
         status: 'pending'
       },
       include: [{model: OrderProduct}]
     })
-    // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
-    // console.log('REQ.BODY', req.body)
-    // const findProduct = await OrderProduct.findByPk(req.body.product.id)
-    // console.log('FIND PRODUCT BEFORE', findProduct);
-    let orderproductsList = order[0].dataValues.orderproducts
-    let orderproductId = orderproductsList.map(
-      eachProduct => eachProduct.productId
-    )
-    console.log('orderproductId', orderproductId)
-
-    if (orderproductId.includes(req.body.product.id) === false) {
-      const addedProduct = await OrderProduct.create({
-        unitPrice: req.body.product.price * 100,
-        quantity: req.body.quantityToAdd, //FIXME
-        orderId: order[0].dataValues.id,
-        productId: req.body.product.id
-      })
-    }
-    res.json(order)
+    res.json(updatedOrder[0].dataValues)
   } catch (err) {
     next(err)
   }
 })
-
-// router.put('/cart', async (req, res, next) => {
-//   try {
-//     // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
-//     console.log('REQ.BODY', req.body)
-//     const findProduct = await OrderProduct.findByPk(req.body.product.id)
-//     console.log('FIND PRODUCT BEFORE', findProduct);
-//     if (findProduct) {
-//       findProduct.quantity++;
-//       console.log('FIND PRODUCT AFTER', findProduct);
-//     }
-//     res.json(findProduct)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 
 module.exports = router
