@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
 import {me} from '../store/singleUser'
+import {fetchChangeOrderStatus} from '../store/checkout'
 
 export class CheckoutPage extends React.Component {
   constructor() {
@@ -23,7 +24,7 @@ export class CheckoutPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
-    //this.props.me()
+    const {cart} = this.props.location.state
   }
 
   handleChange(evt) {
@@ -35,9 +36,6 @@ export class CheckoutPage extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-
-    Axios.put(`/api/carts/cart/${this.props.cart.id}`)
-
     this.setState({
       formcomplete: false,
       status: 'completed'
@@ -46,7 +44,6 @@ export class CheckoutPage extends React.Component {
 
   render() {
     const {cart, user} = this.props
-    // console.log('ZIPCODE', this.props)
 
     let userCart
     if (!user.id) {
@@ -320,12 +317,17 @@ export class CheckoutPage extends React.Component {
               {/* Button Confirm Your Order should be disabled when form is not completed */}
               <div className="btns">
                 <button
-                  type="submit"
+                  type="button"
                   disabled={
                     !this.state.zipCode ||
                     !this.state.CCV ||
                     !this.state.expirationDate ||
                     !this.state.creditCard
+                  }
+                  onClick={() =>
+                    this.props.changeOrderStatus(
+                      this.props.location.state.cart.id
+                    )
                   }
                 >
                   Confirm Your Order
@@ -350,9 +352,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // getProductsFromStore: () => dispatch(fetchAllProducts()),
-    // createItem: (product, quantityToAdd) =>
-    //   dispatch(fetchCreateProduct(product, quantityToAdd))
+    changeOrderStatus: orderId => dispatch(fetchChangeOrderStatus(orderId))
   }
 }
 

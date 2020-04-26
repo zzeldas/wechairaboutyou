@@ -66,6 +66,7 @@ export class Cart extends React.Component {
         })
         .flat()
 
+      console.log('PROPS', this.props)
       console.log('USERCARTPRODUCTS', userCartProducts)
       console.log('ORDERPRODUCTS', orderProducts)
     }
@@ -137,7 +138,12 @@ export class Cart extends React.Component {
           </div>
         )}
         <p>FULL AMOUNT: ${fullAmount}</p>
-        <Link to="/checkoutpage">
+        <Link
+          to={{
+            pathname: '/checkoutpage',
+            state: this.props.cart
+          }}
+        >
           <button type="button">Check Out</button>
         </Link>
       </div>
