@@ -21,6 +21,20 @@ router.get('/cart', async (req, res, next) => {
     next(error)
   }
 })
+// api/carts/ --- Change order status from "pending"  to "completed"
+
+router.put('/cart/:orderId', async (req, res, next) => {
+  try {
+    let order = await Order.findByPk(req.params.orderId)
+
+    if (order !== null) {
+      const updateOrder = await order.update({status: 'completed'})
+      res.json(updateOrder)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
 
 //api/carts/history
 router.get('/history', async (req, res, next) => {
@@ -101,6 +115,34 @@ router.put('/cart/:id/decrease', async (req, res, next) => {
   }
 })
 
+router.delete('/cart/:itemId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        status: 'pending'
+      },
+      include: [{model: OrderProduct}]
+    })
+    //i have propduct id 9 from thunk, i have orderproduct id 6
+    let orderproducts = order.dataValues.orderproducts
+    console.log(orderproducts)
+    console.log('order id', order.dataValues.id)
+    console.log('req.params.id', req.params.itemId)
+
+    const deletedItem = await OrderProduct.destroy({
+      where: {
+        orderId: order.dataValues.id,
+        productId: req.params.itemId
+      }
+    })
+
+    res.json(deletedItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/cart/:id', async (req, res, next) => {
   try {
     const findAllPendingCart = await Order.findAll({
@@ -110,11 +152,25 @@ router.get('/cart/:id', async (req, res, next) => {
       },
       include: [{model: OrderProduct}]
     })
-    consolee.log('findAllPendingCart....', findAllPendingCart)
-    res.json(findAllPendingCart[0].dataValues)
   } catch (err) {
     next(err)
   }
 })
+
+// router.put('/cart', async (req, res, next) => {
+//   try {
+//     // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
+//     console.log('REQ.BODY', req.body)
+//     const findProduct = await OrderProduct.findByPk(req.body.product.id)
+//     console.log('FIND PRODUCT BEFORE', findProduct);
+//     if (findProduct) {
+//       findProduct.quantity++;
+//       console.log('FIND PRODUCT AFTER', findProduct);
+//     }
+//     res.json(findProduct)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 module.exports = router
