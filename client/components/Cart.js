@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
 import {fetchPendingOrder} from '../store/order'
-import {fetchCart, fetchCreateProduct} from '../store/cart'
+import {fetchCart, fetchCreateProduct, fetchRemovedItem} from '../store/cart'
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -90,8 +90,7 @@ export class Cart extends React.Component {
                   <button
                     type="button"
                     onClick={() => {
-                      removeItem(product.id)
-                      location.reload()
+                      this.props.removeUserItem(product)
                     }}
                   >
                     Remove Button
@@ -126,7 +125,8 @@ const mapDispatch = dispatch => {
 
     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
 
-    getCart: () => dispatch(fetchCart())
+    getCart: () => dispatch(fetchCart()),
+    removeUserItem: product => dispatch(fetchRemovedItem(product))
   }
 }
 

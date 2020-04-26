@@ -20,6 +20,10 @@ const addToCart = item => ({
   item
 })
 
+const removeItem = item => ({
+  type: REMOVE_ITEM,
+  item
+})
 //THUNKS
 
 export const fetchCart = () => async dispatch => {
@@ -37,9 +41,21 @@ export const fetchCreateProduct = (
   quantityToAdd
 ) => async dispatch => {
   try {
-    const {data} = await axios.post('/api/carts/cart', {product, quantityToAdd})
+    const {data} = await axios.post('/api/carts/cart', {item, quantityToAdd})
 
     dispatch(addToCart(data[0]))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const fetchRemovedItem = item => async dispatch => {
+  try {
+    console.log('i am deleting item thunk', item)
+    const itemId = item.id
+    const {data} = await axios.delete(`/api/carts/cart/:${itemId}`)
+    console.log('thunk delete this item', data)
+    dispatch(removeItem(item))
   } catch (err) {
     console.error(err)
   }
@@ -56,6 +72,11 @@ export default function cartReducer(state = initialState, action) {
       return {...state, cart: action.cart}
     case ADD_TO_CART:
       return {...state, orderproducts: [...state.orderproducts, action.item]}
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        orderproducts: [...state.filter(item => item !== action.item)]
+      }
     default:
       return state
   }

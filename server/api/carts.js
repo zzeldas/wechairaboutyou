@@ -59,7 +59,6 @@ router.post('/cart', async (req, res, next) => {
     let orderproductId = orderproductsList.map(
       eachProduct => eachProduct.productId
     )
-    console.log('orderproductId', orderproductId)
 
     if (orderproductId.includes(req.body.product.id) === false) {
       const addedProduct = await OrderProduct.create({
@@ -75,6 +74,32 @@ router.post('/cart', async (req, res, next) => {
   }
 })
 
+router.delete('/cart/:itemId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        status: 'pending'
+      },
+      include: [{model: OrderProduct}]
+    })
+    //i have propduct id 9 from thunk, i have orderproduct id 6
+    let orderproducts = order.dataValues.orderproducts
+    console.log(orderproducts)
+    console.log('order id', order.dataValues.id)
+    console.log('req.params.id', req.params.itemId)
+
+    const deletedItem = await OrderProduct.destroy({
+      where: {
+        orderId: order.dataValues.id,
+        productId: req.params.itemId
+      }
+    })
+    res.json(deletedItem)
+  } catch (err) {
+    next(err)
+  }
+})
 // router.put('/cart', async (req, res, next) => {
 //   try {
 //     // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
