@@ -104,7 +104,9 @@ export class Cart extends React.Component {
           </div>
         )}
         <p>FULL AMOUNT: ${fullAmount}</p>
-        <button type="button">Check Out</button>
+        <Link to="/checkoutpage">
+          <button type="button">Check Out</button>
+        </Link>
       </div>
     )
   }
