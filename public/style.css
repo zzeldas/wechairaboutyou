@@ -157,7 +157,7 @@ form div {
   display: flex;
   justify-content: center;
   font-family: 'Arimo';
-  background-color: $coral;
+  background-color: coral;
   -webkit-box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
   box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
@@ -278,9 +278,9 @@ button:focus {
   }
   .btns {
     align-items: center;
-    button {
+    /* button: {
       width: 100%;
-    }
+    } */
   }
   form h1 {
     text-align: center;
