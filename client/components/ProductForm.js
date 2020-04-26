@@ -6,10 +6,10 @@ const ProductForm = props => {
   const {state, handleChange, handleSubmit} = props
   return (
     <main>
-      <h2>Product Form</h2>
-      <div className="box">
+      <h2 className="headercenter"> Product Form</h2>
+      {/* <div className="box">
         <img src="/chairaboutyoulogo.png" />
-      </div>
+      </div> */}
       <p />
       <div className="container">
         <form onSubmit={handleSubmit}>

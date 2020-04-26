@@ -21,6 +21,20 @@ router.get('/cart', async (req, res, next) => {
     next(error)
   }
 })
+// api/carts/ --- Change order status from "pending"  to "completed"
+
+router.put('/cart/:orderId', async (req, res, next) => {
+  try {
+    let order = await Order.findByPk(req.params.orderId)
+
+    if (order !== null) {
+      const updateOrder = await order.update({status: 'completed'})
+      res.json(updateOrder)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
 
 //api/carts/history
 router.get('/history', async (req, res, next) => {
@@ -44,31 +58,58 @@ router.get('/history', async (req, res, next) => {
 //not tested
 router.post('/cart', async (req, res, next) => {
   try {
-    const order = await Order.findOrCreate({
+    const {product, orderInfo} = req.body
+    const addedProduct = await OrderProduct.create({
+      unitPrice: product.price * 100,
+      quantity: 1,
+      orderId: orderInfo.id,
+      productId: product.id
+    })
+    res.json(orderInfo)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/cart', async (req, res, next) => {
+  try {
+    const findProduct = await OrderProduct.findOne({
+      where: {productId: req.body.product.id}
+    })
+    findProduct.quantity++
+    await findProduct.save()
+    const updatedOrder = await Order.findAll({
       where: {
         userId: req.user.id,
         status: 'pending'
       },
       include: [{model: OrderProduct}]
     })
-    // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
-    // console.log('REQ.BODY', req.body)
-    // const findProduct = await OrderProduct.findByPk(req.body.product.id)
-    // console.log('FIND PRODUCT BEFORE', findProduct);
-    let orderproductsList = order[0].dataValues.orderproducts
-    let orderproductId = orderproductsList.map(
-      eachProduct => eachProduct.productId
-    )
+    res.json(updatedOrder[0].dataValues)
+  } catch (err) {
+    next(err)
+  }
+})
 
-    if (orderproductId.includes(req.body.product.id) === false) {
-      const addedProduct = await OrderProduct.create({
-        unitPrice: req.body.product.price * 100,
-        quantity: req.body.quantityToAdd, //FIXME
-        orderId: order[0].dataValues.id,
-        productId: req.body.product.id
-      })
-    }
-    res.json(order)
+router.put('/cart/:id/increase', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const findItem = await OrderProduct.findOne({where: {productId: id}})
+    findItem.quantity++
+    await findItem.save()
+    res.json(findItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/cart/:id/decrease', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const findItem = await OrderProduct.findOne({where: {productId: id}})
+    findItem.quantity--
+    await findItem.save()
+    res.json(findItem)
   } catch (err) {
     next(err)
   }
@@ -101,6 +142,18 @@ router.delete('/cart/:itemId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/cart/:id', async (req, res, next) => {
+  try {
+    const findAllPendingCart = await Order.findAll({
+
+      where: {
+        userId: req.user.id,
+        status: 'pending'
+      },
+      include: [{model: OrderProduct}]
+    })
+
 // router.put('/cart', async (req, res, next) => {
 //   try {
 //     // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
