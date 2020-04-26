@@ -44,6 +44,6 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-//update single user route for admin and login user (may need two routes )
+//update single user route for admin and login user (may need two routes)
 
 //delete single user route

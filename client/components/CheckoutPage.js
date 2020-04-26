@@ -9,7 +9,15 @@ export class CheckoutPage extends React.Component {
     this.state = {
       orderid: '',
       formcomplete: false,
-      status: 'pending'
+      status: 'pending',
+      firstName: '',
+      lastName: '',
+      address: '',
+      email: '',
+      creditCard: '',
+      CCV: '',
+      expirationDate: '',
+      zipCode: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,9 +28,6 @@ export class CheckoutPage extends React.Component {
 
   handleChange(evt) {
     evt.preventDefault()
-
-    // Indicate form completion to enable Order Confirm button.
-
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -41,10 +46,11 @@ export class CheckoutPage extends React.Component {
 
   render() {
     const {cart, user} = this.props
-    //console.log('SEE THIS PROPS', this.props)
+    // console.log('ZIPCODE', this.props)
 
     let userCart
     if (!user.id) {
+      //THIS IS GUEST CART
       userCart = (
         //<div> checkout console logs </div>
         <div className="wrapper">
@@ -156,8 +162,18 @@ export class CheckoutPage extends React.Component {
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="zipCode">Zip Code </label>
+                  <input
+                    placeholder="zipCode"
+                    onChange={this.handleChange}
+                    type="text"
+                    name="zipCode"
+                    // value={user.zipCode}
+                    required
+                  />
+                </div>
               </div>
-              // Button is disabled when form is not completed
               <div className="btns">
                 <button disabled={!this.state.formcomplete} type="submit">
                   Confirm Your Order
@@ -303,7 +319,15 @@ export class CheckoutPage extends React.Component {
 
               {/* Button Confirm Your Order should be disabled when form is not completed */}
               <div className="btns">
-                <button disabled={!this.state.formcomplete} type="submit">
+                <button
+                  type="submit"
+                  disabled={
+                    !this.state.zipCode ||
+                    !this.state.CCV ||
+                    !this.state.expirationDate ||
+                    !this.state.creditCard
+                  }
+                >
                   Confirm Your Order
                 </button>
               </div>
