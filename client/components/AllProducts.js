@@ -33,27 +33,45 @@ export class AllProducts extends React.Component {
       )
     } else {
       userCart = (
-        <div>
+        <div className="container">
           {user.isAdmin === true && (
             <Link to="/addproduct">
               <button type="button">Add Product</button>
             </Link>
           )}
-          {products.map(product => (
-            <div key={product.id}>
-              <img src={product.imageUrl} height="200" width="200" />
-              <Link to={`/products/${product.id}`}>{product.name}</Link>
-              <p>Price: {product.price}</p>
-              <p>Quantity: {product.quantity}</p>
-              <button
-                type="button"
-                onClick={() => this.props.createItem(product)}
-              >
-                ADD TO USER CART
-              </button>
-              <div id="flex-container" />
-            </div>
-          ))}
+
+          <div>
+            {products.map(product => (
+              <div key={product.id} className="card">
+                <div>
+                  <div className="card-img-top">
+                    <img
+                      src={product.imageUrl}
+                      height="200"
+                      width="200"
+                      className="float-left"
+                    />
+                  </div>
+                  <div className="card-body">
+                    <Link to={`/products/${product.id}`} className="card-text">
+                      {product.name}
+                    </Link>
+                    <p className="card-text">Price: {product.price}</p>
+                    <p className="card-text">Quantity: {product.quantity}</p>
+                    <button
+                      type="button"
+                      onClick={() => this.props.createItem(product)}
+                      className="float-right"
+                    >
+                      ADD TO USER CART
+                    </button>
+                  </div>
+                </div>
+
+                <div id="flex-container" />
+              </div>
+            ))}
+          </div>
         </div>
       )
     }

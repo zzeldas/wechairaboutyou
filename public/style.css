@@ -4,8 +4,10 @@
 
 body {
   font: normal 18px/1.5 'Fira Sans', 'Helvetica Neue', sans-serif;
-  background: #3aafab;
-  color: #fff;
+  /* background: #3aafab;
+  color: #fff; */
+  background: white;
+  color: black;
   padding: 50px 0;
 }
 
@@ -17,6 +19,10 @@ label {
   display: block;
 }
 
+nav {
+  height: 3rem;
+  margin: 0;
+}
 nav a {
   display: inline-block;
   margin: 1em;
@@ -25,6 +31,10 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#title {
+  margin-left: 2rem;
 }
 
 .container {
