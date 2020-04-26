@@ -146,28 +146,15 @@ router.delete('/cart/:itemId', async (req, res, next) => {
 router.get('/cart/:id', async (req, res, next) => {
   try {
     const findAllPendingCart = await Order.findAll({
-
       where: {
         userId: req.user.id,
         status: 'pending'
       },
       include: [{model: OrderProduct}]
     })
-
-// router.put('/cart', async (req, res, next) => {
-//   try {
-//     // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
-//     console.log('REQ.BODY', req.body)
-//     const findProduct = await OrderProduct.findByPk(req.body.product.id)
-//     console.log('FIND PRODUCT BEFORE', findProduct);
-//     if (findProduct) {
-//       findProduct.quantity++;
-//       console.log('FIND PRODUCT AFTER', findProduct);
-//     }
-//     res.json(findProduct)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router
