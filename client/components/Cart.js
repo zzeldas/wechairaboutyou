@@ -4,7 +4,13 @@ import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
 import {fetchPendingOrder} from '../store/order'
 
-import {fetchCart, fetchCreateProduct, fetchRemovedItem, increaseQty, decreaseQty} from '../store/cart'
+import {
+  fetchCart,
+  fetchCreateProduct,
+  fetchRemovedItem,
+  increaseQty,
+  decreaseQty
+} from '../store/cart'
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -156,11 +162,10 @@ const mapDispatch = dispatch => {
     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
 
     getCart: () => dispatch(fetchCart()),
-    removeUserItem: product => dispatch(fetchRemovedItem(product))
+    removeUserItem: product => dispatch(fetchRemovedItem(product)),
     increaseQty: id => dispatch(increaseQty(id)),
     decreaseQty: id => dispatch(decreaseQty(id))
   }
 }
 
 export default connect(mapState, mapDispatch)(Cart)
-

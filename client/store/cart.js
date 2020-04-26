@@ -43,14 +43,12 @@ export const fetchCart = () => async dispatch => {
 //
 export const fetchCreateProduct = product => async dispatch => {
   try {
-
     const {data} = await axios.post('/api/carts/cart', {item, quantityToAdd})
     const resFromGet = await axios.get('/api/carts/cart')
     const orderInfo = resFromGet.data[0]
     const orderProductsInfo = resFromGet.data[0].orderproducts
 
     let orderproductId = orderProductsInfo.map(eachP => eachP.productId)
-
 
     if (orderproductId.includes(product.id)) {
       const resFromPut = await axios.put('/api/carts/cart', {product})
@@ -78,6 +76,7 @@ export const fetchRemovedItem = item => async dispatch => {
   } catch (err) {
     console.error(err)
   }
+}
 
 export const increaseQty = id => async dispatch => {
   const resFromIncrease = await axios.put(`/api/carts/cart/${id}/increase`)
@@ -89,7 +88,6 @@ export const increaseQty = id => async dispatch => {
 export const decreaseQty = id => async dispatch => {
   const {data} = await axios.put(`/api/carts/cart/${id}/decrease`)
   dispatch(updateQty(data))
-
 }
 const initialState = {
   cart: {},
