@@ -77,4 +77,44 @@ router.put('/cart', async (req, res, next) => {
   }
 })
 
+router.put('/cart/:id/increase', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const findItem = await OrderProduct.findOne({where: {productId: id}})
+    findItem.quantity++
+    await findItem.save()
+    res.json(findItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/cart/:id/decrease', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const findItem = await OrderProduct.findOne({where: {productId: id}})
+    findItem.quantity--
+    await findItem.save()
+    res.json(findItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/cart/:id', async (req, res, next) => {
+  try {
+    const findAllPendingCart = await Order.findAll({
+      where: {
+        userId: req.user.id,
+        status: 'pending'
+      },
+      include: [{model: OrderProduct}]
+    })
+    consolee.log('findAllPendingCart....', findAllPendingCart)
+    res.json(findAllPendingCart[0].dataValues)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
