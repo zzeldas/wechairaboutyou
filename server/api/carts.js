@@ -143,7 +143,7 @@ router.delete('/cart/:itemId', async (req, res, next) => {
   }
 })
 
-router.get('/cart/:id', async (req, res, next) => {
+router.get('/cart/:id/updateQty', async (req, res, next) => {
   try {
     const findAllPendingCart = await Order.findAll({
       where: {
@@ -152,6 +152,8 @@ router.get('/cart/:id', async (req, res, next) => {
       },
       include: [{model: OrderProduct}]
     })
+    console.log('FIND ALL AFTER UPDATE: ', findAllPendingCart)
+    res.json(findAllPendingCart)
   } catch (err) {
     next(err)
   }
