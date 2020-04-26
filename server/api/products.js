@@ -65,7 +65,6 @@ router.get('/:productId', async (req, res, next) => {
 
 // Add a product only if you are an Admin
 
-//router.post('/', isAdmin, async (req, res, next) => {
 router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     if (!req.body.content) {
@@ -73,10 +72,9 @@ router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
     }
 
     if (req.body.categories && typeof req.body.categories === 'string') {
-      console.log(req.body)
-      let updateCategories = req.body.categories.split(',')
+      updateCategories = req.body.categories.split(',')
     } else {
-      let updateCategories = req.body.categories
+      updateCategories = req.body.categories
     }
 
     const newProductInstance = {
