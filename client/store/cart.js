@@ -47,6 +47,7 @@ export const fetchCreateProduct = product => async dispatch => {
 
     if (orderproductId.includes(product.id)) {
       const resFromPut = await axios.put('/api/carts/cart', {product})
+      console.log('RES FROM PUT DATA: ', resFromPut.data)
       dispatch(addToCart(resFromPut.data))
     } else {
       const resFromPost = await axios.post('/api/carts/cart', {
@@ -63,15 +64,20 @@ export const fetchCreateProduct = product => async dispatch => {
 
 export const increaseQty = id => async dispatch => {
   const resFromIncrease = await axios.put(`/api/carts/cart/${id}/increase`)
-  const updatedCart = await axios.get(`/api/carts/cart/${id}`)
-  console.log('UPDATED CART FROM GET: ', updatedCart)
-  dispatch(addToCart(updatedCart.data))
+  console.log('AFTER PUT: ', resFromIncrease)
+  const updatedCart = await axios.get(`/api/carts/cart/${id}/updateQty`)
+  console.log('UPDATED CART FROM GET: ', updatedCart.data)
+  dispatch(getCart(updatedCart.data[0]))
 }
 
 export const decreaseQty = id => async dispatch => {
-  const {data} = await axios.put(`/api/carts/cart/${id}/decrease`)
-  dispatch(updateQty(data))
+  const resFromDecrease = await axios.put(`/api/carts/cart/${id}/decrease`)
+  console.log('AFTER PUT: ', resFromDecrease)
+  const updatedCart = await axios.get(`/api/carts/cart/${id}/updateQty`)
+  console.log('UPDATED CART FROM GET: ', updatedCart.data)
+  dispatch(getCart(updatedCart.data[0]))
 }
+
 const initialState = {
   cart: {},
   orderproducts: []
