@@ -192,27 +192,43 @@ export class CheckoutPage extends React.Component {
               <div className="name">
                 <div>
                   <label htmlFor="firstName">First Name</label>
-                  <input
+                  <label>{user.firstName}</label>
+
+                  {/* <input
                     placeholder="First Name"
                     onChange={this.handleChange}
                     type="text"
                     name="firstName"
                     value={user.firstName}
                     required
-                  />
+                  /> */}
                 </div>
 
                 <div>
                   <label htmlFor="lastName">Last Name</label>
-                  <input
+                  <label>{user.lastName}</label>
+                  {/* <input
                     placeholder="Last Name"
                     onChange={this.handleChange}
                     type="text"
                     name="lastName"
                     value={user.lastName}
                     required
-                  />
+                  /> */}
                 </div>
+              </div>
+
+              <div className="leftinput">
+                <label htmlFor="name">Email</label>
+                <label htmlFor="name">{user.email}</label>
+                {/* <input
+                  placeholder="email"
+                  onChange={this.handleChange}
+                  type="text"
+                  name="email"
+                  value={user.email}
+                  required
+                /> */}
               </div>
 
               <div className="leftinput">
@@ -223,18 +239,6 @@ export class CheckoutPage extends React.Component {
                   type="text"
                   name="address"
                   value={user.address}
-                  required
-                />
-              </div>
-
-              <div className="leftinput">
-                <label htmlFor="name">Email</label>
-                <input
-                  placeholder="email"
-                  onChange={this.handleChange}
-                  type="text"
-                  name="email"
-                  value={user.email}
                   required
                 />
               </div>
@@ -281,6 +285,17 @@ export class CheckoutPage extends React.Component {
                     type="text"
                     name="CCV"
                     // value={user.cardCcv}
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="ccv">Zip Code </label>
+                  <input
+                    placeholder="zipCode"
+                    onChange={this.handleChange}
+                    type="text"
+                    name="zipCode"
+                    // value={user.zipCode}
                     required
                   />
                 </div>
