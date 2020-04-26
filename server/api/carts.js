@@ -115,20 +115,59 @@ router.put('/cart/:id/decrease', async (req, res, next) => {
   }
 })
 
-router.get('/cart/:id', async (req, res, next) => {
+router.delete('/cart/:itemId', async (req, res, next) => {
   try {
-    const findAllPendingCart = await Order.findAll({
+    const order = await Order.findOne({
       where: {
         userId: req.user.id,
         status: 'pending'
       },
       include: [{model: OrderProduct}]
     })
-    consolee.log('findAllPendingCart....', findAllPendingCart)
-    res.json(findAllPendingCart[0].dataValues)
+    //i have propduct id 9 from thunk, i have orderproduct id 6
+    let orderproducts = order.dataValues.orderproducts
+    console.log(orderproducts)
+    console.log('order id', order.dataValues.id)
+    console.log('req.params.id', req.params.itemId)
+
+    const deletedItem = await OrderProduct.destroy({
+      where: {
+        orderId: order.dataValues.id,
+        productId: req.params.itemId
+      }
+    })
+
+    res.json(deletedItem)
   } catch (err) {
     next(err)
   }
 })
+
+router.get('/cart/:id', async (req, res, next) => {
+  try {
+    const findAllPendingCart = await Order.findAll({
+
+      where: {
+        userId: req.user.id,
+        status: 'pending'
+      },
+      include: [{model: OrderProduct}]
+    })
+
+// router.put('/cart', async (req, res, next) => {
+//   try {
+//     // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
+//     console.log('REQ.BODY', req.body)
+//     const findProduct = await OrderProduct.findByPk(req.body.product.id)
+//     console.log('FIND PRODUCT BEFORE', findProduct);
+//     if (findProduct) {
+//       findProduct.quantity++;
+//       console.log('FIND PRODUCT AFTER', findProduct);
+//     }
+//     res.json(findProduct)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 module.exports = router
