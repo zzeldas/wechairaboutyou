@@ -8,9 +8,12 @@ export class AllUsers extends React.Component {
   }
 
   render() {
+    console.log('users comp')
     return (
       <div>
-        {this.props.users ? (
+        {!this.props.users ? (
+          <h2>No Registered Users</h2>
+        ) : (
           this.props.users.map(user => (
             <ul key={user.id}>
               <li>ID :{user.id}</li>
@@ -21,8 +24,6 @@ export class AllUsers extends React.Component {
               <li>Is user admin :{user.isAdmin.toString()}</li>
             </ul>
           ))
-        ) : (
-          <h2>No Users</h2>
         )}
       </div>
     )
