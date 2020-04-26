@@ -51,19 +51,44 @@ router.post('/cart', async (req, res, next) => {
       },
       include: [{model: OrderProduct}]
     })
-    console.log('ORDER', order)
-    console.log('REQ.BODY', req.body)
-    const addedProduct = await OrderProduct.create({
-      unitPrice: req.body.product.price * 100,
-      quantity: req.body.quantityToAdd, //FIXME
-      orderId: order[0].dataValues.id,
-      productId: req.body.product.id
-    })
+    // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
+    // console.log('REQ.BODY', req.body)
+    // const findProduct = await OrderProduct.findByPk(req.body.product.id)
+    // console.log('FIND PRODUCT BEFORE', findProduct);
+    let orderproductsList = order[0].dataValues.orderproducts
+    let orderproductId = orderproductsList.map(
+      eachProduct => eachProduct.productId
+    )
+    console.log('orderproductId', orderproductId)
 
+    if (orderproductId.includes(req.body.product.id) === false) {
+      const addedProduct = await OrderProduct.create({
+        unitPrice: req.body.product.price * 100,
+        quantity: req.body.quantityToAdd, //FIXME
+        orderId: order[0].dataValues.id,
+        productId: req.body.product.id
+      })
+    }
     res.json(order)
   } catch (err) {
     next(err)
   }
 })
+
+// router.put('/cart', async (req, res, next) => {
+//   try {
+//     // console.log('ORDER-- ORDER PRODUCT', order[0].dataValues.orderproducts)
+//     console.log('REQ.BODY', req.body)
+//     const findProduct = await OrderProduct.findByPk(req.body.product.id)
+//     console.log('FIND PRODUCT BEFORE', findProduct);
+//     if (findProduct) {
+//       findProduct.quantity++;
+//       console.log('FIND PRODUCT AFTER', findProduct);
+//     }
+//     res.json(findProduct)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 module.exports = router
