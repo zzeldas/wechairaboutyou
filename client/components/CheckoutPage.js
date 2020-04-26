@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
 import {me} from '../store/singleUser'
+import {fetchChangeOrderStatus} from '../store/checkout'
 
 export class CheckoutPage extends React.Component {
   constructor() {
@@ -9,20 +10,25 @@ export class CheckoutPage extends React.Component {
     this.state = {
       orderid: '',
       formcomplete: false,
-      status: 'pending'
+      status: 'pending',
+      firstName: '',
+      lastName: '',
+      address: '',
+      email: '',
+      creditCard: '',
+      CCV: '',
+      expirationDate: '',
+      zipCode: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
-    //this.props.me()
+    const {cart} = this.props.location.state
   }
 
   handleChange(evt) {
     evt.preventDefault()
-
-    // Indicate form completion to enable Order Confirm button.
-
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -30,9 +36,6 @@ export class CheckoutPage extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-
-    Axios.put(`/api/carts/cart/${this.props.cart.id}`)
-
     this.setState({
       formcomplete: false,
       status: 'completed'
@@ -41,10 +44,10 @@ export class CheckoutPage extends React.Component {
 
   render() {
     const {cart, user} = this.props
-    //console.log('SEE THIS PROPS', this.props)
 
     let userCart
     if (!user.id) {
+      //THIS IS GUEST CART
       userCart = (
         //<div> checkout console logs </div>
         <div className="wrapper">
@@ -156,8 +159,18 @@ export class CheckoutPage extends React.Component {
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="zipCode">Zip Code </label>
+                  <input
+                    placeholder="zipCode"
+                    onChange={this.handleChange}
+                    type="text"
+                    name="zipCode"
+                    // value={user.zipCode}
+                    required
+                  />
+                </div>
               </div>
-              // Button is disabled when form is not completed
               <div className="btns">
                 <button disabled={!this.state.formcomplete} type="submit">
                   Confirm Your Order
@@ -192,27 +205,43 @@ export class CheckoutPage extends React.Component {
               <div className="name">
                 <div>
                   <label htmlFor="firstName">First Name</label>
-                  <input
+                  <label>{user.firstName}</label>
+
+                  {/* <input
                     placeholder="First Name"
                     onChange={this.handleChange}
                     type="text"
                     name="firstName"
                     value={user.firstName}
                     required
-                  />
+                  /> */}
                 </div>
 
                 <div>
                   <label htmlFor="lastName">Last Name</label>
-                  <input
+                  <label>{user.lastName}</label>
+                  {/* <input
                     placeholder="Last Name"
                     onChange={this.handleChange}
                     type="text"
                     name="lastName"
                     value={user.lastName}
                     required
-                  />
+                  /> */}
                 </div>
+              </div>
+
+              <div className="leftinput">
+                <label htmlFor="name">Email</label>
+                <label htmlFor="name">{user.email}</label>
+                {/* <input
+                  placeholder="email"
+                  onChange={this.handleChange}
+                  type="text"
+                  name="email"
+                  value={user.email}
+                  required
+                /> */}
               </div>
 
               <div className="leftinput">
@@ -223,18 +252,6 @@ export class CheckoutPage extends React.Component {
                   type="text"
                   name="address"
                   value={user.address}
-                  required
-                />
-              </div>
-
-              <div className="leftinput">
-                <label htmlFor="name">Email</label>
-                <input
-                  placeholder="email"
-                  onChange={this.handleChange}
-                  type="text"
-                  name="email"
-                  value={user.email}
                   required
                 />
               </div>
@@ -284,13 +301,39 @@ export class CheckoutPage extends React.Component {
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="ccv">Zip Code </label>
+                  <input
+                    placeholder="zipCode"
+                    onChange={this.handleChange}
+                    type="text"
+                    name="zipCode"
+                    // value={user.zipCode}
+                    required
+                  />
+                </div>
               </div>
 
               {/* Button Confirm Your Order should be disabled when form is not completed */}
               <div className="btns">
-                <button disabled={!this.state.formcomplete} type="submit">
-                  Confirm Your Order
-                </button>
+                <Link to="/products">
+                  <button
+                    type="button"
+                    disabled={
+                      !this.state.zipCode ||
+                      !this.state.CCV ||
+                      !this.state.expirationDate ||
+                      !this.state.creditCard
+                    }
+                    onClick={() =>
+                      this.props.changeOrderStatus(
+                        this.props.location.state.cart.id
+                      )
+                    }
+                  >
+                    Confirm Your Order
+                  </button>
+                </Link>
               </div>
             </form>
           </div>
@@ -311,9 +354,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // getProductsFromStore: () => dispatch(fetchAllProducts()),
-    // createItem: (product, quantityToAdd) =>
-    //   dispatch(fetchCreateProduct(product, quantityToAdd))
+    changeOrderStatus: orderId => dispatch(fetchChangeOrderStatus(orderId))
   }
 }
 

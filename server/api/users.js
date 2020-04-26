@@ -43,3 +43,9 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+
+//update single user route for admin and login user (may need two routes)
+
+//delete single user route
+
