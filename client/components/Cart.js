@@ -3,13 +3,23 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
 import {fetchPendingOrder} from '../store/order'
-import {fetchCart, fetchCreateProduct} from '../store/cart'
+import {
+  fetchCart,
+  fetchCreateProduct,
+  increaseQty,
+  decreaseQty
+} from '../store/cart'
 
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
     this.props.getCreateProduct()
     this.props.getCart()
+    this.handleClickIncrease = this.handleClickIncrease.bind(this)
+  }
+
+  handleClickIncrease(id) {
+    this.props.increaseQty(id)
   }
 
   render() {
@@ -84,6 +94,20 @@ export class Cart extends React.Component {
                   <Link to={`/products/${product.id}`}>{product.name}</Link>
                   <p>Price: ${product.price}</p>
                   <p>Quantity: {orderProducts[i].quantity}</p>
+                  <button
+                    type="button"
+                    onClick={this.handleClickIncrease(product.id)}
+                  >
+                    Increase
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.props.decreaseQty(product.id)
+                    }}
+                  >
+                    Decrease
+                  </button>
                   <p>
                     Unit Total: ${product.price * orderProducts[i].quantity}
                   </p>
@@ -128,7 +152,9 @@ const mapDispatch = dispatch => {
 
     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
 
-    getCart: () => dispatch(fetchCart())
+    getCart: () => dispatch(fetchCart()),
+    increaseQty: id => dispatch(increaseQty(id)),
+    decreaseQty: id => dispatch(decreaseQty(id))
   }
 }
 

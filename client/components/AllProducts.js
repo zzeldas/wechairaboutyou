@@ -47,7 +47,7 @@ export class AllProducts extends React.Component {
               <p>Quantity: {product.quantity}</p>
               <button
                 type="button"
-                onClick={() => this.props.createItem(product, 1)}
+                onClick={() => this.props.createItem(product)}
               >
                 ADD TO USER CART
               </button>
@@ -82,8 +82,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getProductsFromStore: () => dispatch(fetchAllProducts()),
-    createItem: (product, quantityToAdd) =>
-      dispatch(fetchCreateProduct(product, quantityToAdd))
+    createItem: product => dispatch(fetchCreateProduct(product))
   }
 }
 
