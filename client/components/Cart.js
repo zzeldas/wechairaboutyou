@@ -19,16 +19,12 @@ export class Cart extends React.Component {
     this.props.getCart()
 
     this.handleDelete = this.handleDelete.bind(this)
-    this.handleClickIncrease = this.handleClickIncrease.bind(this)
   }
+  
   handleDelete(itemId, e) {
     e.preventDefault()
     this.props.removeUserItem(itemId)
     this.props.getCart()
-  }
-
-  handleClickIncrease(id) {
-    this.props.increaseQty(id)
   }
 
   render() {
@@ -40,6 +36,20 @@ export class Cart extends React.Component {
       delete guestCart[productId]
       sessionStorage.setItem('cart', JSON.stringify(guestCart))
     }
+
+    function increaseQtyGuest(productId) {
+      let guestCart = JSON.parse(sessionStorage.getItem('cart'))
+      guestCart[productId] += 1
+      sessionStorage.setItem('cart', JSON.stringify(guestCart))
+    }
+
+    function decreaseQtyGuest(productId) {
+      let guestCart = JSON.parse(sessionStorage.getItem('cart'))
+      guestCart[productId] -= 1
+      console.log('GUESTCART INC: ', guestCart)
+      sessionStorage.setItem('cart', JSON.stringify(guestCart))
+    }
+
     let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
     let cartProducts = products.filter(product => product.id in cart)
 
@@ -83,6 +93,24 @@ export class Cart extends React.Component {
               <Link to={`/products/${product.id}`}>{product.name}</Link>
               <p>Price: ${product.price}</p>
               <p>Quantity: {cart[product.id]}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  increaseQtyGuest(product.id)
+                  location.reload()
+                }}
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  decreaseQtyGuest(product.id)
+                  location.reload()
+                }}
+              >
+                -
+              </button>
               <p>Unit Total: ${product.price * cart[product.id]}</p>
               <button
                 type="button"
@@ -106,9 +134,11 @@ export class Cart extends React.Component {
                   <p>Quantity: {orderProducts[i].quantity}</p>
                   <button
                     type="button"
-                    onClick={this.handleClickIncrease(product.id)}
+                    onClick={() => {
+                      this.props.increaseQty(product.id)
+                    }}
                   >
-                    Increase
+                    +
                   </button>
                   <button
                     type="button"
@@ -116,7 +146,7 @@ export class Cart extends React.Component {
                       this.props.decreaseQty(product.id)
                     }}
                   >
-                    Decrease
+                    -
                   </button>
                   <p>
                     Unit Total: ${product.price * orderProducts[i].quantity}
