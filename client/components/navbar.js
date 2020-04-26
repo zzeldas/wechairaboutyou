@@ -5,9 +5,11 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store/singleUser'
 
 const Navbar = ({handleClick, isLoggedInUser}) => (
+
   <div id="navbar">
     <img src="/title.png" height="50" width="400" id="title" />
     <img src="/chair_logo.png" height="80" width="80" />
+
 
     <nav>
       {isLoggedInUser ? (

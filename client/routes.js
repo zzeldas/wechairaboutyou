@@ -14,6 +14,7 @@ import removeProduct from './components/removeProduct'
 
 import Cart from './components/Cart'
 import SingleProduct from './components/SingleProduct'
+import CheckoutPage from './components/CheckoutPage'
 
 /**
  * COMPONENT
@@ -37,6 +38,7 @@ class Routes extends Component {
         <Route exact path="/users" component={AllUsers} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkoutpage" component={CheckoutPage} />
 
         <Route
           exact

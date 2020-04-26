@@ -7,9 +7,9 @@ const removeProductForm = props => {
   return (
     <main>
       <h2 className="headercenter"> You are about to delete this product</h2>
-      <div className="box">
+      {/* <div className="box">
         <img src="/chairaboutyoulogo.png" />
-      </div>
+      </div> */}
       <p />
       <div className="container">
         <form onSubmit={handleSubmit}>

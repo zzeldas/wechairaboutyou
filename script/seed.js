@@ -284,10 +284,6 @@ async function seed() {
     {userId: 3},
     {userId: 4},
     {userId: 5},
-    {
-      userId: 5,
-      status: 'completed'
-    },
     {userId: 16}
   ]
   const orders = await Promise.all([Order.bulkCreate(dummyOrders)])
@@ -299,20 +295,20 @@ async function seed() {
     {
       unitPrice: 13599,
       quantity: 4,
-      orderId: 7,
+      orderId: 6,
       productId: 1
     },
     {
       unitPrice: 12999,
       quantity: 4,
-      orderId: 1,
+      orderId: 6,
       productId: 2
     },
     {
       unitPrice: 14699,
       quantity: 4,
-      orderId: 7,
-      productId: 3
+      orderId: 6,
+      productId: 9
     },
     {
       unitPrice: 13599,
