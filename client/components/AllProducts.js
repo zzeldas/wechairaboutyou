@@ -1,18 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/products'
 import {fetchCreateProduct} from '../store/cart'
-import {number} from 'prop-types'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
-    this.props.createItem()
   }
 
   render() {
     const {products, user} = this.props
+
+    //GUEST CART ADDCART
+    const addToCart = (product, quantityToAdd) => {
+      let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
+      let oldQuantity = cart[product.id] || 0
+      let newQuantity = oldQuantity + quantityToAdd
+      cart[product.id] = newQuantity
+      sessionStorage.setItem('cart', JSON.stringify(cart))
+    }
+
     let userCart
     if (!user.id) {
       userCart = (
@@ -74,14 +82,6 @@ export class AllProducts extends React.Component {
           </div>
         </div>
       )
-    }
-    //GUEST CART ADDCART
-    const addToCart = (product, quantityToAdd) => {
-      let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
-      let oldQuantity = cart[product.id] || 0
-      let newQuantity = oldQuantity + quantityToAdd
-      cart[product.id] = newQuantity
-      sessionStorage.setItem('cart', JSON.stringify(cart))
     }
 
     //USER CART ADDCART
