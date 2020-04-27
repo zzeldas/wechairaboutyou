@@ -8,15 +8,17 @@ const {isAdmin, isLoggedIn} = require('../middleware')
 //api/carts/cart
 router.get('/cart', async (req, res, next) => {
   try {
-    const order = await Order.findOrCreate({
-      where: {
-        userId: req.user.id,
-        status: 'pending'
-      },
-      include: [{model: OrderProduct}]
-    })
+    if (req.user) {
+      const order = await Order.findOrCreate({
+        where: {
+          userId: req.user.id,
+          status: 'pending'
+        },
+        include: [{model: OrderProduct}]
+      })
 
-    res.json(order)
+      res.json(order)
+    }
   } catch (error) {
     next(error)
   }
