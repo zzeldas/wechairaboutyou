@@ -11,6 +11,7 @@ export class AllProducts extends React.Component {
 
   render() {
     const {products, user} = this.props
+    console.log('user', user.isAdmin)
 
     //GUEST CART ADDCART
     const addToCart = (product, quantityToAdd) => {
@@ -21,16 +22,15 @@ export class AllProducts extends React.Component {
       sessionStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    let userCart
+    let productsView
     if (!user.id) {
-      userCart = (
+      productsView = (
         <div>
           {products.map(product => (
             <div key={product.id}>
               <img src={product.imageUrl} height="200" width="200" />
               <Link to={`/products/${product.id}`}>{product.name}</Link>
               <p>Price: {product.price}</p>
-              <p>Quantity: {product.quantity}</p>
               <button type="button" onClick={() => addToCart(product, 1)}>
                 {' '}
                 Add To Cart
@@ -40,7 +40,7 @@ export class AllProducts extends React.Component {
         </div>
       )
     } else {
-      userCart = (
+      productsView = (
         <div className="container">
           {user.isAdmin === true && (
             <Link to="/addproduct">
@@ -65,7 +65,11 @@ export class AllProducts extends React.Component {
                       {product.name}
                     </Link>
                     <p className="card-text">Price: {product.price}</p>
-                    <p className="card-text">Quantity: {product.quantity}</p>
+
+                    {user.isAdmin === true && (
+                      <p className="card-text">Quantity: {product.quantity}</p>
+                    )}
+
                     <button
                       type="button"
                       onClick={() => this.props.createItem(product)}
@@ -86,7 +90,7 @@ export class AllProducts extends React.Component {
 
     //USER CART ADDCART
 
-    return <div>{userCart}</div>
+    return <div>{productsView}</div>
   }
 }
 

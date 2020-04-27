@@ -23,6 +23,14 @@ async function seed() {
       isAdmin: true
     },
     {
+      firstName: 'user',
+      lastName: 'user',
+      email: 'user@wechair.com',
+      password: 'user123',
+      address: '7 Vahlen Place',
+      isAdmin: false
+    },
+    {
       firstName: 'Amerigo',
       lastName: 'Stow',
       email: 'astow1o@netscape.com',

@@ -173,7 +173,8 @@ function (_React$Component) {
 
       var _this$props = this.props,
           products = _this$props.products,
-          user = _this$props.user; //GUEST CART ADDCART
+          user = _this$props.user;
+      console.log('user', user.isAdmin); //GUEST CART ADDCART
 
       var addToCart = function addToCart(product, quantityToAdd) {
         var cart = JSON.parse(sessionStorage.getItem('cart') || '{}');
@@ -183,10 +184,10 @@ function (_React$Component) {
         sessionStorage.setItem('cart', JSON.stringify(cart));
       };
 
-      var userCart;
+      var productsView;
 
       if (!user.id) {
-        userCart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, products.map(function (product) {
+        productsView = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, products.map(function (product) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: product.id
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -195,7 +196,7 @@ function (_React$Component) {
             width: "200"
           }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/products/".concat(product.id)
-          }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: ", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: ", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "button",
             onClick: function onClick() {
               return addToCart(product, 1);
@@ -203,7 +204,7 @@ function (_React$Component) {
           }, ' ', "Add To Cart"));
         }));
       } else {
-        userCart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        productsView = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "container"
         }, user.isAdmin === true && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
           to: "/addproduct"
@@ -227,7 +228,7 @@ function (_React$Component) {
             className: "card-text"
           }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             className: "card-text"
-          }, "Price: ", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          }, "Price: ", product.price), user.isAdmin === true && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             className: "card-text"
           }, "Quantity: ", product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "button",
@@ -242,7 +243,7 @@ function (_React$Component) {
       } //USER CART ADDCART
 
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, userCart);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, productsView);
     }
   }]);
 
