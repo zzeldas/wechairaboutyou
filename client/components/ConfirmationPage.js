@@ -24,7 +24,7 @@ export class ConfirmationPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
-    // const {cart} = this.props.location.state
+    //const { cart } = this.props.location.state
   }
 
   handleChange(evt) {
@@ -45,166 +45,63 @@ export class ConfirmationPage extends React.Component {
   render() {
     const {cart, user} = this.props
 
+    // let orderProducts = this.props.cart.cart.orderproducts
+
+    //   let userCartProducts
+
+    //   if (orderProducts) {
+    // 	  let orderProductsId = orderProducts.map(
+    // 		  orderProduct => orderProduct.productId
+    // 	  )
+
+    // userCartProducts = orderProductsId
+    // .map(id => {
+    // 	return products.filter(product => id === product.id)
+    // })
+    // .flat()
+
     let ConfirmPage
 
     ConfirmPage = (
       <div className="wrapper">
         <div className="container">
-          <h2>
-            Thank you for your order!
-            <img
-              className="shipping"
-              src="/checkmark.ico"
-              alt="missing truck"
-            />
-          </h2>
+          <img
+            className="confirmation"
+            src="/checkmark.ico"
+            alt="missing truck"
+          />
+          <h2>Thank you for your order!</h2>
           <h3>
             Now you can relax. We're working on getting your CHAIRS to you ASAP!
           </h3>
           <p> </p>
+          <h3>Detail of your order:</h3>
+          {/* <div>
+					<p>Order Total: ${car.cart.total}</p>
+						cart.orderproducts.map(product => (
+					<div key={product.name}>
+						<img src={product.imageUrl} height="100" width="100" />
+						<Link to={`/products/${product.id}`}>{product.name}</Link>
+						<p>Price: ${product.price}</p>
+						<p>Quantity: {cart[product.id]}</p>
+						<p>Unit Total: ${product.price * cart[product.id]}</p>)
+					</div>
+					</div> */}
 
-          <h2>
+          <h3>
             <Link to="/home">
-              <img className="cart" src="/home.ico" alt="missing cart image" />
+              <img
+                className="shipping"
+                src="/home.ico"
+                alt="missing cart image"
+              />
               Continue Shopping
             </Link>
-          </h2>
+            {/* <Link to="/confirmationpage"> </Link> */}
+          </h3>
         </div>
       </div>
     )
-
-    //       ConfirmPage = (
-    //         //<div> Confirmation console logs </div>
-    //         <div className="wrapper">
-    //           <div className="container">
-    //             <form onSubmit={this.handleSubmit}>
-    //               <h2>
-    //                 Shipping Details
-    //                 <img
-    //                   className="shipping"
-    //                   src="/whitetruck.ico"
-    //                   alt="missing truck"
-    //                 />
-    //                 <Link to="/cart">
-    //                   <img
-    //                     className="cart"
-    //                     src="/cart.ico"
-    //                     alt="missing cart image"
-    //                   />
-    //                   Cart
-    //                 </Link>
-    //               </h2>
-    //               <div className="name">
-    //                 <div>
-    //                   <label htmlFor="firstName">First Name</label>
-    //                   <input
-    //                     placeholder="First Name"
-    //                     onChange={this.handleChange}
-    //                     type="text"
-    //                     name="firstName"
-    //                     value={user.firstName}
-    //                     required
-    //                   />
-    //                 </div>
-
-    //                 <div>
-    //                   <label htmlFor="lastName">Last Name</label>
-    //                   <input
-    //                     placeholder="Last Name"
-    //                     onChange={this.handleChange}
-    //                     type="text"
-    //                     name="lastName"
-    //                     value={user.lastName}
-    //                     required
-    //                   />
-    //                 </div>
-    //               </div>
-    //               <div className="leftinput">
-    //                 <label htmlFor="name">Address</label>
-    //                 <input
-    //                   placeholder="address"
-    //                   onChange={this.handleChange}
-    //                   type="text"
-    //                   name="address"
-    //                   value={user.address}
-    //                   required
-    //                 />
-    //               </div>
-    //               <div className="leftinput">
-    //                 <label htmlFor="name">Email</label>
-    //                 <input
-    //                   placeholder="email"
-    //                   onChange={this.handleChange}
-    //                   type="text"
-    //                   name="email"
-    //                   value={user.email}
-    //                   required
-    //                 />
-    //               </div>
-    //               <h2>
-    //                 Payment Information
-    //                 <img
-    //                   className="shipping"
-    //                   src="/creditcard.ico"
-    //                   alt="missing cc image"
-    //                 />
-    //               </h2>
-    //               <div className="leftinput">
-    //                 <label htmlFor="card-num">Credit Card No.</label>
-    //                 <input
-    //                   placeholder="Credit Card"
-    //                   onChange={this.handleChange}
-    //                   type="text"
-    //                   name="creditCard"
-    //                   // value={user.creditCard}
-    //                   required
-    //                 />
-    //               </div>
-    //               <div className="cc-info">
-    //                 <div>
-    //                   <label htmlFor="expirationDate">Exp</label>
-    //                   <input
-    //                     placeholder="Expiration Date"
-    //                     onChange={this.handleChange}
-    //                     type="text"
-    //                     name="expirationDate"
-    //                     // value={user.cardExpDate}
-    //                     required
-    //                   />
-    //                 </div>
-
-    //                 <div>
-    //                   <label htmlFor="ccv">CCV</label>
-    //                   <input
-    //                     placeholder="CCV"
-    //                     onChange={this.handleChange}
-    //                     type="text"
-    //                     name="CCV"
-    //                     // value={user.cardCcv}
-    //                     required
-    //                   />
-    //                 </div>
-    //                 <div>
-    //                   <label htmlFor="zipCode">Zip Code </label>
-    //                   <input
-    //                     placeholder="zipCode"
-    //                     onChange={this.handleChange}
-    //                     type="text"
-    //                     name="zipCode"
-    //                     // value={user.zipCode}
-    //                     required
-    //                   />
-    //                 </div>
-    //               </div>
-    //               <div className="btns">
-    //                 <button disabled={!this.state.formcomplete} type="submit">
-    //                   Confirm Your Order
-    //                 </button>
-    //               </div>
-    //             </form>
-    //           </div>
-    //         </div>
-    // 	  )
 
     return <div>{ConfirmPage}</div>
   }
@@ -218,9 +115,9 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  return {
-    changeOrderStatus: orderId => dispatch(fetchChangeOrderStatus(orderId))
-  }
+  // return {
+  // 	changeOrderStatus: orderId => dispatch(fetchChangeOrderStatus(orderId))
+  // }
 }
 
 export default connect(mapState, mapDispatch)(ConfirmationPage)
