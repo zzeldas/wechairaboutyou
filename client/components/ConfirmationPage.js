@@ -9,17 +9,7 @@ export class ConfirmationPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      orderid: '',
-      formcomplete: false,
-      status: 'pending',
-      firstName: '',
-      lastName: '',
-      address: '',
-      email: '',
-      creditCard: '',
-      CCV: '',
-      expirationDate: '',
-      zipCode: ''
+      order: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -39,8 +29,7 @@ export class ConfirmationPage extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     this.setState({
-      formcomplete: false,
-      status: 'completed'
+      order: 'confirm'
     })
   }
 
