@@ -9,7 +9,7 @@ export class ConfirmationPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      order: ''
+      // order: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -29,7 +29,7 @@ export class ConfirmationPage extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     this.setState({
-      order: 'confirm'
+      // order: 'confirm'
     })
   }
 
