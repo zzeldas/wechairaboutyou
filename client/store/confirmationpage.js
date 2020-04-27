@@ -29,7 +29,6 @@ const createPendingOrder = userId => ({
 export const fetchSingleCompletedOrder = orderId => async dispatch => {
   try {
     const res = await axios.get(`/api/carts/cart/${orderId}`) //FIXME
-    console.log('RES IN FETCH SINGLE ORDER', orderId)
     dispatch(getSingleOrder(res.data))
   } catch (err) {
     console.error(err)

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
 import {me} from '../store/singleUser'
 import {fetchSingleCompletedOrder} from '../store/confirmationpage'
+import {fetchAllProducts} from '../store/products'
 
 export class ConfirmationPage extends React.Component {
   constructor() {
@@ -25,6 +26,7 @@ export class ConfirmationPage extends React.Component {
   }
   componentDidMount() {
     this.props.getSingleCompletedOrder(this.props.location.state.orderId)
+    this.props.getProductsFromStore()
   }
 
   handleChange(evt) {
@@ -44,75 +46,76 @@ export class ConfirmationPage extends React.Component {
 
   render() {
     const info = this.props.location.state
-    // const orderproducts = this.props.order.orderproducts
-
-    // let orderproducts;
-
-    // if(this.props.order.orderproducts){
-    //   orderproducts = this.props.order.orderproducts
-    // }
+    const orderproducts = this.props.order.orderproducts
 
     console.log('PROPS', this.props)
-    // let orderProducts = this.props.cart.cart.orderproducts
-
-    //   let userCartProducts
-
-    //   if (orderProducts) {
-    // 	  let orderProductsId = orderProducts.map(
-    // 		  orderProduct => orderProduct.productId
-    // 	  )
-
-    // userCartProducts = orderProductsId
-    // .map(id => {
-    // 	return products.filter(product => id === product.id)
-    // })
-    // .flat()
 
     let ConfirmPage
+    let userOrders
 
-    ConfirmPage = (
-      <div className="wrapper">
-        <div className="container">
-          <img
-            className="confirmation"
-            src="/checkmark.ico"
-            alt="missing truck"
-          />
-          <h2>Thank you for your order!</h2>
-          <h3>
-            Now you can relax. We're working on getting your CHAIRS to you ASAP!
-          </h3>
-          <p> </p>
-          <h3>Detail of your order:</h3>
-          {/* <div>
-						{orderproducts.map((product) => (
-              <div key = {product.id}>
-                <Link to={`/products/${product.productId}`}>Your Product</Link>
-                <p>Price: ${product.unitPrice}</p>
-                <p>Quantity: {product.quantity}</p>
-                <p>Unit Total: ${product.total}</p>
-              </div>
-              ))}
-					</div> */}
+    if (orderproducts) {
+      let orderProductsId = orderproducts.map(
+        orderProduct => orderProduct.productId
+      )
 
-          <Link to="/home">
+      userOrders = orderProductsId
+        .map(id => {
+          return this.props.products.filter(product => id === product.id)
+        })
+        .flat()
+
+      console.log('USER ORDER', userOrders)
+      let result = 0
+
+      orderproducts.forEach(item => (result += item.unitPrice * item.quantity))
+
+      ConfirmPage = (
+        <div className="wrapper">
+          <div className="container">
             <img
-              className="shipping"
-              src="/home.ico"
-              alt="missing cart image"
+              className="confirmation"
+              src="/checkmark.ico"
+              alt="missing truck"
             />
-            <button
-              type="button"
-              onClick={() => this.props.createPendingOrder(info.userId)}
-            >
-              {' '}
-              Continue Shopping{' '}
-            </button>
-          </Link>
-          {/* <Link to="/confirmationpage"> </Link> */}
+            <h2>Thank you for your order!</h2>
+            <h3>
+              Now you can relax. We're working on getting your CHAIRS to you
+              ASAP!
+            </h3>
+            <p> </p>
+            <h3>Detail of your order:</h3>
+            <div>
+              {orderproducts.map((product, i) => (
+                <div key={product.id}>
+                  <Link to={`/products/${product.productId}`}>
+                    Your Product
+                  </Link>
+                  <p>Price: ${product.unitPrice}</p>
+                  <p>Quantity: {product.quantity}</p>
+                  <p>Unit Total: ${product.total}</p>
+                </div>
+              ))}
+              <p>Total: ${result}</p>
+            </div>
+
+            <Link to="/home">
+              <img
+                className="shipping"
+                src="/home.ico"
+                alt="missing cart image"
+              />
+              <button
+                type="button"
+                onClick={() => this.props.createPendingOrder(info.userId)}
+              >
+                Continue Shopping
+              </button>
+            </Link>
+            {/* <Link to="/confirmationpage"> </Link> */}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
 
     return <div>{ConfirmPage}</div>
   }
@@ -129,7 +132,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getSingleCompletedOrder: orderId =>
-      dispatch(fetchSingleCompletedOrder(orderId))
+      dispatch(fetchSingleCompletedOrder(orderId)),
+    getProductsFromStore: () => dispatch(fetchAllProducts())
   }
 }
 
