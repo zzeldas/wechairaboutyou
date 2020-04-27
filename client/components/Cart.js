@@ -51,14 +51,8 @@ export class Cart extends React.Component {
     let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
     let cartProducts = products.filter(product => product.id in cart)
 
-    let result = 0
-    cartProducts.forEach(product => {
-      result += product.price * cart[product.id]
-    })
-    let fullAmount = result
-
     //USER CART
-    console.log('this props ', this.props)
+
     let orderProducts = this.props.cart.cart.orderproducts
 
     let userCartProducts
@@ -73,10 +67,31 @@ export class Cart extends React.Component {
           return products.filter(product => id === product.id)
         })
         .flat()
+    }
 
-      console.log('PROPS', this.props)
-      console.log('USERCARTPRODUCTS', userCartProducts)
-      console.log('ORDERPRODUCTS', orderProducts)
+    const cartTotal = () => {
+      if (orderProducts) {
+        //userCart total
+        console.log('orderProducts for user order', orderProducts)
+        if (orderProducts.length === 0) {
+          return 0
+        } else {
+          //user have order products in cart
+          let result = 0
+          orderProducts.forEach(product => {
+            result += product.unitPrice * product.quantity
+          })
+          return (result / 100).toFixed(2)
+        }
+      } else {
+        //guest cart total
+
+        let result = 0
+        cartProducts.forEach(product => {
+          result += product.price * cart[product.id]
+        })
+        return Math.round(result * 100) / 100
+      }
     }
 
     return (
@@ -128,7 +143,7 @@ export class Cart extends React.Component {
                 <div key={product.name}>
                   <img src={product.imageUrl} height="200" width="200" />
                   <Link to={`/products/${product.id}`}>{product.name}</Link>
-                  <p>Price: ${product.price}</p>
+                  <p>Price: ${orderProducts[i].price}</p>
                   <p>Quantity: {orderProducts[i].quantity}</p>
                   <button
                     type="button"
@@ -153,7 +168,6 @@ export class Cart extends React.Component {
                     type="button"
                     onClick={() => {
                       this.props.removeUserItem(product)
-                      // this.handleDelete(product.id, e)
                     }}
                   >
                     Remove Button
@@ -165,7 +179,7 @@ export class Cart extends React.Component {
             )}
           </div>
         )}
-        <p>FULL AMOUNT: ${fullAmount}</p>
+        <p>FULL AMOUNT: ${cartTotal()}</p>
         <Link
           to={{
             pathname: '/checkoutpage',

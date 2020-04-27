@@ -452,14 +452,8 @@ function (_React$Component) {
       var cart = JSON.parse(sessionStorage.getItem('cart') || '{}');
       var cartProducts = products.filter(function (product) {
         return product.id in cart;
-      });
-      var result = 0;
-      cartProducts.forEach(function (product) {
-        result += product.price * cart[product.id];
-      });
-      var fullAmount = result; //USER CART
+      }); //USER CART
 
-      console.log('this props ', this.props);
       var orderProducts = this.props.cart.cart.orderproducts;
       var userCartProducts;
 
@@ -472,10 +466,32 @@ function (_React$Component) {
             return id === product.id;
           });
         }).flat();
-        console.log('PROPS', this.props);
-        console.log('USERCARTPRODUCTS', userCartProducts);
-        console.log('ORDERPRODUCTS', orderProducts);
       }
+
+      var cartTotal = function cartTotal() {
+        if (orderProducts) {
+          //userCart total
+          console.log('orderProducts for user order', orderProducts);
+
+          if (orderProducts.length === 0) {
+            return 0;
+          } else {
+            //user have order products in cart
+            var result = 0;
+            orderProducts.forEach(function (product) {
+              result += product.unitPrice * product.quantity;
+            });
+            return (result / 100).toFixed(2);
+          }
+        } else {
+          //guest cart total
+          var _result = 0;
+          cartProducts.forEach(function (product) {
+            _result += product.price * cart[product.id];
+          });
+          return Math.round(_result * 100) / 100;
+        }
+      };
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "MY CART"), !this.props.user.id ? cartProducts.map(function (product) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -514,7 +530,7 @@ function (_React$Component) {
           width: "200"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
           to: "/products/".concat(product.id)
-        }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", orderProducts[i].price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           onClick: function onClick() {
             _this.props.increaseQty(product.id);
@@ -527,11 +543,10 @@ function (_React$Component) {
         }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.price * orderProducts[i].quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           onClick: function onClick() {
-            _this.props.removeUserItem(product); // this.handleDelete(product.id, e)
-
+            _this.props.removeUserItem(product);
           }
         }, "Remove Button"));
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Nothing in your cart")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FULL AMOUNT: $", fullAmount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Nothing in your cart")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FULL AMOUNT: $", cartTotal()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: {
           pathname: '/checkoutpage',
           state: this.props.cart
@@ -1351,34 +1366,16 @@ var Navbar = function Navbar(_ref) {
     src: "/chair_logo.png",
     height: "80",
     width: "80"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, isLoggedInUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-    className: "navbar navbar-light bg-light"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "nav justify-content-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/home",
-    className: "nav-link"
-  }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/products",
-    className: "nav-link"
-  }, "All Products")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), isLoggedInUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/home"
+  }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/products"
+  }, "All Products"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
-    onClick: handleClick,
-    className: "nav-link"
-  }, "Logout")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/cart",
-    className: "nav-link"
-  }, "Cart"))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-    className: "navbar navbar-expand-lg navbar-light bg-light"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    onClick: handleClick
+  }, "Logout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/cart"
+  }, "Cart")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/home"
   }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/products"
@@ -1388,7 +1385,7 @@ var Navbar = function Navbar(_ref) {
     to: "/signup"
   }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/cart"
-  }, "Cart"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+  }, "Cart")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
 };
 /**
  * CONTAINER
@@ -46908,7 +46905,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
