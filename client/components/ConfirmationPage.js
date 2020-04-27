@@ -47,6 +47,15 @@ export class ConfirmationPage extends React.Component {
   render() {
     const info = this.props.location.state
     const orderproducts = this.props.order.orderproducts
+    const products = this.props.products
+    const productName = id => {
+      let result = products.find(p => p.id === id)
+      if (result) {
+        return result.name
+      } else {
+        return 'Your Product'
+      }
+    }
 
     console.log('PROPS', this.props)
 
@@ -88,7 +97,7 @@ export class ConfirmationPage extends React.Component {
               {orderproducts.map((product, i) => (
                 <div key={product.id}>
                   <Link to={`/products/${product.productId}`}>
-                    Your Product
+                    {productName(product.productId)}
                   </Link>
                   <p>Price: ${product.unitPrice}</p>
                   <p>Quantity: {product.quantity}</p>
