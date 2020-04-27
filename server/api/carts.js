@@ -25,6 +25,22 @@ router.get('/cart', async (req, res, next) => {
     next(error)
   }
 })
+//api/carts/cart/{orderID} single past order
+router.get('/cart/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.orderId,
+        status: 'completed'
+      },
+      include: [{model: OrderProduct}]
+    })
+
+    res.json(order)
+  } catch (error) {
+    next(error)
+  }
+})
 // api/carts/ --- Change order status from "pending"  to "completed"
 
 router.put('/cart/:orderId', async (req, res, next) => {
@@ -70,6 +86,18 @@ router.post('/cart', async (req, res, next) => {
       productId: product.id
     })
     res.json(orderInfo)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//create new order after confirmation page
+//api/carts/cart/userId
+router.post('cart/:userId', async (req, res, next) => {
+  try {
+    await Order.findOrCreate({
+      where: {userId: req.params.userId, status: 'pending'}
+    })
   } catch (err) {
     next(err)
   }

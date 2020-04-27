@@ -15,6 +15,7 @@ import removeProduct from './components/removeProduct'
 import Cart from './components/Cart'
 import SingleProduct from './components/SingleProduct'
 import CheckoutPage from './components/CheckoutPage'
+import ConfirmationPage from './components/ConfirmationPage'
 
 /**
  * COMPONENT
@@ -40,6 +41,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkoutpage" component={CheckoutPage} />
+        <Route exact path="/confirmationpage" component={ConfirmationPage} />
 
         <Route
           exact
