@@ -11,7 +11,6 @@ export class AllProducts extends React.Component {
 
   render() {
     const {products, user} = this.props
-    console.log('user', user.isAdmin)
 
     //GUEST CART ADDCART
     const addToCart = (product, quantityToAdd) => {
@@ -31,6 +30,7 @@ export class AllProducts extends React.Component {
               <img src={product.imageUrl} height="200" width="200" />
               <Link to={`/products/${product.id}`}>{product.name}</Link>
               <p>Price: {product.price}</p>
+              <p className="card-text">Quantity in stock: {product.quantity}</p>
               <button type="button" onClick={() => addToCart(product, 1)}>
                 {' '}
                 Add To Cart
@@ -65,10 +65,9 @@ export class AllProducts extends React.Component {
                       {product.name}
                     </Link>
                     <p className="card-text">Price: {product.price}</p>
-
-                    {user.isAdmin === true && (
-                      <p className="card-text">Quantity: {product.quantity}</p>
-                    )}
+                    <p className="card-text">
+                      Quantity in stock: {product.quantity}
+                    </p>
 
                     <button
                       type="button"

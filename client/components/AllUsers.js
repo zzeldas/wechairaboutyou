@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllUsers} from '../store/users'
+import {Login} from '../components'
+import {Link} from 'react-router-dom'
 
 export class AllUsers extends React.Component {
   componentDidMount() {
@@ -8,10 +10,16 @@ export class AllUsers extends React.Component {
   }
 
   render() {
-    console.log('users comp')
+    console.log('users comp', this.props.isLoggedInUser)
+
     return (
       <div>
-        {!this.props.users ? (
+        {/* {
+          !this.props.isLoggedInUser ? (
+            <h3>Please Log in</h3>
+          )
+          : (<h3>logged in</h3>) */}
+        {this.props.users.length === 0 ? (
           <h2>No Registered Users</h2>
         ) : (
           this.props.users.map(user => (
