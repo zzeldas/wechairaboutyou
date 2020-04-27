@@ -6,7 +6,6 @@ import {fetchPendingOrder} from '../store/order'
 
 import {
   fetchCart,
-  fetchCreateProduct,
   fetchRemovedItem,
   increaseQty,
   decreaseQty
@@ -15,12 +14,11 @@ import {
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getProductsFromStore()
-    this.props.getCreateProduct()
     this.props.getCart()
 
     this.handleDelete = this.handleDelete.bind(this)
   }
-  
+
   handleDelete(itemId, e) {
     e.preventDefault()
     this.props.removeUserItem(itemId)
@@ -28,7 +26,7 @@ export class Cart extends React.Component {
   }
 
   render() {
-    const {products, user} = this.props
+    const {products} = this.props
 
     //GUEST CART
     function removeItem(productId) {
@@ -193,10 +191,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getProductsFromStore: () => dispatch(fetchAllProducts()),
-    getCreateProduct: () => dispatch(fetchCreateProduct()),
-
     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
-
     getCart: () => dispatch(fetchCart()),
     removeUserItem: product => dispatch(fetchRemovedItem(product)),
     increaseQty: id => dispatch(increaseQty(id)),
