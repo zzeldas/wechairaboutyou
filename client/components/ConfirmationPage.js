@@ -35,54 +35,53 @@ export class ConfirmationPage extends React.Component {
 
   render() {
     const info = this.props.location.state
-    const orderproducts = this.props.order.orderproducts
-    const products = this.props.products
-    const productName = id => {
-      let result = products.find(p => p.id === id)
-      if (result) {
-        return result.name
-      } else {
-        return 'Your Product'
-      }
-    }
+    // const orderproducts = this.props.order.orderproducts
+    // const products = this.props.products
+    // const productName = id => {
+    //   let result = products.find(p => p.id === id)
+    //   if (result) {
+    //     return result.name
+    //   } else {
+    //     return 'Your Product'
+    //   }
+    // }
 
     console.log('PROPS', this.props)
 
     let ConfirmPage
     let userOrders
 
-    if (orderproducts) {
-      let orderProductsId = orderproducts.map(
-        orderProduct => orderProduct.productId
-      )
+    // if (true) {
+    //   let orderProductsId = orderproducts.map(
+    //     orderProduct => orderProduct.productId
+    //   )
 
-      userOrders = orderProductsId
-        .map(id => {
-          return this.props.products.filter(product => id === product.id)
-        })
-        .flat()
+    //   userOrders = orderProductsId
+    //     .map(id => {
+    //       return this.props.products.filter(product => id === product.id)
+    //     })
+    //     .flat()
 
-      console.log('USER ORDER', userOrders)
-      let result = 0
+    //   console.log('USER ORDER', userOrders)
+    //   let result = 0
 
-      orderproducts.forEach(item => (result += item.unitPrice * item.quantity))
+    //   orderproducts.forEach(item => (result += item.unitPrice * item.quantity))
 
-      ConfirmPage = (
-        <div className="wrapper">
-          <div className="container">
-            <img
-              className="confirmation"
-              src="/checkmark.ico"
-              alt="missing truck"
-            />
-            <h2>Thank you for your order!</h2>
-            <h3>
-              Now you can relax. We're working on getting your CHAIRS to you
-              ASAP!
-            </h3>
-            <p> </p>
-            <h3>Detail of your order:</h3>
-            <div>
+    ConfirmPage = (
+      <div className="wrapper">
+        <div className="container">
+          <img
+            className="confirmation"
+            src="/checkmark.ico"
+            alt="missing truck"
+          />
+          <h2>Thank you for your order!</h2>
+          <h3>
+            Now you can relax. We're working on getting your CHAIRS to you ASAP!
+          </h3>
+          <p> </p>
+          <h3>Detail of your order:</h3>
+          {/* <div>
               {orderproducts.map((product, i) => (
                 <div key={product.id}>
                   <Link to={`/products/${product.productId}`}>
@@ -94,26 +93,26 @@ export class ConfirmationPage extends React.Component {
                 </div>
               ))}
               <p>Total: ${result}</p>
-            </div>
+            </div> */}
 
-            <Link to="/home">
-              <img
-                className="shipping"
-                src="/home.ico"
-                alt="missing cart image"
-              />
-              <button
-                type="button"
-                onClick={() => this.props.createPendingOrder(info.userId)}
-              >
-                Continue Shopping
-              </button>
-            </Link>
-            {/* <Link to="/confirmationpage"> </Link> */}
-          </div>
+          <Link to="/home">
+            <img
+              className="shipping"
+              src="/home.ico"
+              alt="missing cart image"
+            />
+            <button
+              type="button"
+              onClick={() => this.props.createPendingOrder(info.userId)}
+            >
+              Continue Shopping
+            </button>
+          </Link>
+          {/* <Link to="/confirmationpage"> </Link> */}
         </div>
-      )
-    }
+      </div>
+    )
+    //}
 
     return <div>{ConfirmPage}</div>
   }

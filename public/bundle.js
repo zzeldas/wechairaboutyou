@@ -1008,67 +1008,52 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var info = this.props.location.state;
-      var orderproducts = this.props.order.orderproducts;
-      var products = this.props.products;
-
-      var productName = function productName(id) {
-        var result = products.find(function (p) {
-          return p.id === id;
-        });
-
-        if (result) {
-          return result.name;
-        } else {
-          return 'Your Product';
-        }
-      };
+      var info = this.props.location.state; // const orderproducts = this.props.order.orderproducts
+      // const products = this.props.products
+      // const productName = id => {
+      //   let result = products.find(p => p.id === id)
+      //   if (result) {
+      //     return result.name
+      //   } else {
+      //     return 'Your Product'
+      //   }
+      // }
 
       console.log('PROPS', this.props);
       var ConfirmPage;
-      var userOrders;
+      var userOrders; // if (true) {
+      //   let orderProductsId = orderproducts.map(
+      //     orderProduct => orderProduct.productId
+      //   )
+      //   userOrders = orderProductsId
+      //     .map(id => {
+      //       return this.props.products.filter(product => id === product.id)
+      //     })
+      //     .flat()
+      //   console.log('USER ORDER', userOrders)
+      //   let result = 0
+      //   orderproducts.forEach(item => (result += item.unitPrice * item.quantity))
 
-      if (orderproducts) {
-        var orderProductsId = orderproducts.map(function (orderProduct) {
-          return orderProduct.productId;
-        });
-        userOrders = orderProductsId.map(function (id) {
-          return _this2.props.products.filter(function (product) {
-            return id === product.id;
-          });
-        }).flat();
-        console.log('USER ORDER', userOrders);
-        var result = 0;
-        orderproducts.forEach(function (item) {
-          return result += item.unitPrice * item.quantity;
-        });
-        ConfirmPage = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "wrapper"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "confirmation",
-          src: "/checkmark.ico",
-          alt: "missing truck"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Thank you for your order!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Now you can relax. We're working on getting your CHAIRS to you ASAP!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Detail of your order:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, orderproducts.map(function (product, i) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: product.id
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-            to: "/products/".concat(product.productId)
-          }, productName(product.productId)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: $", product.unitPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Quantity: ", product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unit Total: $", product.total));
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Total: $", result)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-          to: "/home"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "shipping",
-          src: "/home.ico",
-          alt: "missing cart image"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          onClick: function onClick() {
-            return _this2.props.createPendingOrder(info.userId);
-          }
-        }, "Continue Shopping"))));
-      }
+      ConfirmPage = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "confirmation",
+        src: "/checkmark.ico",
+        alt: "missing truck"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Thank you for your order!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Now you can relax. We're working on getting your CHAIRS to you ASAP!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Detail of your order:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/home"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "shipping",
+        src: "/home.ico",
+        alt: "missing cart image"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return _this2.props.createPendingOrder(info.userId);
+        }
+      }, "Continue Shopping")))); //}
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, ConfirmPage);
     }
