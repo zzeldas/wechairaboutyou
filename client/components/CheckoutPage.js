@@ -44,7 +44,7 @@ export class CheckoutPage extends React.Component {
 
   render() {
     const {cart, user} = this.props
-
+    console.log(this.props.location.state)
     let userCart
     if (!user.id) {
       //THIS IS GUEST CART
@@ -206,7 +206,6 @@ export class CheckoutPage extends React.Component {
                 <div>
                   <label htmlFor="firstName">First Name</label>
                   <label>{user.firstName}</label>
-
                   {/* <input
                     placeholder="First Name"
                     onChange={this.handleChange}
@@ -316,7 +315,15 @@ export class CheckoutPage extends React.Component {
 
               {/* Button Confirm Your Order should be disabled when form is not completed */}
               <div className="btns">
-                <Link to="/products">
+                <Link
+                  to={{
+                    pathname: '/confirmationpage',
+                    state: {
+                      orderId: this.props.location.state.cart.id,
+                      userId: this.props.location.state.cart.userId
+                    }
+                  }}
+                >
                   <button
                     type="button"
                     disabled={

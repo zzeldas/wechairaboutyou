@@ -43,7 +43,7 @@ export const fetchCart = () => async dispatch => {
 //
 export const fetchCreateProduct = product => async dispatch => {
   try {
-    const {data} = await axios.post('/api/carts/cart', {item, quantityToAdd})
+    // const {data} = await axios.post('/api/carts/cart', {item, quantityToAdd})
     const resFromGet = await axios.get('/api/carts/cart')
     const orderInfo = resFromGet.data[0]
     const orderProductsInfo = resFromGet.data[0].orderproducts
