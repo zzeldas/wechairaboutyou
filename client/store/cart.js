@@ -1,6 +1,4 @@
 import axios from 'axios'
-import redux from 'react-redux'
-import history from '../history'
 
 // ACTION TYPES
 
@@ -43,7 +41,6 @@ export const fetchCart = () => async dispatch => {
 //
 export const fetchCreateProduct = product => async dispatch => {
   try {
-    const {data} = await axios.post('/api/carts/cart', {item, quantityToAdd})
     const resFromGet = await axios.get('/api/carts/cart')
     const orderInfo = resFromGet.data[0]
     const orderProductsInfo = resFromGet.data[0].orderproducts
@@ -55,11 +52,7 @@ export const fetchCreateProduct = product => async dispatch => {
       console.log('RES FROM PUT DATA: ', resFromPut.data)
       dispatch(addToCart(resFromPut.data))
     } else {
-      const resFromPost = await axios.post('/api/carts/cart', {
-        product,
-        orderInfo,
-        resFromGet
-      })
+      await axios.post('/api/carts/cart', {product, orderInfo})
       dispatch(addToCart(orderInfo))
     }
   } catch (err) {
@@ -88,7 +81,7 @@ export const increaseQty = id => async dispatch => {
 }
 
 export const decreaseQty = id => async dispatch => {
-  const resFromDecrease = await axios.put(`/api/carts/cart/${id}/decrease`)
+  await axios.put(`/api/carts/cart/${id}/decrease`)
   const updatedCart = await axios.get(`/api/carts/cart/${id}/updateQty`)
   dispatch(getCart(updatedCart.data[0]))
 }
