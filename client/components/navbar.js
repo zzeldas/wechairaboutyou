@@ -4,49 +4,60 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store/singleUser'
 
-const Navbar = ({handleClick, isLoggedInUser}) => (
-  <div id="navbar">
-    <img src="/title.png" height="50" width="400" id="title" />
-    <img src="/chair_logo.png" height="80" width="80" />
+const Navbar = ({handleClick, isLoggedInUser}) => {
+  return (
+    <div id="nav">
+      <img src="/title.png" height="50" width="400" />
+      <img src="/chair_logo.png" height="50" width="50" id="chairLogo" />
 
-    {/* <nav> */}
-    {isLoggedInUser ? (
-      <div>
-        {/* The navbar will show these links after you log in */}
-        {/* <nav className="navbar navbar-light bg-light"> */}
-        {/* <ul className="nav justify-content-center">
-              <li className="nav-item"> */}
-        <Link to="/home">Home</Link>
-        {/* </li>
-              <li className="nav-item"> */}
-        <Link to="/products">All Products</Link>
-        {/* </li>
-              <li className="nav-item"> */}
-        <a href="#" onClick={handleClick}>
-          Logout
-        </a>
-        {/* </li>
-              <li className="nav-item"> */}
-        <Link to="/cart">Cart</Link>
-        {/* </li>
-            </ul>
-          </nav> */}
-      </div>
-    ) : (
-      <div>
-        {/* <nav className="navbar navbar-expand-lg navbar-light bg-light" /> */}
-        {/* The navbar will show these links before you log in */}
-        <Link to="/home">Home</Link>
-        <Link to="/products">All Products</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/cart">Cart</Link>
-      </div>
-    )}
-    {/* </nav> */}
-    <hr />
-  </div>
-)
+      {isLoggedInUser ? (
+        <div className="dropMenuBody">
+          <ul>
+            {/* The navbar will show these links after you log in */}
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+
+            <li>
+              <Link to="/products">All Products</Link>
+            </li>
+            <li>
+              <Link to="/cart">Cart</Link>
+            </li>
+            <li>
+              <a href="#" onClick={handleClick}>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      ) : (
+        <div className="topnav">
+          <ul>
+            {/* The navbar will show these links before you log in */}
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">All Products</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/cart">Cart</Link>
+            </li>
+          </ul>
+        </div>
+      )}
+
+      <hr />
+    </div>
+  )
+}
 
 /**
  * CONTAINER
