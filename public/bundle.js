@@ -546,14 +546,19 @@ function (_React$Component) {
             _this.props.removeUserItem(product);
           }
         }, "Remove Button"));
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Nothing in your cart")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FULL AMOUNT: $", cartTotal()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Nothing in your cart")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FULL AMOUNT: $", cartTotal()), cartTotal() ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: {
           pathname: '/checkoutpage',
           state: this.props.cart
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button"
-      }, "Check Out")));
+      }, "Check Out")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: {
+          pathname: '/products',
+          state: this.props.cart
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Cart is empty, click here to find your perfect chairs to add to your shopping cart")));
     }
   }]);
 
@@ -46905,7 +46910,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

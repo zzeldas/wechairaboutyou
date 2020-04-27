@@ -18,6 +18,8 @@ router.get('/cart', async (req, res, next) => {
       })
 
       res.json(order)
+    } else {
+      res.json('guest cart, rendering with information from session storage')
     }
   } catch (error) {
     next(error)

@@ -180,14 +180,28 @@ export class Cart extends React.Component {
           </div>
         )}
         <p>FULL AMOUNT: ${cartTotal()}</p>
-        <Link
-          to={{
-            pathname: '/checkoutpage',
-            state: this.props.cart
-          }}
-        >
-          <button type="button">Check Out</button>
-        </Link>
+        {cartTotal() ? (
+          <Link
+            to={{
+              pathname: '/checkoutpage',
+              state: this.props.cart
+            }}
+          >
+            <button type="button">Check Out</button>
+          </Link>
+        ) : (
+          <Link
+            to={{
+              pathname: '/products',
+              state: this.props.cart
+            }}
+          >
+            <h3>
+              Cart is empty, click here to find your perfect chairs to add to
+              your shopping cart
+            </h3>
+          </Link>
+        )}
       </div>
     )
   }
