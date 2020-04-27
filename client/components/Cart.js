@@ -101,77 +101,105 @@ export class Cart extends React.Component {
         <button type="button">Check Out</button> */}
         {!this.props.user.id ? (
           cartProducts.map(product => (
-            <div key={product.name}>
-              <img src={product.imageUrl} height="200" width="200" />
-              <Link to={`/products/${product.id}`}>{product.name}</Link>
-              <p>Price: ${product.price}</p>
-              <p>Quantity: {cart[product.id]}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  increaseQtyGuest(product.id)
-                  location.reload()
-                }}
-              >
-                +
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  decreaseQtyGuest(product.id)
-                  location.reload()
-                }}
-              >
-                -
-              </button>
-              <p>Unit Total: ${product.price * cart[product.id]}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  removeItem(product.id)
-                  location.reload()
-                }}
-              >
-                Remove Button
-              </button>
+            <div key={product.name} className="products">
+              <img
+                src={product.imageUrl}
+                height="200"
+                width="200"
+                className="products-img"
+              />
+              <div className="products-info">
+                <Link to={`/products/${product.id}`} className="product-name">
+                  {product.name}
+                </Link>
+                <p className="price">Price: ${product.price}</p>
+                <p className="quantity">Quantity: {cart[product.id]}</p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    increaseQtyGuest(product.id)
+                    location.reload()
+                  }}
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    decreaseQtyGuest(product.id)
+                    location.reload()
+                  }}
+                >
+                  -
+                </button>
+                <p className="price">
+                  Unit Total: ${product.price * cart[product.id]}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    removeItem(product.id)
+                    location.reload()
+                  }}
+                >
+                  Remove Button
+                </button>
+              </div>
             </div>
           ))
         ) : (
           <div>
             {userCartProducts ? (
               userCartProducts.map((product, i) => (
-                <div key={product.name}>
-                  <img src={product.imageUrl} height="200" width="200" />
-                  <Link to={`/products/${product.id}`}>{product.name}</Link>
-                  <p>Price: ${orderProducts[i].price}</p>
-                  <p>Quantity: {orderProducts[i].quantity}</p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.props.increaseQty(product.id)
-                    }}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.props.decreaseQty(product.id)
-                    }}
-                  >
-                    -
-                  </button>
-                  <p>
-                    Unit Total: ${product.price * orderProducts[i].quantity}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.props.removeUserItem(product)
-                    }}
-                  >
-                    Remove Button
-                  </button>
+
+                <div key={product.name} className="products">
+                  <img
+                    src={product.imageUrl}
+                    height="200"
+                    width="200"
+                    className="products-img"
+                  />
+                  <div className="products-info">
+                    <Link
+                      to={`/products/${product.id}`}
+                      className="product-name"
+                    >
+                      {product.name}
+                    </Link>
+                    <p className="price">Price: ${orderProducts[i].price}</p>
+                    <p className="quantity">
+                      Quantity: {orderProducts[i].quantity}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.props.increaseQty(product.id)
+                      }}
+                    >
+                      +
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.props.decreaseQty(product.id)
+                      }}
+                    >
+                      -
+                    </button>
+                    <p className="price">
+                      Unit Total: ${product.price * orderProducts[i].quantity}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.props.removeUserItem(product)
+                        // this.handleDelete(product.id, e)
+                      }}
+                    >
+                      Remove Button
+                    </button>
+                  </div>
+
                 </div>
               ))
             ) : (
@@ -179,7 +207,8 @@ export class Cart extends React.Component {
             )}
           </div>
         )}
-        <p>FULL AMOUNT: ${cartTotal()}</p>
+
+        <p className="full-price">FULL AMOUNT: ${cartTotal()}</p>
         {cartTotal() ? (
           <Link
             to={{
@@ -187,7 +216,7 @@ export class Cart extends React.Component {
               state: this.props.cart
             }}
           >
-            <button type="button">Check Out</button>
+            <button className="checkout" type="button">Check Out</button>
           </Link>
         ) : (
           <Link
@@ -202,6 +231,7 @@ export class Cart extends React.Component {
             </h3>
           </Link>
         )}
+
       </div>
     )
   }

@@ -15,12 +15,25 @@ class SingleProduct extends React.Component {
 
     return (
       <div>
-        <h2 id="title">{product.name}</h2>
-        <img src={product.imageUrl} height="300" width="300" />
-        <p>Price: {product.price}</p>
-        <p>Description: {product.description}</p>
-        <p>Available Count: {product.quantity}</p>
-        <button type="button">Add to Cart</button>
+        <h2 id="title" className="single-product-name">
+          {product.name}
+        </h2>
+        <div className="single-product-img-info">
+          <img
+            src={product.imageUrl}
+            height="300"
+            width="300"
+            className="single-img"
+          />
+          <div>
+            <p className="single-info">Price: ${product.price}</p>
+            <p className="single-info">Description: {product.description}</p>
+            <p className="single-info">Available Count: {product.quantity}</p>
+          </div>
+        </div>
+        <button type="button" className="add-to-cart">
+          Add to Cart
+        </button>
         {user.isAdmin === true && (
           <div>
             <Link
@@ -28,7 +41,9 @@ class SingleProduct extends React.Component {
                 product.description
               }/${product.price}/${product.quantity}/${product.isActive}`}
             >
-              <button type="button">Edit Product</button>
+              <button type="button" className="admin-product-btn">
+                Edit Product
+              </button>
             </Link>
 
             {/* PENDING TO SIMPLIFY THE ROUTE BY MARIA */}
@@ -43,7 +58,9 @@ class SingleProduct extends React.Component {
                 product.description
               }`}
             >
-              <button type="button">Remove Product</button>
+              <button type="button" className="admin-product-btn">
+                Remove Product
+              </button>
             </Link>
           </div>
         )}

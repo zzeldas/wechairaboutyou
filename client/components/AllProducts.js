@@ -26,15 +26,30 @@ export class AllProducts extends React.Component {
       productsView = (
         <div>
           {products.map(product => (
-            <div key={product.id}>
-              <img src={product.imageUrl} height="200" width="200" />
-              <Link to={`/products/${product.id}`}>{product.name}</Link>
-              <p>Price: {product.price}</p>
-              <p className="card-text">Quantity in stock: {product.quantity}</p>
-              <button type="button" onClick={() => addToCart(product, 1)}>
-                {' '}
-                Add To Cart
-              </button>
+
+            <div key={product.id} className="products">
+              <img
+                src={product.imageUrl}
+                height="200"
+                width="200"
+                className="products-img"
+              />
+              <div className="products-info">
+                <Link to={`/products/${product.id}`} className="product-name">
+                  {product.name}
+                </Link>
+                <p className="price">Price: ${product.price}</p>
+                <p className="quantity">Quantity: {product.quantity}</p>
+                <button
+                  type="button"
+                  onClick={() => addToCart(product, 1)}
+                  className="add-to-cart"
+                >
+                  {' '}
+                  Add To Cart
+                </button>
+              </div>
+
             </div>
           ))}
         </div>
@@ -44,42 +59,41 @@ export class AllProducts extends React.Component {
         <div className="container">
           {user.isAdmin === true && (
             <Link to="/addproduct">
-              <button type="button">Add Product</button>
+              <button type="button" className="add-new-product">
+                Add Product
+              </button>
             </Link>
           )}
 
           <div>
             {products.map(product => (
-              <div key={product.id} className="card">
-                <div>
-                  <div className="card-img-top">
-                    <img
-                      src={product.imageUrl}
-                      height="200"
-                      width="200"
-                      className="float-left"
-                    />
+              <div key={product.id}>
+                <div className="products">
+                  <div className="products-img">
+                    <img src={product.imageUrl} height="200" width="200" />
                   </div>
-                  <div className="card-body">
-                    <Link to={`/products/${product.id}`} className="card-text">
+                  <div className="products-info">
+                    <Link
+                      to={`/products/${product.id}`}
+                      className="product-name"
+                    >
                       {product.name}
                     </Link>
-                    <p className="card-text">Price: {product.price}</p>
-                    <p className="card-text">
-                      Quantity in stock: {product.quantity}
+
+                    <p className="price">Price: ${product.price}</p>
+                    <p className="quantity">
+                      Available Quantity: {product.quantity}
                     </p>
 
                     <button
                       type="button"
                       onClick={() => this.props.createItem(product)}
-                      className="float-right"
+                      className="add-to-cart"
                     >
                       ADD TO USER CART
                     </button>
                   </div>
                 </div>
-
-                <div id="flex-container" />
               </div>
             ))}
           </div>
