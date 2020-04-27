@@ -16,24 +16,18 @@ const Navbar = ({handleClick, isLoggedInUser}) => (
         {/* <nav className="navbar navbar-light bg-light"> */}
         {/* <ul className="nav justify-content-center">
               <li className="nav-item"> */}
-        <Link to="/home" className="nav-link">
-          Home
-        </Link>
+        <Link to="/home">Home</Link>
         {/* </li>
               <li className="nav-item"> */}
-        <Link to="/products" className="nav-link">
-          All Products
-        </Link>
+        <Link to="/products">All Products</Link>
         {/* </li>
               <li className="nav-item"> */}
-        <a href="#" onClick={handleClick} className="nav-link">
+        <a href="#" onClick={handleClick}>
           Logout
         </a>
         {/* </li>
               <li className="nav-item"> */}
-        <Link to="/cart" className="nav-link">
-          Cart
-        </Link>
+        <Link to="/cart">Cart</Link>
         {/* </li>
             </ul>
           </nav> */}
