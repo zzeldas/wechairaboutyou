@@ -51,14 +51,8 @@ export class Cart extends React.Component {
     let cart = JSON.parse(sessionStorage.getItem('cart') || '{}')
     let cartProducts = products.filter(product => product.id in cart)
 
-    let result = 0
-    cartProducts.forEach(product => {
-      result += product.price * cart[product.id]
-    })
-    let fullAmount = result
-
     //USER CART
-    console.log('this props ', this.props)
+
     let orderProducts = this.props.cart.cart.orderproducts
 
     let userCartProducts
@@ -73,10 +67,31 @@ export class Cart extends React.Component {
           return products.filter(product => id === product.id)
         })
         .flat()
+    }
 
-      console.log('PROPS', this.props)
-      console.log('USERCARTPRODUCTS', userCartProducts)
-      console.log('ORDERPRODUCTS', orderProducts)
+    const cartTotal = () => {
+      if (orderProducts) {
+        //userCart total
+        console.log('orderProducts for user order', orderProducts)
+        if (orderProducts.length === 0) {
+          return 0
+        } else {
+          //user have order products in cart
+          let result = 0
+          orderProducts.forEach(product => {
+            result += product.unitPrice * product.quantity
+          })
+          return (result / 100).toFixed(2)
+        }
+      } else {
+        //guest cart total
+
+        let result = 0
+        cartProducts.forEach(product => {
+          result += product.price * cart[product.id]
+        })
+        return Math.round(result * 100) / 100
+      }
     }
 
     return (
@@ -136,6 +151,7 @@ export class Cart extends React.Component {
           <div>
             {userCartProducts ? (
               userCartProducts.map((product, i) => (
+
                 <div key={product.name} className="products">
                   <img
                     src={product.imageUrl}
@@ -150,7 +166,7 @@ export class Cart extends React.Component {
                     >
                       {product.name}
                     </Link>
-                    <p className="price">Price: ${product.price}</p>
+                    <p className="price">Price: ${orderProducts[i].price}</p>
                     <p className="quantity">
                       Quantity: {orderProducts[i].quantity}
                     </p>
@@ -183,6 +199,7 @@ export class Cart extends React.Component {
                       Remove Button
                     </button>
                   </div>
+
                 </div>
               ))
             ) : (
@@ -190,17 +207,31 @@ export class Cart extends React.Component {
             )}
           </div>
         )}
-        <p className="full-price">FULL AMOUNT: ${fullAmount}</p>
-        <Link
-          to={{
-            pathname: '/checkoutpage',
-            state: this.props.cart
-          }}
-        >
-          <button type="button" className="checkout">
-            Check Out
-          </button>
-        </Link>
+
+        <p className="full-price">FULL AMOUNT: ${cartTotal()}</p>
+        {cartTotal() ? (
+          <Link
+            to={{
+              pathname: '/checkoutpage',
+              state: this.props.cart
+            }}
+          >
+            <button className="checkout" type="button">Check Out</button>
+          </Link>
+        ) : (
+          <Link
+            to={{
+              pathname: '/products',
+              state: this.props.cart
+            }}
+          >
+            <h3>
+              Cart is empty, click here to find your perfect chairs to add to
+              your shopping cart
+            </h3>
+          </Link>
+        )}
+
       </div>
     )
   }

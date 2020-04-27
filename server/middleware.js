@@ -9,7 +9,6 @@ const isAdmin = (req, res, next) => {
 //middleware isLoggedIn
 const isLoggedIn = (req, res, next) => {
   if (!req.session.passport) {
-    console.log('please login', req.session)
     res.json('please log in')
   } else {
     next()

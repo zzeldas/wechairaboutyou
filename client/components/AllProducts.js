@@ -21,11 +21,12 @@ export class AllProducts extends React.Component {
       sessionStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    let userCart
+    let productsView
     if (!user.id) {
-      userCart = (
+      productsView = (
         <div>
           {products.map(product => (
+
             <div key={product.id} className="products">
               <img
                 src={product.imageUrl}
@@ -48,12 +49,13 @@ export class AllProducts extends React.Component {
                   Add To Cart
                 </button>
               </div>
+
             </div>
           ))}
         </div>
       )
     } else {
-      userCart = (
+      productsView = (
         <div className="container">
           {user.isAdmin === true && (
             <Link to="/addproduct">
@@ -77,10 +79,12 @@ export class AllProducts extends React.Component {
                     >
                       {product.name}
                     </Link>
+
                     <p className="price">Price: ${product.price}</p>
                     <p className="quantity">
                       Available Quantity: {product.quantity}
                     </p>
+
                     <button
                       type="button"
                       onClick={() => this.props.createItem(product)}
@@ -99,7 +103,7 @@ export class AllProducts extends React.Component {
 
     //USER CART ADDCART
 
-    return <div>{userCart}</div>
+    return <div>{productsView}</div>
   }
 }
 
