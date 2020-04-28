@@ -35,14 +35,13 @@ export const fetchSingleCompletedOrder = orderId => async dispatch => {
   }
 }
 
-// export const fetchCreatePendingdOrder = (userId) => async dispatch => {
-//     try {
-//       const res = await axios.get(`/api/carts/cart/${userId}`) //FIXME need to get the route
-//       dispatch(createPendingOrder(res.data))
-//     } catch (err) {
-//       console.error(err)
-//     }
-//   }
+export const fetchCreatePendingdOrder = userId => async dispatch => {
+  try {
+    const res = await axios.post(`/api/carts/cart/${userId}`) //FIXME need to get the route
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export default function ordersReducer(state = initialState, action) {
   switch (action.type) {

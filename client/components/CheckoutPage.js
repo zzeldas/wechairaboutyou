@@ -3,6 +3,13 @@ import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
 import {me} from '../store/singleUser'
 import {fetchChangeOrderStatus} from '../store/checkout'
+import {fetchAllProducts} from '../store/products'
+import {fetchPendingOrder} from '../store/order'
+import {fetchCart} from '../store/cart'
+import {
+  fetchSingleCompletedOrder,
+  fetchCreatePendingdOrder
+} from '../store/confirmationpage'
 
 export class CheckoutPage extends React.Component {
   constructor() {
@@ -24,7 +31,7 @@ export class CheckoutPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
-    const {cart} = this.props.location.state
+    this.props.getCart()
   }
 
   handleChange(evt) {
@@ -44,7 +51,7 @@ export class CheckoutPage extends React.Component {
 
   render() {
     const {cart, user} = this.props
-    console.log(this.props.location.state)
+    console.log('PROPS', this.props)
     let userCart
     if (!user.id) {
       //THIS IS GUEST CART
@@ -333,10 +340,9 @@ export class CheckoutPage extends React.Component {
                       !this.state.creditCard
                     }
                     onClick={() =>
-                      this.props.changeOrderStatus(
-                        this.props.location.state.cart.id
-                      )
+                      this.props.changeOrderStatus(this.props.all.cart.id)
                     }
+                    onSubmit={this.handleSubmit}
                   >
                     Confirm Your Order
                   </button>
@@ -354,14 +360,18 @@ export class CheckoutPage extends React.Component {
 
 const mapState = state => {
   return {
-    products: state.products,
-    user: state.user
+    user: state.user,
+    order: state.order,
+    all: state.cart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    changeOrderStatus: orderId => dispatch(fetchChangeOrderStatus(orderId))
+    changeOrderStatus: orderId => dispatch(fetchChangeOrderStatus(orderId)),
+    getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
+    getCart: () => dispatch(fetchCart()),
+    createPendingOrder: () => dispatch(fetchCreatePendingdOrder())
   }
 }
 
