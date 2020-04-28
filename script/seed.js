@@ -401,7 +401,7 @@ async function seed() {
       price: 500.0,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Aida Executive Chair',
       description:
@@ -411,7 +411,7 @@ async function seed() {
       price: 259.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Jorden Executive Chair',
       description:
@@ -421,7 +421,7 @@ async function seed() {
       price: 300.0,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Saddle Task Chair',
       description:
@@ -431,7 +431,7 @@ async function seed() {
       price: 389.0,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Blazek Mesh Task Chair',
       description:
@@ -441,7 +441,7 @@ async function seed() {
       price: 358.9,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Alonie Ergonomic Executive Chair',
       description:
@@ -451,7 +451,7 @@ async function seed() {
       price: 199.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Waldrop Side Chair',
       description:
@@ -461,7 +461,7 @@ async function seed() {
       price: 299.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Hermod Ergonomic Executive Chair',
       description:
@@ -471,7 +471,7 @@ async function seed() {
       price: 359.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Hillard Heated Executive Chair',
       description:
@@ -481,7 +481,7 @@ async function seed() {
       price: 328.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[0]])),
     Product.create({
       name: 'Beckson Ergonomic Mesh Task Chair',
       description:
@@ -489,6 +489,107 @@ async function seed() {
       imageUrl:
         'https://secure.img1-fg.wfcdn.com/im/05559715/resize-h800-w800%5Ecompr-r85/9072/90721782/Beckson+Ergonomic+Mesh+Task+Chair.jpg',
       price: 729.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[0]])),
+
+    Product.create({
+      name: 'Casart',
+      description:
+        'Best than Most With selected material of soft PVC leather and breathable sponge cushion, this gaming chair brings you an perfectly feeling of relaxation and comfort. You can adjust it vertically and indulge in it with this premium user experience',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/611hsJSUEjL._AC_SL1200_.jpg',
+      price: 129.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Devoko',
+      description:
+        'Devoko high back ergonomic gaming chair covered by premium breathable leather and freely adjustable lumbar support & headrest pillow protecting your spinal & neck.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/71iD3uTLZ0L._AC_SL1500_.jpg',
+      price: 129.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Remaxe',
+      description:
+        'Ergonomic design with free USB electric massager, headrest pillow wider and thicker armrests with ergonomic shape, larger-size seat cushion, adjustable footrest',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/51SiVICDGHL._AC_.jpg',
+      price: 180.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'BestOffice',
+      description:
+        'Our leather office chair is built for long-lasting comfort. Wider than the average desk chair, and easily adjusted for height, the locking mechanism keeps the back upright and relieves the stress and pain brought on by other office chairs',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/51V5budxXHL._AC_SL1010_.jpg',
+      price: 98.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Fortnite RAVEN-X',
+      description:
+        "You're a contender, don't let yourself get eliminated by an uncomfortable chair! The Fortnight edition Raven gaming chair provides unbeatable ergonomic comfort. A racecar-style gaming chair that provides luxury and comfort, whether it's used for intense gaming sessions and climbing to the top of the leaderboards, or long workdays",
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/50520646/resize-h800-w800%5Ecompr-r85/1126/112645497/Alonie+Ergonomic+Executive+Chair.jpghttps://images-na.ssl-images-amazon.com/images/I/81NJo8PrASL._SL1500_.jpg',
+      price: 141.54,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'VICTORAGE Victo',
+      description:
+        'The VICTORAGE Gaming Chair has a solid steel frame and a sophisticated rocking mechanism. Thick PU faux leather and 42% freshly moulded cold foam density for steady & comfort.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/61a-oqDnPkL._AC_SL1500_.jpg',
+      price: 369.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'GTRACING',
+      description:
+        'GTRACING is dedicated to make the best gaming chair for pro gamers. Choose us, and improve your gaming experience!',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/61uyVXlE6HL._AC_SL1500_.jpg',
+      price: 165.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Homall',
+      description:
+        'High Density shaping Foam,more comfortable,elasticity resilience and service life;1.8mm thick steel frame,more sturdy and stable;Pu Leather,skin friendly and wear-resisting.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/71KgK0rfv9L._AC_SL1500_.jpg',
+      price: 139.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Vitesse',
+      description:
+        'Thicker back and deeper bucket seat provide extra comfort for home, office and conference occasion use.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/71RxsZCPIUL._AC_SL1500_.jpg',
+      price: 142.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Luckwind',
+      description:
+        'This chair is a stylish addition to your gaming station, a master touch to your office. Featured after racing car, embraced wing back / soft padded armrest / ergonomic cushioned seat consist its contoured, segmented comfort padding. Built-in headrest, removable lumbar cushion & retrace-able footrest add special care when choosing multiple reclining positions. Either stay professional or fashion is surely up to you!',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/618p2OiRDsL._AC_SL1000_.jpg',
+      price: 128.88,
       quantity: '25',
       isActive: true
     }).then(product => product.setCategories([categories[1]]))
