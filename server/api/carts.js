@@ -59,6 +59,7 @@ router.put('/cart/:orderId', async (req, res, next) => {
 //api/carts/history
 router.get('/history', async (req, res, next) => {
   try {
+    console.log('req.user', req.user)
     const pastOrders = await Order.findAll({
       where: {
         userId: req.user.id,
@@ -66,7 +67,7 @@ router.get('/history', async (req, res, next) => {
       },
       include: [{model: OrderProduct}]
     })
-    console.log(req.user.id)
+
     res.json(pastOrders)
   } catch (err) {
     next(err)
