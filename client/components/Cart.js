@@ -204,7 +204,7 @@ export class Cart extends React.Component {
                       }}
                       className="delete-btn"
                     >
-                      Remove Button
+                      Remove Chair
                     </button>
                   </div>
                 </div>
