@@ -2,14 +2,17 @@
 const isAdmin = (req, res, next) => {
   console.log('req.user ', req.user)
   if (!req.user.dataValues.isAdmin) {
-    res.json('You are not authorized to see this content')
+    res.json({message: 'You are not authorized to see this content'})
   }
   next()
 }
 //middleware isLoggedIn
 const isLoggedIn = (req, res, next) => {
   if (!req.session.passport) {
-    res.json('please log in')
+    res.json({
+      message: 'please log in',
+      path: '/login'
+    })
   } else {
     next()
   }

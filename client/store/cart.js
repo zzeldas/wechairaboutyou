@@ -6,12 +6,18 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 const GET_CART = 'GET_CART'
 const UPDATE_QTY = 'UPDATE_QTY'
+const ORDER_HISTORY = 'ORDER_HISTORY'
 
 // ACTION CREATORS
 
 const getCart = cart => ({
   type: GET_CART,
   cart
+})
+
+const getOrderHistory = pastOrders => ({
+  type: ORDER_HISTORY,
+  pastOrders
 })
 
 const addToCart = item => ({
@@ -38,10 +44,18 @@ export const fetchCart = () => async dispatch => {
     console.error(err)
   }
 }
-//
+
+export const fetchPastOrders = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/carts/history')
+    dispatch(getOrderHistory(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const fetchCreateProduct = product => async dispatch => {
   try {
-
     // const {data} = await axios.post('/api/carts/cart', {item, quantityToAdd})
     const resFromGet = await axios.get('/api/carts/cart')
     const orderInfo = resFromGet.data[0]
@@ -90,7 +104,8 @@ export const decreaseQty = id => async dispatch => {
 
 const initialState = {
   cart: {},
-  orderproducts: []
+  orderproducts: [],
+  orderHistory: []
 }
 // REDUCERS
 
@@ -98,6 +113,8 @@ export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
       return {...state, cart: action.cart}
+    case ORDER_HISTORY:
+      return {...state, orderHistory: action.pastOrders}
     case ADD_TO_CART:
       return {...state, orderproducts: [...state.orderproducts, action.item]}
     case REMOVE_ITEM:
