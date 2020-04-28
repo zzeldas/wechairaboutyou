@@ -97,71 +97,77 @@ export class Cart extends React.Component {
     return (
       <div>
         <h2 className="review-order">My Order</h2>
-        {/* <p>FULL AMOUNT: ${fullAmount}</p>
-        <button type="button">Check Out</button> */}
         {!this.props.user.id ? (
-          cartProducts.map(product => (
-            <div key={product.name} className="products">
-              <img
-                src={product.imageUrl}
-                height="200"
-                width="200"
-                className="products-img"
-              />
-              <div className="products-info">
-                <Link to={`/products/${product.id}`} className="product-name">
-                  {product.name}
-                </Link>
-                <p className="price">${product.price}</p>
-                <p className="quantity">Quantity: {cart[product.id]}</p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    increaseQtyGuest(product.id)
-                    location.reload()
-                  }}
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    decreaseQtyGuest(product.id)
-                    location.reload()
-                  }}
-                >
-                  -
-                </button>
-                <p className="price">
-                  Unit Total: ${product.price * cart[product.id]}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    removeItem(product.id)
-                    location.reload()
-                  }}
-                >
-                  DELETE
-                </button>
+          <div className="cart-div">
+            {cartProducts.map(product => (
+              <div key={product.name} className="cart-container">
+                <img
+                  src={product.imageUrl}
+                  height="200"
+                  width="200"
+                  className="cart-products-img"
+                />
+                <div className="cart-products-info">
+                  <Link
+                    to={`/products/${product.id}`}
+                    className="cart-product-name"
+                  >
+                    {product.name}
+                  </Link>
+                  <p className="price">${product.price}</p>
+                  <p className="quantity">Quantity: {cart[product.id]}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      increaseQtyGuest(product.id)
+                      location.reload()
+                    }}
+                    className="update-qty"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      decreaseQtyGuest(product.id)
+                      location.reload()
+                    }}
+                    className="update-qty"
+                  >
+                    -
+                  </button>
+                  <p className="price">
+                    Unit Total: ${product.price * cart[product.id]}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      removeItem(product.id)
+                      location.reload()
+                    }}
+                    className="delete-btn"
+                  >
+                    DELETE
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            ))}{' '}
+          </div>
         ) : (
-          <div>
+          <div className="cart-div">
             {userCartProducts ? (
               userCartProducts.map((product, i) => (
-                <div key={product.name} className="products">
+                <div key={product.name} className="cart-container">
                   <img
                     src={product.imageUrl}
                     height="200"
                     width="200"
-                    className="products-img"
+                    className="cart-products-img"
                   />
-                  <div className="products-info">
+                  <div className="cart-products-info">
                     <Link
                       to={`/products/${product.id}`}
-                      className="product-name"
+                      className="cart-product-name"
                     >
                       {product.name}
                     </Link>
@@ -174,6 +180,7 @@ export class Cart extends React.Component {
                       onClick={() => {
                         this.props.increaseQty(product.id)
                       }}
+                      className="update-qty"
                     >
                       +
                     </button>
@@ -182,6 +189,7 @@ export class Cart extends React.Component {
                       onClick={() => {
                         this.props.decreaseQty(product.id)
                       }}
+                      className="update-qty"
                     >
                       -
                     </button>
@@ -194,6 +202,7 @@ export class Cart extends React.Component {
                         this.props.removeUserItem(product)
                         // this.handleDelete(product.id, e)
                       }}
+                      className="delete-btn"
                     >
                       DELETE
                     </button>

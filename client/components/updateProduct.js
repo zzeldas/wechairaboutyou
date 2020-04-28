@@ -65,6 +65,7 @@ class updateProduct extends Component {
   render() {
     return (
       <div>
+        <h2 className="update-product-title">Update Product</h2>
         <ProductForm
           state={this.state}
           handleChange={this.handleChange}

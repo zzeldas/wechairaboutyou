@@ -5,12 +5,10 @@ import {connect} from 'react-redux'
 const ProductForm = props => {
   const {state, handleChange, handleSubmit} = props
   return (
-    <main>
-      <h2 className="headercenter"> Product Form</h2>
+    <main className="form">
       {/* <div className="box">
         <img src="/chairaboutyoulogo.png" />
       </div> */}
-      <p />
       <div className="container">
         <form onSubmit={handleSubmit}>
           <ul className="flex-outer">

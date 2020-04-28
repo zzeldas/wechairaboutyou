@@ -161,6 +161,7 @@ async function seed() {
     Category.create({name: 'Office Chairs'}),
     Category.create({name: 'Game Chairs'}),
     Category.create({name: 'Dining Chairs'}),
+    Category.create({name: 'Kids Chairs'}),
     Category.create({name: 'Backyard Chairs'}),
     Category.create({name: 'OutDoors'}),
     Category.create({name: 'Living Room'}),
@@ -168,7 +169,8 @@ async function seed() {
     Category.create({name: 'Blue'}),
     Category.create({name: 'Red'}),
     Category.create({name: 'Navy'}),
-    Category.create({name: 'Pool'})
+    Category.create({name: 'Pink'}),
+    Category.create({name: 'Green'})
   ])
 
   console.log(`seeded ${categories.length} categories`)
@@ -185,7 +187,7 @@ async function seed() {
       price: 14.31,
       quantity: '50',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3], categories[12]])),
 
     Product.create({
       name:
@@ -197,7 +199,7 @@ async function seed() {
       price: 27.16,
       quantity: '80',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3], categories[9]])),
 
     Product.create({
       name:
@@ -209,7 +211,7 @@ async function seed() {
       price: 27.99,
       quantity: '80',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3]])),
 
     Product.create({
       name: "Animal Adventure | Sweet Seats | Pink Owl Children's Plush Chair",
@@ -220,7 +222,7 @@ async function seed() {
       price: 80,
       quantity: '100',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3], categories[11]])),
 
     Product.create({
       name: "Animal Adventure | Sweet Seats | Blue Bear Children's Plush Chair",
@@ -231,7 +233,7 @@ async function seed() {
       price: 80,
       quantity: '80',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3], categories[10]])),
 
     Product.create({
       name: 'Kid Foam Sofa Chair, Children Foam Couch for Kid Gift (Blue)',
@@ -242,7 +244,7 @@ async function seed() {
       price: 69.95,
       quantity: '20',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3], categories[10]])),
 
     Product.create({
       name:
@@ -254,7 +256,7 @@ async function seed() {
       price: 34.95,
       quantity: '90',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3]])),
 
     Product.create({
       name: 'RUYU 9 Inch Kids Solid Hard Wood Fruit Chair',
@@ -265,7 +267,7 @@ async function seed() {
       price: 26.99,
       quantity: '80',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3]])),
 
     Product.create({
       name: 'RUYU 9 Inch Kids Solid Hard Wood Fruit Chair',
@@ -276,7 +278,7 @@ async function seed() {
       price: 26.99,
       quantity: '60',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[3]])),
 
     Product.create({
       name:
@@ -376,7 +378,7 @@ async function seed() {
       price: 344.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[10]])),
+    }).then(product => product.setCategories([categories[9], categories[2]])),
     Product.create({
       name: 'Inspire Q Wilmington II Window Back Wood Dining Side Chairs',
       description:
@@ -386,7 +388,7 @@ async function seed() {
       price: 154.79,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]]))
+    }).then(product => product.setCategories([categories[1], categories[2]]))
   ])
 
   console.log(`seeded ${products.length} products`)

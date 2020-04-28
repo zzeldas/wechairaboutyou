@@ -10,7 +10,7 @@ const Navbar = ({handleClick, isLoggedInUser}) => {
       {isLoggedInUser ? (
         <div className="dropMenuBody">
           <nav>
-            <ul>
+            <ul className="nav-ul">
               {/* The navbar will show these links after you log in */}
 
               <img src="/title.png" height="30" width="300" id="title-logo" />
@@ -21,17 +21,17 @@ const Navbar = ({handleClick, isLoggedInUser}) => {
                 id="chairLogo"
               />
 
-              <li>
+              <li className="nav-li">
                 <Link to="/home">Home</Link>
               </li>
-              <li>
+              <li className="nav-li">
                 <Link to="/products">All Products</Link>
               </li>
-              <li>
+              <li className="nav-li">
                 <Link to="/cart">Cart</Link>
               </li>
-              <li>My Page</li>
-              <li>
+              <li className="nav-li">My Page</li>
+              <li className="nav-li">
                 <a href="#" onClick={handleClick}>
                   Logout
                 </a>
@@ -42,7 +42,7 @@ const Navbar = ({handleClick, isLoggedInUser}) => {
       ) : (
         <div className="topnav">
           <nav>
-            <ul>
+            <ul className="nav-ul">
               {/* The navbar will show these links before you log in */}
               <img src="/title.png" height="30" width="300" id="title-logo" />
               <img
@@ -51,19 +51,19 @@ const Navbar = ({handleClick, isLoggedInUser}) => {
                 width="30"
                 id="chairLogo"
               />
-              <li>
+              <li className="nav-li">
                 <Link to="/home">Home</Link>
               </li>
-              <li>
+              <li className="nav-li">
                 <Link to="/products">All Products</Link>
               </li>
-              <li>
+              <li className="nav-li">
                 <Link to="/login">Login</Link>
               </li>
-              <li>
+              <li className="nav-li">
                 <Link to="/signup">Sign Up</Link>
               </li>
-              <li>
+              <li className="nav-li">
                 <Link to="/cart">Cart</Link>
               </li>
             </ul>
