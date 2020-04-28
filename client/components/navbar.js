@@ -7,50 +7,67 @@ import {logout} from '../store/singleUser'
 const Navbar = ({handleClick, isLoggedInUser}) => {
   return (
     <div id="nav">
-      <img src="/title.png" height="50" width="400" />
-      <img src="/chair_logo.png" height="50" width="50" id="chairLogo" />
-
       {isLoggedInUser ? (
         <div className="dropMenuBody">
-          <ul>
-            {/* The navbar will show these links after you log in */}
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
+          <nav>
+            <ul>
+              {/* The navbar will show these links after you log in */}
 
-            <li>
-              <Link to="/products">All Products</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-            <li>
-              <a href="#" onClick={handleClick}>
-                Logout
-              </a>
-            </li>
-          </ul>
+              <img src="/title.png" height="30" width="300" id="title-logo" />
+              <img
+                src="/chair_logo.png"
+                height="30"
+                width="30"
+                id="chairLogo"
+              />
+
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/products">All Products</Link>
+              </li>
+              <li>
+                <Link to="/cart">Cart</Link>
+              </li>
+              <li>My Page</li>
+              <li>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       ) : (
         <div className="topnav">
-          <ul>
-            {/* The navbar will show these links before you log in */}
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
-            <li>
-              <Link to="/products">All Products</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-          </ul>
+          <nav>
+            <ul>
+              {/* The navbar will show these links before you log in */}
+              <img src="/title.png" height="30" width="300" id="title-logo" />
+              <img
+                src="/chair_logo.png"
+                height="30"
+                width="30"
+                id="chairLogo"
+              />
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/products">All Products</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/signup">Sign Up</Link>
+              </li>
+              <li>
+                <Link to="/cart">Cart</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       )}
 

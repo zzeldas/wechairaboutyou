@@ -96,7 +96,7 @@ export class Cart extends React.Component {
 
     return (
       <div>
-        <h1>MY CART</h1>
+        <h2 className="review-order">My Order</h2>
         {/* <p>FULL AMOUNT: ${fullAmount}</p>
         <button type="button">Check Out</button> */}
         {!this.props.user.id ? (
@@ -112,7 +112,7 @@ export class Cart extends React.Component {
                 <Link to={`/products/${product.id}`} className="product-name">
                   {product.name}
                 </Link>
-                <p className="price">Price: ${product.price}</p>
+                <p className="price">${product.price}</p>
                 <p className="quantity">Quantity: {cart[product.id]}</p>
                 <button
                   type="button"
@@ -142,7 +142,7 @@ export class Cart extends React.Component {
                     location.reload()
                   }}
                 >
-                  Remove Button
+                  DELETE
                 </button>
               </div>
             </div>
@@ -151,7 +151,6 @@ export class Cart extends React.Component {
           <div>
             {userCartProducts ? (
               userCartProducts.map((product, i) => (
-
                 <div key={product.name} className="products">
                   <img
                     src={product.imageUrl}
@@ -166,7 +165,7 @@ export class Cart extends React.Component {
                     >
                       {product.name}
                     </Link>
-                    <p className="price">Price: ${orderProducts[i].price}</p>
+                    <p className="price">${orderProducts[i].price}</p>
                     <p className="quantity">
                       Quantity: {orderProducts[i].quantity}
                     </p>
@@ -196,10 +195,9 @@ export class Cart extends React.Component {
                         // this.handleDelete(product.id, e)
                       }}
                     >
-                      Remove Button
+                      DELETE
                     </button>
                   </div>
-
                 </div>
               ))
             ) : (
@@ -208,7 +206,7 @@ export class Cart extends React.Component {
           </div>
         )}
 
-        <p className="full-price">FULL AMOUNT: ${cartTotal()}</p>
+        <p className="full-price">TOTAL: ${cartTotal()}</p>
         {cartTotal() ? (
           <Link
             to={{
@@ -216,7 +214,9 @@ export class Cart extends React.Component {
               state: this.props.cart
             }}
           >
-            <button className="checkout" type="button">Check Out</button>
+            <button className="checkout" type="button">
+              Check Out
+            </button>
           </Link>
         ) : (
           <Link
@@ -231,7 +231,6 @@ export class Cart extends React.Component {
             </h3>
           </Link>
         )}
-
       </div>
     )
   }

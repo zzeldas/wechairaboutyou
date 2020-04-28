@@ -23,6 +23,7 @@ const removeItem = item => ({
   type: REMOVE_ITEM,
   item
 })
+
 export const updateQty = item => ({
   type: UPDATE_QTY,
   item
@@ -41,17 +42,13 @@ export const fetchCart = () => async dispatch => {
 //
 export const fetchCreateProduct = product => async dispatch => {
   try {
-
-    // const {data} = await axios.post('/api/carts/cart', {item, quantityToAdd})
     const resFromGet = await axios.get('/api/carts/cart')
     const orderInfo = resFromGet.data[0]
     const orderProductsInfo = resFromGet.data[0].orderproducts
-
     let orderproductId = orderProductsInfo.map(eachP => eachP.productId)
 
     if (orderproductId.includes(product.id)) {
       const resFromPut = await axios.put('/api/carts/cart', {product})
-      console.log('RES FROM PUT DATA: ', resFromPut.data)
       dispatch(addToCart(resFromPut.data))
     } else {
       await axios.post('/api/carts/cart', {product, orderInfo})
