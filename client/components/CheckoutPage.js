@@ -355,7 +355,8 @@ export class CheckoutPage extends React.Component {
 const mapState = state => {
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
+    order: state.order
   }
 }
 

@@ -27,7 +27,7 @@ export class Cart extends React.Component {
 
   render() {
     const {products} = this.props
-
+    console.log('PROPS', this.props)
     //GUEST CART
     function removeItem(productId) {
       let guestCart = JSON.parse(sessionStorage.getItem('cart'))
@@ -96,7 +96,7 @@ export class Cart extends React.Component {
 
     return (
       <div>
-        <h2 className="review-order">My Order</h2>
+        <h1>MY CART</h1>
         {/* <p>FULL AMOUNT: ${fullAmount}</p>
         <button type="button">Check Out</button> */}
         {!this.props.user.id ? (
@@ -112,7 +112,7 @@ export class Cart extends React.Component {
                 <Link to={`/products/${product.id}`} className="product-name">
                   {product.name}
                 </Link>
-                <p className="price">${product.price}</p>
+                <p className="price">Price: ${product.price}</p>
                 <p className="quantity">Quantity: {cart[product.id]}</p>
                 <button
                   type="button"
@@ -142,7 +142,7 @@ export class Cart extends React.Component {
                     location.reload()
                   }}
                 >
-                  DELETE
+                  Remove Button
                 </button>
               </div>
             </div>
@@ -165,7 +165,7 @@ export class Cart extends React.Component {
                     >
                       {product.name}
                     </Link>
-                    <p className="price">${orderProducts[i].price}</p>
+                    <p className="price">Price: ${orderProducts[i].price}</p>
                     <p className="quantity">
                       Quantity: {orderProducts[i].quantity}
                     </p>
@@ -195,7 +195,7 @@ export class Cart extends React.Component {
                         // this.handleDelete(product.id, e)
                       }}
                     >
-                      DELETE
+                      Remove Button
                     </button>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export class Cart extends React.Component {
           </div>
         )}
 
-        <p className="full-price">TOTAL: ${cartTotal()}</p>
+        <p className="full-price">FULL AMOUNT: ${cartTotal()}</p>
         {cartTotal() ? (
           <Link
             to={{
