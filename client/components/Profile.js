@@ -16,6 +16,7 @@ class Profile extends React.Component {
     if (this.props.user) {
       user = this.props.user
     }
+    console.log(this.props)
 
     return (
       <div>
@@ -28,8 +29,12 @@ class Profile extends React.Component {
                 <p>{user.firstName + ' ' + user.lastName}</p>
                 <p>{user.email}</p>
                 <p>{user.address}</p>
-                <button type="button">edit profiles</button>
-                <h3>Your Past Purchase</h3>
+                <button type="button" className="admin-product-btn">
+                  Edit Profile
+                </button>
+                <h3>Your Have No Past Purchase-</h3>
+                <p />
+                <Link to="/products">Browse Our Store for Chairs</Link>
               </div>
             ) : (
               <div>
