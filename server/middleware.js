@@ -1,6 +1,5 @@
 //middleware isAdmin
 const isAdmin = (req, res, next) => {
-  console.log('req.user ', req.user)
   if (!req.user.dataValues.isAdmin) {
     res.json({message: 'You are not authorized to see this content'})
   }

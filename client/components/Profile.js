@@ -32,7 +32,7 @@ class Profile extends React.Component {
                 <button type="button" className="admin-product-btn">
                   Edit Profile
                 </button>
-                <h3>Your Have No Past Purchase-</h3>
+                <h3>Your Have No Past Purchase</h3>
                 <p />
                 <Link to="/products">Browse Our Store for Chairs</Link>
               </div>
