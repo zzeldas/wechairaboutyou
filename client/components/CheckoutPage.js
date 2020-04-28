@@ -6,6 +6,10 @@ import {fetchChangeOrderStatus} from '../store/checkout'
 import {fetchAllProducts} from '../store/products'
 import {fetchPendingOrder} from '../store/order'
 import {fetchCart} from '../store/cart'
+import {
+  fetchSingleCompletedOrder,
+  fetchCreatePendingdOrder
+} from '../store/confirmationpage'
 
 export class CheckoutPage extends React.Component {
   constructor() {
@@ -338,6 +342,7 @@ export class CheckoutPage extends React.Component {
                     onClick={() =>
                       this.props.changeOrderStatus(this.props.all.cart.id)
                     }
+                    onSubmit={this.handleSubmit}
                   >
                     Confirm Your Order
                   </button>
@@ -365,7 +370,8 @@ const mapDispatch = dispatch => {
   return {
     changeOrderStatus: orderId => dispatch(fetchChangeOrderStatus(orderId)),
     getPendingOrderFromStore: () => dispatch(fetchPendingOrder()),
-    getCart: () => dispatch(fetchCart())
+    getCart: () => dispatch(fetchCart()),
+    createPendingOrder: () => dispatch(fetchCreatePendingdOrder())
   }
 }
 

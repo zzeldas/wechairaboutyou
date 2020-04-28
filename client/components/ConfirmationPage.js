@@ -104,7 +104,8 @@ export class ConfirmationPage extends React.Component {
               />
               <button
                 type="submit"
-                onSubmit={() => this.props.createPendingOrder(user.id)}
+                onClick={() => this.props.createPendingOrder(user.id)}
+                onSubmit={this.handleSubmit}
               >
                 Continue Shopping
               </button>
