@@ -26,7 +26,7 @@ class SingleProduct extends React.Component {
             width="300"
             className="single-img"
           />
-          <div>
+          <div className="single-product-info">
             <p className="single-info">Price: ${product.price}</p>
             <p className="single-info">Description: {product.description}</p>
             <p className="single-info">Available Count: {product.quantity}</p>

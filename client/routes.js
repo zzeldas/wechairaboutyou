@@ -17,6 +17,8 @@ import SingleProduct from './components/SingleProduct'
 import CheckoutPage from './components/CheckoutPage'
 import ConfirmationPage from './components/ConfirmationPage'
 
+import SingleCategory from './components/SingleCategory'
+
 /**
  * COMPONENT
  */
@@ -38,6 +40,11 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/addproduct" component={newProduct} />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route
+          exact
+          path="/products/categories/:categoryId"
+          component={SingleCategory}
+        />
         <Route exact path="/users" component={AllUsers} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/cart" component={Cart} />

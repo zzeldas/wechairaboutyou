@@ -1,33 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchAllProducts} from '../store/products'
 import {fetchCreateProduct} from '../store/cart'
-import {fetchAllCategories} from '../store/categories'
+import {fetchAllCategories, fetchSingleCategory} from '../store/categories'
 
-export class AllProducts extends React.Component {
+class SingleCategory extends React.Component {
   componentDidMount() {
-    this.props.getProductsFromStore()
+    this.props.getSingleCategoryFromStore(this.props.match.params.categoryId)
     this.props.getCategoriesFromStore()
   }
 
   render() {
-    const {products, user, categories} = this.props
-
-    let categoriesView
-    if (categories.length > 0) {
-      categoriesView = (
-        <div id="categories">
-          {categories.map(category => (
-            <div key={category.id}>
-              <Link to={`/products/categories/${category.id}`}>
-                <p className="category">{category.name}</p>
-              </Link>
-            </div>
-          ))}
-        </div>
-      )
-    }
+    const {user, pInCategory} = this.props
+    console.log('this.props: ', this.props)
+    console.log('PROPS CATEGORY: ', this.props.pInCategory)
 
     //GUEST CART ADDCART
     const addToCart = (product, quantityToAdd) => {
@@ -39,10 +25,10 @@ export class AllProducts extends React.Component {
     }
 
     let productsView
-    if (!user.id) {
+    if (!user.id && pInCategory.length > 0) {
       productsView = (
         <div className="products-div">
-          {products.map(product => (
+          {pInCategory.map(product => (
             <div key={product.id} className="products-container">
               <div className="products">
                 <img
@@ -71,7 +57,7 @@ export class AllProducts extends React.Component {
           ))}
         </div>
       )
-    } else {
+    } else if (pInCategory.length > 0) {
       productsView = (
         <div>
           {user.isAdmin === true && (
@@ -83,7 +69,7 @@ export class AllProducts extends React.Component {
           )}
 
           <div className="products-div">
-            {products.map(product => (
+            {pInCategory.map(product => (
               <div key={product.id} className="products-container">
                 <div className="products">
                   <div className="products-img">
@@ -99,8 +85,8 @@ export class AllProducts extends React.Component {
 
                     <p className="price">${product.price}</p>
                     {/* <p className="quantity">
-                      Available Quantity: {product.quantity}
-                    </p> */}
+                        Available Quantity: {product.quantity}
+                      </p> */}
 
                     <button
                       type="button"
@@ -120,12 +106,7 @@ export class AllProducts extends React.Component {
 
     //USER CART ADDCART
 
-    return (
-      <div>
-        {categoriesView}
-        {productsView}
-      </div>
-    )
+    return <div>{productsView}</div>
   }
 }
 
@@ -133,16 +114,18 @@ const mapState = state => {
   return {
     products: state.products,
     user: state.user,
-    categories: state.categories.all
+    categories: state.categories.all,
+    pInCategory: state.categories.singleCategory
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getProductsFromStore: () => dispatch(fetchAllProducts()),
+    // getProductsFromStore: () => dispatch(fetchAllProducts()),
     createItem: product => dispatch(fetchCreateProduct(product)),
-    getCategoriesFromStore: () => dispatch(fetchAllCategories())
+    getCategoriesFromStore: () => dispatch(fetchAllCategories()),
+    getSingleCategoryFromStore: id => dispatch(fetchSingleCategory(id))
   }
 }
 
-export default connect(mapState, mapDispatch)(AllProducts)
+export default connect(mapState, mapDispatch)(SingleCategory)

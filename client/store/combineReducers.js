@@ -5,6 +5,7 @@ import productsReducer from './products'
 import productReducer from './singleProduct'
 import cartReducer from './cart'
 import ordersReducer from './confirmationpage'
+import categoriesReducer from './categories'
 
 const appReducer = combineReducers({
   users: usersReducer,
@@ -12,7 +13,8 @@ const appReducer = combineReducers({
   products: productsReducer,
   product: productReducer,
   cart: cartReducer,
-  singleOrder: ordersReducer
+  singleOrder: ordersReducer,
+  categories: categoriesReducer
 })
 
 export default appReducer
