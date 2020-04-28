@@ -17,11 +17,15 @@ router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
 })
 
 //get single User route
-router.get('/user', isLoggedIn, async (req, res, next) => {
+router.get('/:id', isLoggedIn, async (req, res, next) => {
   try {
-    const userId = req.user.dataValues.id
-    const foundUser = await User.findByPk(userId, {include: [{model: Order}]})
-    res.json(foundUser)
+    const id = req.params.id
+
+    const foundUser = await User.findByPk(id, {include: [{model: Order}]})
+    if (foundUser.dataValues.id === req.user.id || req.user.isAdmin) {
+      let user = foundUser.dataValues
+      res.json(user)
+    }
   } catch (err) {
     next(err)
   }
@@ -44,8 +48,6 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-
 //update single user route for admin and login user (may need two routes)
 
 //delete single user route
-
