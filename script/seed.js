@@ -158,19 +158,20 @@ async function seed() {
   console.log(`seeded successfully`)
 
   const categories = await Promise.all([
-    Category.create({name: 'Office Chairs'}),
-    Category.create({name: 'Game Chairs'}),
-    Category.create({name: 'Dining Chairs'}),
-    Category.create({name: 'Kids Chairs'}),
-    Category.create({name: 'Backyard Chairs'}),
-    Category.create({name: 'OutDoors'}),
-    Category.create({name: 'Living Room'}),
-    Category.create({name: 'Patio'}),
-    Category.create({name: 'Blue'}),
-    Category.create({name: 'Red'}),
-    Category.create({name: 'Navy'}),
-    Category.create({name: 'Pink'}),
-    Category.create({name: 'Green'})
+    Category.create({name: 'Office Chairs'}), //0
+    Category.create({name: 'Game Chairs'}), //1
+    Category.create({name: 'Dining Chairs'}), //2
+    Category.create({name: 'Kids Chairs'}), //3
+    Category.create({name: 'Backyard Chairs'}), //4
+    Category.create({name: 'OutDoors'}), //5
+    Category.create({name: 'Living Room'}), //6
+    Category.create({name: 'Patio'}), //7
+    Category.create({name: 'Blue'}), //8
+    Category.create({name: 'Red'}), //9
+    Category.create({name: 'Navy'}), //10
+    Category.create({name: 'Pink'}), //11
+    Category.create({name: 'Green'}), //12
+    Category.create({name: 'Beige'}) //13
   ])
 
   console.log(`seeded ${categories.length} categories`)
@@ -211,7 +212,7 @@ async function seed() {
       price: 27.99,
       quantity: '80',
       isActive: true
-    }).then(product => product.setCategories([categories[3]])),
+    }).then(product => product.setCategories([categories[3], categories[8]])),
 
     Product.create({
       name: "Animal Adventure | Sweet Seats | Pink Owl Children's Plush Chair",
@@ -233,7 +234,7 @@ async function seed() {
       price: 80,
       quantity: '80',
       isActive: true
-    }).then(product => product.setCategories([categories[3], categories[10]])),
+    }).then(product => product.setCategories([categories[3], categories[8]])),
 
     Product.create({
       name: 'Kid Foam Sofa Chair, Children Foam Couch for Kid Gift (Blue)',
@@ -244,7 +245,7 @@ async function seed() {
       price: 69.95,
       quantity: '20',
       isActive: true
-    }).then(product => product.setCategories([categories[3], categories[10]])),
+    }).then(product => product.setCategories([categories[3], categories[8]])),
 
     Product.create({
       name:
@@ -290,7 +291,7 @@ async function seed() {
       price: 245.92,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[2]])),
 
     Product.create({
       name:
@@ -303,7 +304,7 @@ async function seed() {
       quantity: '25',
       isActive: true
     }).then(product =>
-      product.setCategories([categories[7], categories[1], categories[8]])
+      product.setCategories([categories[7], categories[2], categories[13]])
     ),
 
     Product.create({
@@ -315,7 +316,7 @@ async function seed() {
       price: 129.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[2], categories[3]])),
+    }).then(product => product.setCategories([categories[2], categories[13]])),
 
     Product.create({
       name: 'Upholstered Fabric Dining Chairs',
@@ -326,7 +327,7 @@ async function seed() {
       price: 146.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[9], categories[8]])),
+    }).then(product => product.setCategories([categories[2], categories[7]])),
 
     Product.create({
       name: 'Yaheetech Dining Chair Living Dining Room PU',
@@ -337,7 +338,7 @@ async function seed() {
       price: 135.99,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1]])),
+    }).then(product => product.setCategories([categories[2]])),
     Product.create({
       name: 'Huaki Modern Dining Chairs, Mid - Century',
       description:
@@ -358,7 +359,9 @@ async function seed() {
       price: 94.98,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[4], categories[5]])),
+    }).then(product =>
+      product.setCategories([categories[2], categories[5], categories[4]])
+    ),
     Product.create({
       name: 'Signature Design by Ashley - Glambrey Dining Room Chair Set',
       description: ' Scrolled Metal Accents - Set of 4 - Brown',
@@ -367,7 +370,7 @@ async function seed() {
       price: 197.0,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[9]])),
+    }).then(product => product.setCategories([categories[2]])),
     Product.create({
       name:
         'Sole Designs The Julia Collection Contemporary Style Fabric Upholstered Armless Dining Side Chairs(Set of 2), Ruby',
@@ -388,7 +391,7 @@ async function seed() {
       price: 154.79,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[1], categories[2]]))
+    }).then(product => product.setCategories([categories[2]]))
   ])
 
   console.log(`seeded ${products.length} products`)
