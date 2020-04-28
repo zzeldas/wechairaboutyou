@@ -32,9 +32,18 @@ class Profile extends React.Component {
                 <button type="button" className="admin-product-btn">
                   Edit Profile
                 </button>
-                <h3>Your Have No Past Purchase</h3>
+                <h3>Your Past Purchase</h3>
+                <div>
+                  <p>Order ID: 24368</p>
+                  <p>Cool chair</p>
+                  <p>Price: $ 259.99</p>
+                  <p>Quantity: 1</p>
+                  <p>Unit Total: $259.99</p>
+                </div>
+
+                <p>Total: $259.99</p>
                 <p />
-                <Link to="/products">Browse Our Store for Chairs</Link>
+                <Link to="/products">Browse Our Store for More Chairs</Link>
               </div>
             ) : (
               <div>
