@@ -67,10 +67,6 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
-    if (!req.body.content) {
-      res.status(500)
-    }
-
     if (req.body.categories && typeof req.body.categories === 'string') {
       updateCategories = req.body.categories.split(',')
     } else {

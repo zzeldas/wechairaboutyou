@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ProductForm from './ProductForm'
 import Axios from 'axios'
+import {Redirect} from 'react-router-dom'
 
 class newProduct extends Component {
   constructor() {
@@ -12,7 +13,8 @@ class newProduct extends Component {
       price: 0,
       quantity: 1,
       categories: [],
-      isActive: false
+      isActive: false,
+      redirect: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -52,11 +54,15 @@ class newProduct extends Component {
       price: 0,
       quantity: 0,
       categories: [],
-      isActive: false
+      isActive: false,
+      redirect: '/products'
     })
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
     return (
       <div>
         <ProductForm
