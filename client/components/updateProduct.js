@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ProductForm from './ProductForm'
 import Axios from 'axios'
+import {Redirect} from 'react-router-dom'
 
 class updateProduct extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class updateProduct extends Component {
       quantity: this.props.match.params.quantity,
       isActive: this.props.match.params.isActive,
       categories: this.props.match.params.categories,
-      imageUrl: this.props.match.params.imageUrl
+      imageUrl: this.props.match.params.imageUrl,
+      redirect: null
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -58,11 +60,15 @@ class updateProduct extends Component {
       quantity: this.state.quantity,
       categories: this.state.categories,
       isActive: isActForm,
-      imageUrl: this.state.imageUrl
+      imageUrl: this.state.imageUrl,
+      redirect: `/products/${this.props.match.params.id}`
     })
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
     return (
       <div>
         <h2 className="update-product-title">Update Product</h2>

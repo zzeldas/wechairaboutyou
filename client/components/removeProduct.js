@@ -1,17 +1,18 @@
 import React, {Component} from 'react'
 import RemoveProductForm from './removeProductForm'
 import Axios from 'axios'
+import {Redirect} from 'react-router-dom'
 
-class updateProduct extends Component {
+class removeProduct extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       id: this.props.match.params.id,
       name: this.props.match.params.name,
-      description: this.props.match.params.description
+      description: this.props.match.params.description,
+      redirect: null
     }
-
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -21,13 +22,16 @@ class updateProduct extends Component {
     this.setState({
       id: this.state.id,
       name: `Style ${this.state.id} have been deleted`,
-      description: ''
+      description: '',
+      redirect: '/products'
     })
-    console.log('record deleted')
-    //this.props.history.go(-2)
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
+
     return (
       <div>
         <RemoveProductForm
@@ -39,4 +43,4 @@ class updateProduct extends Component {
   }
 }
 
-export default updateProduct
+export default removeProduct

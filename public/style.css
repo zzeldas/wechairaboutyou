@@ -399,7 +399,7 @@ form div {
 .flex-inner {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .flex-inner {
@@ -415,13 +415,14 @@ form div {
 .flex-outer li p {
   padding: 8px;
   font-weight: 300;
+  align-items: flex-start;
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .flex-outer > li > label,
 .flex-outer li p {
-  flex: 1 0 120px;
+  /* flex: 1 0 0px; */
   max-width: 220px;
 }
 
@@ -436,7 +437,18 @@ form div {
 
 .flex-outer li input:not([type='checkbox']),
 .flex-outer li textarea {
-  padding: 15px;
+  padding: 10px;
+  margin: 5px 7px;
+  width: 100%;
+  border: none;
+}
+
+.flex-outer li select {
+  text-indent: 15px;
+  width: 1500px;
+  padding: 0 5em;
+  margin: 5px 70px;
+  width: 10%;
   border: none;
 }
 
@@ -474,11 +486,11 @@ form div {
 
 .wrapper {
   margin-top: 5%;
-  width: 60%;
+  width: 80%;
   display: flex;
   justify-content: center;
   font-family: 'Arimo';
-  background-color: coral;
+  background-color: #c7d312;
   -webkit-box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
   box-shadow: 9px 13px 25px 0px rgba(0, 0, 0, 0.18);
@@ -553,7 +565,7 @@ h1 {
 .btns button {
   margin: 3px 0;
   height: 30px;
-  width: 50%;
+  /* width: 50%; */
   color: #cfc9e1;
   background-color: #4a3b76;
   text-transform: uppercase;
