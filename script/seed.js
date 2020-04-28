@@ -177,6 +177,109 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name:
+        "Flash Furniture Green Plastic Stackable School Chair with 10.5'' Seat Height",
+      description:
+        'When considering school seating for early childhood centers this plastic school chair should be at the top of your list with its safety design. Pair with our plastic height adjustable activity table for ease of maintenance around messy kids. Stack quantity: 10, static load capacity: 154 pounds. Contoured one-piece polypropylene shell, no metal parts eliminate pinch injury. Ideal use in the classroom, daycare, preschool, homeschool, after school centers\nPRODUCT MEASUREMENTS >>> Overall Size: 12.5"W x 14"D x 20"H | Seat Size: 10"W x 10"D x 10.75"H | Back Size: 11"W x 10.5"H',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/31wlseSFIgL._AC_.jpg',
+      price: 14.31,
+      quantity: '50',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name:
+        'Angeles Value Stack Kids Chair, Preschool Daycare Playroom Furniture, Flexible Seating Classroom Furniture for Toddlers, Red, 9',
+      description:
+        'DURABLE MATERIAL: Value Stack Chairs are durable and created using solid one-piece construction. Protective boots help prevent sliding and reduce noise. Chairs accommodate up to 100 lbs.\nSTACKABLE KIDS CHAIR DESIGN: All chair sizes conveniently stack together. Value Stack Chairs come in 5", 7", 9", 11", and 13". PERFECT FOR HOMESCHOOLS & PLAYROOMS: It\'s extremely common for parents to be homeschooling their kids while daycares and schools are closed. Setting up a kid-sized activity table or desk with a chair will help normalize the lives of your children so you can attempt to keep their school learning on track while you work from home.\nDIMENSIONS: 15.625" x 15" x 19.75". AGES: 2-3 years. WARRANTY: Limited Lifetime',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/71iPzaBuIEL._AC_SL1500_.jpg',
+      price: 27.16,
+      quantity: '80',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name:
+        'Emma + Oliver Blue Plastic Stackable School Chair with 12 Seat Height',
+      description:
+        'Stacking Student Chair. 176 lb. Static Load Capacity. Stacks up to 10 Chairs High, Lightweight Design. Designed to encourage proper sitting habits',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/41icTz278kL._AC_.jpg',
+      price: 27.99,
+      quantity: '80',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name: "Animal Adventure | Sweet Seats | Pink Owl Children's Plush Chair",
+      description:
+        'Plush slip cover is removable and washable.Zipper closure is child-safe (parents can easily open closer with a simple paper clip).Lightweight and easy to move. The perfect size (14"L x 19"W x 20"H). Ages 18 months and up.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/91dH9MBfqvL._AC_SL1500_.jpg',
+      price: 80,
+      quantity: '100',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name: "Animal Adventure | Sweet Seats | Blue Bear Children's Plush Chair",
+      description:
+        'Plush slip cover is removable and washable. Zipper closure is child-safe (parents can easily open closer with a simple paper clip). Lightweight and easy to move. The perfect size (14"L x 19"W x 20"H). Ages 18 months and up.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/71JgGHkdADL._AC_SL1282_.jpg',
+      price: 80,
+      quantity: '80',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name: 'Kid Foam Sofa Chair, Children Foam Couch for Kid Gift (Blue)',
+      description:
+        '【Premium Materials】:toddlers sofa made by high density safe solid bio foam and Eco-Friendly PVC cover.no glue used, no odourless 【Product Specification】product size: 50x49x45cm, seat size: w21x D 27cm, seat with max capacity of 43 kg. 【Designed Characteristic】The kid foam sofa is very cute and comfortable, durable.it is for kid seat, playing ,sleep, rest…exc. light weight foam frame design can prevent the kid don’t suffer the injure during he play time.let kid more funny and happy when the kid sit on the chair free move. Enjoying his play time. long term use moderate hardness foam, size suitable the kids sofa make your kid bones growth more and more healthy. 【Quality Requirement】kids couches and sofas related materials have passed the CPSIA,ASTM-963 ,Flammability and children chair structure test. Up to USA standard.So your can use with rest assured. 【Pay Attention Point】Please put child chair on the even ground when you kid sit or play. If your child is very small, please accompanied with his to play. if have a litter stain. Please use wet towel with mild soap for spot clean.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/61%2B%2B-C09j0L._AC_SL1200_.jpg',
+      price: 69.95,
+      quantity: '20',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name:
+        'Lukeight Stuffed Animal Storage Bean Bag Chair, Bean Bag Cover for Organizing Kid’s Room',
+      description:
+        "Bean bag cover can hide kid's stuffed animals and all soft items, creating a fun bean bag chair. 100% cotton canvas, soft, durable and cozy. Children love sitting on this storage bag to watch TV, read book or sleep every day. X-Large size can hold about small stuffed animals 180, medium stuffed animals 90, large stuffed animals 40 or 200 ml beans, suitable for kids from 5 to 10 years old, teens and adults. Toy storage bag with double stitched, long zipper and handle can move smoothly from room to anther. Best storage equipment for kids room. Perfect gift for mothers, children or someone you love. You can see kids growing with this bag",
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/51xtOkeFjjL._AC_SL1001_.jpg',
+      price: 34.95,
+      quantity: '90',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name: 'RUYU 9 Inch Kids Solid Hard Wood Fruit Chair',
+      description:
+        'The stool is suitable for children, and the modeling of stool is lovely, delicate and practical. Embedded screws are used for easy installation and operation. Made of pure natural wood and environmentally friendly non-toxic water-based paint. Each product has a smooth edge treatment. Ideal for children over 36 months.For children sit chair. Quality Assurance: No batteries, No harmful substances, Premium quality wooden toys, keep your kids in a healthy environment. Any problem, feel free to contact us.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/5186TUM3oPL._AC_SL1000_.jpg',
+      price: 26.99,
+      quantity: '80',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name: 'RUYU 9 Inch Kids Solid Hard Wood Fruit Chair',
+      description:
+        'The stool is suitable for children, and the modeling of stool is lovely, delicate and practical. Embedded screws are used for easy installation and operation. Made of pure natural wood and environmentally friendly non-toxic water-based paint. Each product has a smooth edge treatment. Ideal for children over 36 months.For children sit chair. Quality Assurance: No batteries, No harmful substances, Premium quality wooden toys, keep your kids in a healthy environment. Any problem, feel free to contact us.',
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/51kRKSqIf7L._AC_SL1000_.jpg',
+      price: 26.99,
+      quantity: '60',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+
+    Product.create({
+      name:
         'BIRDROCK HOME Crossback Side Chairs - 2pc - Delivered Fully Assembled(Mahogany, Upholstered Side Chair)',
       description:
         'Modern design crafted from solid wood with a rich distressed finish and an elegant neutral upholstered seat',
@@ -186,6 +289,7 @@ async function seed() {
       quantity: '25',
       isActive: true
     }).then(product => product.setCategories([categories[1]])),
+
     Product.create({
       name:
         'HomePop Parsons Classic Upholstered Accent Dining Chair, Set of 2, Gray',
@@ -195,7 +299,7 @@ async function seed() {
         'https://images-na.ssl-images-amazon.com/images/I/71%2B%2Bbg5LazL._AC_SL1500_.jpg',
       price: 135.99,
       quantity: '25',
-      isActive: false
+      isActive: true
     }).then(product =>
       product.setCategories([categories[7], categories[1], categories[8]])
     ),
@@ -210,6 +314,7 @@ async function seed() {
       quantity: '25',
       isActive: true
     }).then(product => product.setCategories([categories[2], categories[3]])),
+
     Product.create({
       name: 'Upholstered Fabric Dining Chairs',
       description:
@@ -220,6 +325,7 @@ async function seed() {
       quantity: '25',
       isActive: true
     }).then(product => product.setCategories([categories[9], categories[8]])),
+
     Product.create({
       name: 'Yaheetech Dining Chair Living Dining Room PU',
       description:

@@ -103,25 +103,25 @@ router.post('cart/:userId', async (req, res, next) => {
   }
 })
 
-router.put('/cart', async (req, res, next) => {
-  try {
-    const findProduct = await OrderProduct.findOne({
-      where: {productId: req.body.product.id}
-    })
-    findProduct.quantity++
-    await findProduct.save()
-    const updatedOrder = await Order.findAll({
-      where: {
-        userId: req.user.id,
-        status: 'pending'
-      },
-      include: [{model: OrderProduct}]
-    })
-    res.json(updatedOrder[0].dataValues)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.put('/cart', async (req, res, next) => {
+//   try {
+//     const findProduct = await OrderProduct.findOne({
+//       where: {productId: req.body.product.id}
+//     })
+//     findProduct.quantity++
+//     await findProduct.save()
+//     const updatedOrder = await Order.findAll({
+//       where: {
+//         userId: req.user.id,
+//         status: 'pending'
+//       },
+//       include: [{model: OrderProduct}]
+//     })
+//     res.json(updatedOrder[0].dataValues)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 router.put('/cart/:id/increase', async (req, res, next) => {
   try {

@@ -24,39 +24,39 @@ export class AllProducts extends React.Component {
     let productsView
     if (!user.id) {
       productsView = (
-        <div>
+        <div className="products-div">
           {products.map(product => (
-
-            <div key={product.id} className="products">
-              <img
-                src={product.imageUrl}
-                height="200"
-                width="200"
-                className="products-img"
-              />
-              <div className="products-info">
-                <Link to={`/products/${product.id}`} className="product-name">
-                  {product.name}
-                </Link>
-                <p className="price">Price: ${product.price}</p>
-                <p className="quantity">Quantity: {product.quantity}</p>
-                <button
-                  type="button"
-                  onClick={() => addToCart(product, 1)}
-                  className="add-to-cart"
-                >
-                  {' '}
-                  Add To Cart
-                </button>
+            <div key={product.id} className="products-container">
+              <div className="products">
+                <img
+                  src={product.imageUrl}
+                  height="200"
+                  width="200"
+                  className="products-img"
+                />
+                <div className="products-info">
+                  <Link to={`/products/${product.id}`} className="product-name">
+                    {product.name}
+                  </Link>
+                  <p className="price">${product.price}</p>
+                  {/* <p className="quantity">Available Quantity: {product.quantity}</p> */}
+                  <button
+                    type="button"
+                    onClick={() => addToCart(product, 1)}
+                    className="add-to-cart"
+                  >
+                    {' '}
+                    Add To Cart
+                  </button>
+                </div>
               </div>
-
             </div>
           ))}
         </div>
       )
     } else {
       productsView = (
-        <div className="container">
+        <div>
           {user.isAdmin === true && (
             <Link to="/addproduct">
               <button type="button" className="add-new-product">
@@ -65,9 +65,9 @@ export class AllProducts extends React.Component {
             </Link>
           )}
 
-          <div>
+          <div className="products-div">
             {products.map(product => (
-              <div key={product.id}>
+              <div key={product.id} className="products-container">
                 <div className="products">
                   <div className="products-img">
                     <img src={product.imageUrl} height="200" width="200" />
@@ -80,17 +80,17 @@ export class AllProducts extends React.Component {
                       {product.name}
                     </Link>
 
-                    <p className="price">Price: ${product.price}</p>
-                    <p className="quantity">
+                    <p className="price">${product.price}</p>
+                    {/* <p className="quantity">
                       Available Quantity: {product.quantity}
-                    </p>
+                    </p> */}
 
                     <button
                       type="button"
                       onClick={() => this.props.createItem(product)}
                       className="add-to-cart"
                     >
-                      ADD TO USER CART
+                      ADD TO CART
                     </button>
                   </div>
                 </div>
