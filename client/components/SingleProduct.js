@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProduct} from '../store/singleProduct'
+import {fetchCreateProduct} from '../store/cart'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -29,11 +30,15 @@ class SingleProduct extends React.Component {
             <p className="single-info">Price: ${product.price}</p>
             <p className="single-info">Description: {product.description}</p>
             <p className="single-info">Available Count: {product.quantity}</p>
+            <button
+              type="button"
+              className="add-to-cart"
+              onClick={() => this.props.createItem(product)}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
-        <button type="button" className="add-to-cart">
-          Add to Cart
-        </button>
         {user.isAdmin === true && (
           <div>
             <Link
@@ -78,7 +83,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getSingleProductFromStore: id => dispatch(fetchProduct(id))
+    getSingleProductFromStore: id => dispatch(fetchProduct(id)),
+    createItem: product => dispatch(fetchCreateProduct(product))
   }
 }
 
