@@ -143,8 +143,8 @@ async function seed() {
       isAdmin: false
     },
     {
-      firstName: 'Admin',
-      lastName: 'Admin',
+      firstName: 'Holly',
+      lastName: 'Chair',
       email: 'admin@wechair.com',
       password: 'admin123',
       address: '034 Hallows Avenue',
@@ -391,7 +391,107 @@ async function seed() {
       price: 154.79,
       quantity: '25',
       isActive: true
-    }).then(product => product.setCategories([categories[2]]))
+    }).then(product => product.setCategories([categories[2]])),
+    Product.create({
+      name: 'Kirbyville Genuine Leather Task Chair',
+      description:
+        'Offer a touch of mid-century-inspired style to your home office or workspace with this eye-catching office chair. Crafted from a manufactured wood frame with a black finish, it features genuine top-grain leather upholstery and showcases stitched accents running the length of the seat and back. It has a minimum height of 18" but can be raised an additional 5 inch.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/29889716/resize-h800-w800%5Ecompr-r85/4288/42882612/Kirbyville+Genuine+Leather+Task+Chair.jpg',
+      price: 500.0,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Aida Executive Chair',
+      description:
+        'This office chair features a beautiful walnut bentwood frame with glossy black LeatherSoft upholstery. This chair is sure to make an impression and become the focal point in your office or home office. The mid-back design is a practical choice in a multitude of settings. A mid-back office chair offers support to the mid-to-upper back region. This chair is ideal for anyone who does a great deal of typing throughout the day and needs good back support. The contoured backrest provides firm back support. The waterfall front seat edge removes pressure from the lower legs and improves circulation. Chair easily swivels 360 degrees to get the maximum use of your workspace without strain. The pneumatic adjustment lever will allow you to easily adjust the seat to your desired height.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/10908341/resize-h800-w800%5Ecompr-r85/6611/66113283/Aida+Executive+Chair.jpg',
+      price: 259.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Jorden Executive Chair',
+      description:
+        'Get to work in the French country style with this executive chair. Enveloped in linen upholstery, this chair features a high backrest, fixed arms, and a gently contoured seat. Button tufting lends a tailored touch, while foam fill provides comfort and support. Sporting a weathered wood finish, the chair’s base includes tilt control, a swivel mechanism, and a lever-operated lift to adjust the seat height from 20" to 23", while five hooded caster wheels let you glide from task to task with ease.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/08042200/resize-h800-w800%5Ecompr-r85/3056/30562528/Jorden+Executive+Chair.jpg',
+      price: 300.0,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Saddle Task Chair',
+      description:
+        'Featuring a plywood inner frame and an iron base this modern office chair is durable, stable, and fashionable. Its plywood inner frame allows this piece to maintain its unique shape for years to come while its iron base enhances its overall strength.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/20423580/resize-h800-w800%5Ecompr-r85/4050/40503274/Saddle+Task+Chair.jpg',
+      price: 389.0,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Blazek Mesh Task Chair',
+      description:
+        'The perfect perch when you are working from home or just surfing the web, this adjustable height desk chair is an office essential. Founded atop a five-wheel catered base, it can easily float between your computer and printer, with quick trips to the filing cabinet being a breeze. Understated enough for any aesthetic, its frame is crafted from metal with finishes of neutral black and pewter. Plus, it offers a mesh back that molds to yours for useful lumbar support.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/01866502/resize-h800-w800%5Ecompr-r85/3999/39998737/Tenafly+Mesh+Task+Chair.jpg',
+      price: 358.9,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Alonie Ergonomic Executive Chair',
+      description:
+        'Do you have an office job and have to spend half of your day sitting down on a chair? Have you been experiencing some backache lately? If so, then you need an office chair that is perfect for you and can adjust to your needs. They provide you a better sitting experience. What they have are various kinds of office chairs to satisfy all your needs, whatever you need an ergonomic executive office chair, luxurious managerial office chair, or simple but comfortable task chair or other style office chairs. They are a world-class experienced supplier, skilled in advanced intelligent technology, selecting superior quality material, attaching importance to every user needs and experience.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/50520646/resize-h800-w800%5Ecompr-r85/1126/112645497/Alonie+Ergonomic+Executive+Chair.jpg',
+      price: 199.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Waldrop Side Chair',
+      description:
+        'Featuring padded and contoured seat and back, this small living room chair will cushion and support you in the right places. Besides being great as a living home chair, its also suitable in high-moisture places such as the kitchen, pantry or bathroom as it’s upholstered in stain-resistant fabric. No more having to worry about spending a lot of effort in maintaining the living room table chair as it’s very easy to wipe clean. The best thing is, the contemporary living room chairs score high on looks with its woody, rustic charm.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/00445510/compr-r85/6847/68471309/waldrop-side-chair.jpg',
+      price: 299.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Hermod Ergonomic Executive Chair',
+      description:
+        'Influenced by contemporary designs, it showcases a streamlined design crafted with a plastic frame, a breathable mesh backing, and faux leather armrests. Breathable mesh back and seat provide cooling comfort. Adjustable arms and headrest provide help to support your upper back. Pneumatic seat height adjustment moves the seat up and down to adapt to various body heights. The mesh back chair can recline from 90° to 135° to offer an inviting aesthetic that’s made for up to eight hours of use. Whether this office chair is stationed in the home study or at your personal office desk, it’s sure to lend some support.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/93693810/resize-h800-w800%5Ecompr-r85/1001/100194059/Hermod+Ergonomic+Executive+Chair.jpg',
+      price: 359.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Hillard Heated Executive Chair',
+      description:
+        'Ease the tension of your to-do list with this executive chair. With a heated seat, shiatsu-style massage system, and adjustable back angle, this armed chair is designed to bring comfort to the forefront of your office space. This piece is crafted with metal and manufactured wood frame, padding, and faux leather upholstery for a streamlined and inviting look. And thanks to the included ottoman, you can kick up your feet as you take a seat. For added function, this swivel chair can adjust in seat height to suit your needs. The manufacturer backs this product with a two-year warranty in commercial settings.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/54946192/resize-h800-w800%5Ecompr-r85/9137/91373721/Hillard+Heated+Executive+Chair.jpg',
+      price: 328.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]])),
+    Product.create({
+      name: 'Beckson Ergonomic Mesh Task Chair',
+      description:
+        'With a contoured waterfall seat and lumbar-friendly mesh back, this task chair is a must-have for any hardworking professional powering through the work day. It’s crafted with a metal frame and features a five-star base complete with rolling casters for mobility. The swivel seat lets you quickly turn from task to task, while the leather upholstery provides an inviting look. Plus, the seat height and armrests can be adjusted for customizable comfort.',
+      imageUrl:
+        'https://secure.img1-fg.wfcdn.com/im/05559715/resize-h800-w800%5Ecompr-r85/9072/90721782/Beckson+Ergonomic+Mesh+Task+Chair.jpg',
+      price: 729.99,
+      quantity: '25',
+      isActive: true
+    }).then(product => product.setCategories([categories[1]]))
   ])
 
   console.log(`seeded ${products.length} products`)

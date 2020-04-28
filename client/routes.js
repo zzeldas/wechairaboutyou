@@ -7,7 +7,7 @@ import {me} from './store/singleUser'
 import Home from './components/Home'
 import AllProducts from './components/AllProducts'
 import AllUsers from './components/AllUsers'
-
+import Profile from './components/Profile'
 import newProduct from './components/newProduct'
 import updateProduct from './components/updateProduct'
 import removeProduct from './components/removeProduct'
@@ -36,6 +36,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/profile" component={Profile} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/addproduct" component={newProduct} />
         <Route exact path="/products/:productId" component={SingleProduct} />

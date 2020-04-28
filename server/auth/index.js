@@ -57,8 +57,18 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res, next) => {
+  try {
+    const id = req.user.id
+
+    const foundUser = await User.findByPk(id, {include: [{model: Order}]})
+    if (foundUser.dataValues.id === req.user.id || req.user.isAdmin) {
+      let user = foundUser.dataValues
+      res.json(user)
+    }
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.use('/google', require('./google'))

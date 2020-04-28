@@ -30,7 +30,9 @@ const Navbar = ({handleClick, isLoggedInUser}) => {
               <li className="nav-li">
                 <Link to="/cart">Cart</Link>
               </li>
-              <li className="nav-li">My Page</li>
+              <li className="nav-li">
+                <Link to="/profile">My Profile</Link>
+              </li>
               <li className="nav-li">
                 <a href="#" onClick={handleClick}>
                   Logout

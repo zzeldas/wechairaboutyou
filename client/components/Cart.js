@@ -27,7 +27,7 @@ export class Cart extends React.Component {
 
   render() {
     const {products} = this.props
-
+    console.log('PROPS', this.props)
     //GUEST CART
     function removeItem(productId) {
       let guestCart = JSON.parse(sessionStorage.getItem('cart'))
@@ -171,7 +171,7 @@ export class Cart extends React.Component {
                     >
                       {product.name}
                     </Link>
-                    <p className="price">${orderProducts[i].price}</p>
+                    <p className="price">Price: ${orderProducts[i].price}</p>
                     <p className="quantity">
                       Quantity: {orderProducts[i].quantity}
                     </p>
@@ -204,7 +204,7 @@ export class Cart extends React.Component {
                       }}
                       className="delete-btn"
                     >
-                      DELETE
+                      Remove Button
                     </button>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ export class Cart extends React.Component {
           </div>
         )}
 
-        <p className="full-price">TOTAL: ${cartTotal()}</p>
+        <p className="full-price">FULL AMOUNT: ${cartTotal()}</p>
         {cartTotal() ? (
           <Link
             to={{
